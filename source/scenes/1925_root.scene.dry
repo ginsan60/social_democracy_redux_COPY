@@ -304,6 +304,9 @@ Q.dnvp_r = 20;
 Q.nsdap_r = 3;
 Q.other_r = 9;
 
+Q.bourgeois_coalition = 41;
+Q.far_right_coalition = 23;
+
 // diff from prev
 Q.old_spd_r = 20;
 Q.old_sapd_r = 0;
@@ -484,7 +487,9 @@ Q.timers = ['advisor_action', 'confronting_nazis', 'crisis_program',
             'sa_ban', 'sh_ban', 'papen_chancellor',
             'kpd_policy', 'kpd_ultimatum', 'popular_front_dispute',
             'high_inflation', 'banking_crisis', 'march_on_berlin', 'abysinnia', 'nazi_peak',
-            'nazi_reform', 'understanding_enemy', 'laissez_faire', 'presidential'];
+            'nazi_reform', 'understanding_enemy', 'laissez_faire', 'presidential', 'papenomics', 'thuringeration',
+            'advisor_loss', 'schleichers_schemes', 'disarray', 'dne', 'businesses_lose_confidence', 'article_48',
+            'military_relations'];
 Q.advisor_action_timer = 0;
 // party affairs timers
 Q.confronting_nazis_timer = 0;
