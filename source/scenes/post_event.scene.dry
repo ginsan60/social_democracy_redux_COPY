@@ -689,6 +689,23 @@ if (Q.month_actions >= 1) {
         }
     }
 
+    if (Q.hitler_deported) {
+        Q.hitler_austria += 1;
+        if (Q.black_thursday_seen) {
+            Q.hitler_austria += 1;
+        }
+        if (Q.nazi_migration) {
+            Q.hitler_austria += 1;
+            if (Q.sa_force >= 500) {
+                Q.sa_force -= 100;
+                Q.nsdapo_force += 0.15;
+            }
+            Q.sa_force *= 0.95;
+            Q.nsdapo_force += 0.1;
+            Q.sa_militancy -= 0.01;
+        }
+    }
+
     ////////////////////////// annual support changes
     if (Q.year < 1928 && Q.president != "Ebert") {
         Q.sa_strength += 50/36;
