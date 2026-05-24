@@ -6,6 +6,29 @@ body {
   line-height: 155%;
   overflow-y: scroll;
 }
+body.dark-mode {
+  --bg-color: #000;
+  --border-color: #fff;
+  --content-bg-color: #242424;
+  --text-color: #efefef;
+  --link-color: #ff8080;
+  --link-hover-color: rgba(255, 255, 255, 0.06);
+  --tab-bg-color: #555555;
+  --tab-color: #505050;
+  --tab-hover-color: #242424;
+  --card-border-color: #4c4c4c;
+  --card-bg-color: #3f3f3f;
+}
+body.dark-mode #content {
+  border-style: double;
+  border-width: 4px;
+  border-color: #888;
+}
+body.dark-mode .tools {
+  border-style: double;
+  border-width: 4px;
+  border-color: #888;
+}
 header, #content, footer {
   color: #431;
   max-width: 540px;
