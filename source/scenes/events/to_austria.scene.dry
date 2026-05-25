@@ -3,7 +3,7 @@ new-page: true
 subtitle: Hitler gives a speech in Vienna calling for the Nazi movement to move to Austria.
 view-if: not austrian_civil_war_seen and (hitler_austria*(sa_banned+1)) >= ((nsdap_votes+sa_force)/2)
 max-visits: 1
-on-arrival: nazi_migration = 1; nsdapo_force = (hitler_austria*0.1)
+on-arrival: nazi_migration = 1; nsdapo_force = (hitler_austria*0.1); austria_militancy = 0; austria_strength = 0
 tags: event
 
 = Hitler in Austria
