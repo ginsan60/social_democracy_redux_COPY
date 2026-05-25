@@ -37,7 +37,7 @@ The uprising lasted for no more than a few days before it was crushed. The Schut
 
 @long_war
 title: It is a civil war.
-view-if: sdapo_strength = 5 or sdapo_strength = 4
+view-if: sdapo_strength+nsdapo_force < 6 and sdapo_strength+nsdapo_force >= 4
 on-arrival: austria_civil_war = 1
 
 Neither side is backing down, and the SDAPÖ have formed an alternative government after defeating the government troops in some cities[? if nsdapo_force :, while Hitler's forces have captured a few towns as well, not aligning with either government. ?]. Austria is in a state of civil war.
