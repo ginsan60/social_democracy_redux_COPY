@@ -696,13 +696,15 @@ if (Q.month_actions >= 1) {
         }
         if (Q.nazi_migration) {
             Q.hitler_austria += 1;
-            if (Q.sa_force >= 500) {
-                Q.sa_force -= 100;
+            if (Q.sa_strength >= 500) {
+                Q.sa_strength -= 100;
                 Q.nsdapo_force += 0.15;
+                Q.austria_strength += (100*(Q.nationalism/100));
             }
-            Q.sa_force *= 0.95;
+            Q.sa_strength *= 0.95;
             Q.nsdapo_force += 0.1;
             Q.sa_militancy -= 0.01;
+            Q.austria_militancy += 0.01;
         }
     }
 

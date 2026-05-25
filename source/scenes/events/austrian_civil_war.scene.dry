@@ -77,7 +77,7 @@ Given the SDAPÖ's starting position, this is treated as a victory. Now begins t
 
 @long_war_2
 title: There is nothing we can do.
-on-arrival: z_relation -= 6; dvp_relation -= 6; coalition_dissent += 1; workers_spd -= 3; new_middle_spd -= 5; rural_spd -= 6; old_middle_spd -= 6; unemployed_spd -= 4
+on-arrival: austrian_long_war = 1; z_relation -= 6; dvp_relation -= 6; coalition_dissent += 1; workers_spd -= 3; new_middle_spd -= 5; rural_spd -= 6; old_middle_spd -= 6; unemployed_spd -= 4
 
 No matter our efforts, the war continues. Too many lives are extinguished. Refugees begin to flow into Germany, and trade suffers. Many are calling our Austrian interference a mistake.
 
@@ -109,7 +109,7 @@ Rejecting the capitulation and calling on a general uprising of all German natio
 
 - @support_sdapo_party2
 - @support_sdapo_govt2
-- @long_war_2
+- @long_war_3
 - @nsdapo_victory
 
 @support_sdapo_party2
@@ -117,7 +117,7 @@ title: As a party, the SPD will provide the SDAPÖ with support.
 subtitle: -2 resources
 choose-if: resources >= 2
 on-arrival: resources -= 2; sdapo_strength += 1
-go-to: sdapo_victory if sdapo_strength >= nsdapo_strength; long_war_2 if sdapo_strength/nsdapo_strength >= 0.9 and sdapo_strength/nsdapo_strength <= 1.1
+go-to: sdapo_victory if sdapo_strength >= nsdapo_strength and sdapo_strength/nsdapo_strength > 1.1; long_war_3 if sdapo_strength/nsdapo_strength >= 0.9 and sdapo_strength/nsdapo_strength <= 1.1; nsdapo_victory if nsdapo_strength >= sdapo_strength and sdapo_strength/nsdapo_strength < 0.9
 
 The SPD raises its resources to provide arms and volunteers for the SDAPÖ.
 
@@ -125,12 +125,20 @@ The SPD raises its resources to provide arms and volunteers for the SDAPÖ.
 title: The Foreign Ministry will support the democratic Austrian forces.
 view-if: spd_in_government and foreign_minister_party = "SPD"
 on-arrival: sdapo_strength += 1
-go-to: sdapo_victory if sdapo_strength+nsdapo_strength >= 6; long_war_2 if sdapo_strength+nsdapo_strength < 6
+go-to: sdapo_victory if sdapo_strength >= nsdapo_strength; long_war_3 if sdapo_strength/nsdapo_strength >= 0.9 and sdapo_strength/nsdapo_strength <= 1.1
 
 We provide diplomatic and some financial and material support to the SDAPÖ forces.
 
-@long_war_2
+@long_war_3
 title: There is nothing we can do.
-on-arrival: z_relation -= 6; dvp_relation -= 6; coalition_dissent += 1; workers_spd -= 3; new_middle_spd -= 5; rural_spd -= 6; old_middle_spd -= 6; unemployed_spd -= 4
+view-if: sdapo_strength/nsdapo_strength >= 0.9
+on-arrival: austrian_long_war = 2; z_relation -= 6; dvp_relation -= 6; coalition_dissent += 1; workers_spd -= 3; new_middle_spd -= 5; rural_spd -= 6; old_middle_spd -= 6; unemployed_spd -= 4
 
 No matter our efforts, the war continues. Too many lives are extinguished. Refugees begin to flow into Germany, and trade suffers. Many are calling our Austrian interference a mistake.
+
+@nsdapo_victory
+title: There is nothing we can do.
+view-if: sdapo_strength/nsdapo_strength < 0.9
+on-arrival: nazi_austria = 1; old_middle_nsdap += 15*(nationalism/100); rural_nsdap += 15*(nationalism/100); new_middle_nsdap += 10*(nationalism/100); workers_nsdap += 5*(nationalism/100); unemployed_nsdap += 5*(nationalism/100); nationalism += 10
+
+No matter our efforts, Hitler is victorious. He has managed to take over Austria as a new base of Nazi power, immediately consolidating power and announcing his intentions to reunify the state with Germany by any means necessary. How this situation will develop remains to be seen. One thing is certain; this new Austria is quite the pariah, with no friends to look to on the world stage, and the former Entente powers, even Italy, refusing to recognize it.
