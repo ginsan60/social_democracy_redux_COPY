@@ -1,9 +1,9 @@
 title: March on Berlin
 subtitle: Right-wing militants are taking action...
-view-if: ((((spd_in_government = 1 and coup_progress >= 10) or (coup_progress >= 15)) and year >= 1929 and (year >= 1930 or month >= 6) and ((sa_banned=0 or sh_banned=0) or (sa_force + sh_force + army_force*(1-reichswehr_loyalty) >= 50))) or (year >= 1933 and month >= 2 and chancellor != "Papen" and chancellor != "Schleicher" and coup_progress >= 6 and president == "Braun" and nsdap_votes + dnvp_votes + (sa_force+sh_force)/4 >= 50)) and march_on_berlin_timer = 0 and (nsdap_votes + sa_force < dnvp_votes + other_votes + dvp_votes + sh_force) and chancellor_party != "DNVP"
+view-if: ((((spd_in_government = 1 and coup_progress >= 10) or (coup_progress >= 15)) and year >= 1929 and (year >= 1930 or month >= 6) and ((sa_banned=0 or sh_banned=0) or (sa_force + sh_force + army_force*(1-reichswehr_loyalty) >= 50))) or (year >= 1933 and month >= 2 and chancellor != "Papen" and chancellor != "Schleicher" and coup_progress >= 6 and president == "Braun" and nsdap_votes + dnvp_votes + (sa_force+sh_force)/4 >= 50)) and march_on_berlin_timer = 0 and (nsdap_votes + sa_force + vienna_influence < dnvp_votes + other_votes + dvp_votes + sh_force) and chancellor_party != "DNVP"
 new-page: true
 max-visits: 4
-on-arrival: march_on_berlin_seen += 1; sa_strength += 40; sh_strength += 120; strife += 1; march_on_berlin_timer += 8
+on-arrival: seldte_march = 1; march_on_berlin_seen += 1; sa_strength += 40; sh_strength += 120; strife += 1; march_on_berlin_timer += 8
 go-to: ask_resign if spd_in_government and (president != "Braun" and president != "Schumacher" and president != "Juchacz" and president != "Thälmann" and president != "Münzenberg" and president != "Adenauer" and (president != "Gessler" or reichswehr_loyalty < 0.2)); govt_menu if president = "Braun" or president = "Schumacher" or president = "Juchacz"; non_govt_menu if spd_in_government = 0 and (president != "Braun" and president != "Schumacher" and president != "Juchacz" and president != "Adenauer" and president != "Thälmann" and president != "Münzenberg" and (president != "Gessler" or reichswehr_loyalty < 0.2)); presidential_support if (president == "Gessler" and reichswehr_loyalty >= 0.2) or president == "Adenauer" or president == "Thälmann" or president == "Münzenberg"
 tags: event
 

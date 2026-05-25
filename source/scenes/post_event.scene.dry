@@ -697,7 +697,7 @@ if (Q.month_actions >= 1) {
             Q.rural_nsdap *= 0.75;
             Q.unemployed_nsdap *= 0.75;
         }
-        Q.hitler_austria += 1;
+        Q.hitler_austria += 0.1;
         if (Q.black_thursday_seen) {
             Q.hitler_austria += 1;
         }
@@ -725,6 +725,9 @@ if (Q.month_actions >= 1) {
                 Q.austria_strength += 1;
                 if (Q.austria_strength < 150) {
                     Q.austria_strength += 10;
+                }
+                if (Q.vienna_influence >= 1) {
+                    Q.vienna_influence += (Q.coup_progress*Q.austria_militancy)/12;
                 }
             }
         }
