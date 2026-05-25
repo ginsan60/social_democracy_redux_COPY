@@ -703,7 +703,9 @@ if (Q.month_actions >= 1) {
             }
             Q.sa_strength *= 0.95;
             Q.nsdapo_force += 0.1;
-            Q.sa_militancy -= 0.01;
+            if (!Q.nazi_austria && Q.sa_militancy >= 0.2) {
+                Q.sa_militancy -= 0.01;
+            }
             Q.austria_militancy += 0.01;
             if (Q.nazi_austria) {
                 Q.sa_militancy += 0.0025;
