@@ -3,9 +3,61 @@ new-page: true
 tags: event
 on-arrival: global_tension += 3
 view-if: anschluss_attempt
+max-visits: 1
 
 = The Austrian Issue
 
 In coordination with the March on Berlin, which we have now resolved, Austrian forces had crossed the border into Bavaria to wage war. While their domestic allies no longer raise up arms against us, the Austrian issue remains ever prevalent. Under Hitler's call for a grand national revolution to unify the German people, the forces attempt to converge on Munich, assisted by domestic Nazi militias.
 
-(WIP! SOON DONE!)
+- @war: So it is war.
+- @paramilitaries: Nothing more than paramilitaries.
+
+@war
+view-if: hitler_recognized
+go-to: warmenu
+
+Due the fact we have recognized Hitler's government as legitimate, there really is no two ways around this; this is war, between Germany and Austria. 
+
+@paramilitaries
+view-if: not hitler_recognized
+go-to: warmenu
+
+Even as but paramilitaries, this still could spell civil war. Certainly, the fact they are launching their attacks from Austrian territory does give things an international implication, even if we do not recognize Hitler's government.
+
+@warmenu
+
+- @strike: Are the unions ready to organize a general strike?
+- @reichsbanner: Is the Reichsbanner prepared to take a stand?
+- @kpd: Will the communists help defend the proletariat from this fascist assault?
+- @soviets: For that matter, what about the Soviets?
+- @reichswehr: Is the Reichswehr ready to defend Munich?
+- @entente: Will the Entente powers back us?
+- @mussolini: What about Mussolini?
+
+@strike 
+
+Test
+
+@reichsbanner
+
+Test
+
+@kpd
+
+Test
+
+@soviets
+
+Test
+
+@reichswehr
+
+Test
+
+@entente
+
+Test
+
+@mussolini
+
+Test
