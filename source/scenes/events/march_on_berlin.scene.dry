@@ -11,7 +11,7 @@ tags: event
 
 The far right is mobilizing. Paramilitary forces of the Stahlhelm and SA, organized under the Harzburg Front, have marched on Berlin, threatening to violently overthrow the government.
 
-They demand either immediate elections under the "supervision" of the nationalist paramilitaries, or else the immediate resignation of the government and the appointment of Adolf Hitler as chancellor[? if hitler_deported : , and the revocation of his deportation ?]. It is obvious that they are threatening a civil war if their demands are not met.
+They demand either immediate elections under the "supervision" of the nationalist paramilitaries, or else the immediate resignation of the government and the appointment of Adolf Hitler as chancellor[? if hitler_deported :, and the revocation of his deportation[? if hitler_dead :, following his revival back to life by the Nazi Party's top necromancers?]?]. It is obvious that they are threatening a civil war if their demands are not met.
 
 @non_govt_menu
 
@@ -33,7 +33,7 @@ President [+ president +] has called for emergency elections, to be held next mo
 @accept_hitler
 on-arrival: chancellor = "Hitler"; chancellor_party = "NSDAP"; spd_in_government = 0
 
-After the resignation of the chancellor, Hitler has been appointed chancellor[? if hitler_deported: , after being made a citizen again ?].
+After the resignation of the chancellor, Hitler has been appointed chancellor[? if hitler_deported:, after being made a citizen again?].
 
 - @hitler_takes_power
 

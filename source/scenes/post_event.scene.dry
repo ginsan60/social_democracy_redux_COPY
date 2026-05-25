@@ -690,6 +690,13 @@ if (Q.month_actions >= 1) {
     }
 
     if (Q.hitler_deported) {
+        if (Q.hitler_dead) {
+            Q.workers_nsdap *= 0.75;
+            Q.new_middle_nsdap *= 0.75;
+            Q.old_middle_nsdap *= 0.75;
+            Q.rural_nsdap *= 0.75;
+            Q.unemployed_nsdap *= 0.75;
+        }
         Q.hitler_austria += 1;
         if (Q.black_thursday_seen) {
             Q.hitler_austria += 1;
