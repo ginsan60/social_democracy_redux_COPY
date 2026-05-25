@@ -49,7 +49,7 @@ on-arrival: austria_sanctioned = 1; coup_progress += 2; coup_progress += 1 if na
 
 We have decided to place economic sanctions on Austria. This decision is sure to hurt Hitler hard, though it is also doing well to mobilize the nationalist right against us in one big tide of solidarity for Hitler and Austria.
 
-@enough:
+@enough
 
 We have done enough now.
 
