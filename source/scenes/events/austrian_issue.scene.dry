@@ -2,6 +2,7 @@ title: The Austrian Issue
 new-page: true
 tags: event
 on-arrival: global_tension += 3
+view-if: anschluss_attempt
 
 = The Austrian Issue
 
