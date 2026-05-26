@@ -126,6 +126,7 @@ Time Remaining: [+ time_left +]
 - @the_battle: The Battle of Munich.
 
 @strike
+max-visits: 1
 choose-if: time_left >= 1
 unavailable-subtitle: It takes time to live, but no time to die.
 on-arrival: {! 
@@ -160,6 +161,7 @@ go-to: warmenu
 The trade unions, while historically less powerful in Bavaria than elsewhere in the Reich, still possess the power to make all urban industry slow to a halt and mobilize a defense within the city of Munich against the Nazi tide. We have activated our union contacts, organizing as fast as we can a strike. [? if resources_spent : We have used our resources to help with the strike. ?][? if not resources_spent : Without resources to help the strike with, we expended more time than we'd have liked on the strike preparations. ?]
 
 @reichsbanner
+max-visits: 1
 choose-if: time_left >= 1
 unavailable-subtitle: It takes time to live, but no time to die.
 on-arrival: {!
@@ -186,20 +188,25 @@ go-to: warmenu
 While only a minority of our voterbase is in Bavaria, we still have a portion of our Reichsbanner forces in the state, numbering [+ bavaria_rb_disp +] thousand. These men are quickly mobilized in the city of Munich, taking up defensive positions. [? if resources_spent : We have used our resources to help in the mobilization. ?][? if not resources_spent : Without resources to help the mobilization with, we expended more time than we'd have liked on the strike preparations. ?]
 
 @kpd
+max-visits: 1
 choose-if: time_left >= 1
 unavailable-subtitle: It takes time to live, but no time to die.
 on-arrival: time_left -= 1; kpd_relation += 2; left_dissent -= 5
+go-to: warmenu
 
 The KPD has, since the days of the disastrous Bavarian Soviet, always been a small party in the region. [? if kpd_relation >= 60 : Nevertheless, with what little forces they have, they are willing to help. ?][? if kpd_relation < 60 and kpd_relation >= 40 : Some of them are choosing to help in the fight, though many still spite us. ?][? if kpd_relation < 40 : By and large, the communists do not make much of an effort to defend against the assault. Some, using revolutionary-defeatist rhetoric, even consider a defeat desirable. ?]
 
 @soviets
+max-visits: 1
 choose-if: time_left >= 1 and (foreign_minister_party == "SPD" or comintern_seen)
 unavailable-subtitle: [? if time_left < 1 : It takes time to live, but no time to die. ?][? if time_left >= 1 : We have no way of contacting the Soviets. ?]
 on-arrival: time_left -= 1; east_relation += 1; communist_coalition += 1 if east_relation >= 1; kpd_relation += 5 if east_relation >= 1; west_relation -= 1 if west_relation < 2
+go-to: warmenu
 
 We reach out to the Soviets, asking them for help. [? if east_relation < 1 : Stalin, frankly, does not care, rendering the whole thing a waste of time. We have, at least, mildly improven our relations. ?][? if east_relation >= 1 : While they are completely incapable of providing immediate help, Stalin is happy to be thought of, and assures us he will tell the KPD to assist in defending against the reactionary and fascist menace, while simultaneously issuing a condemnation of Hitler's actions and calling for the restoration of regular Austrian government. ?] [? if west_relation < 2 : The Entente powers are a bit annoyed by our validation of the USSR. ?]
 
 @reichswehr
+max-visits: 1
 choose-if: time_left >= 1 and spd_in_government
 unavailable-subtitle: [? if time_left < 1 : It takes time to live, but no time to die. ?][? if time_left >= 1 : We have no control over the Reichswehr. ?]
 on-arrival: {!
@@ -223,6 +230,7 @@ The Reichswehr, for all its faults, is by and large Germany's strongest armed fo
 [? if resources_spent : We are able to save a bit of time in mobilization by spending some of the government's budget. ?][? if not resources_spent : Without any allocated budget to speed the mobilization up, the Reichswehr is slower to mobilize. ?]
 
 @entente
+max-visits: 1
 choose-if: time_left >= 1 and (foreign_minister_party == "SPD" or west_seen)
 unavailable-subtitle: [? if time_left < 1 : It takes time to live, but no time to die. ?][? if time_left >= 1 : We have no way of contacting their governments. ?]
 on-arrival: time_left -= 1; west_relation += 1; ddp_relation += 3 if west_relation >= 1; z_relation += 3 if west_relation >= 1
@@ -231,10 +239,12 @@ go-to: warmenu
 We reach out to the Entente Powers, asking them for help. [? if west_relation < 1 : For whatever reason, they are unwilling to help us, viewing us as not much better than the Austrians and far more concerned with their internal affairs, rendering the whole idea a waste of time. ?][? if west_relation >= 1 : While they are completely incapable of providing immediate help, the Entente Powers nevertheless bring the matter to the League of Nations, granting us international legitimacy, and domestic legitimacy from those who care about international legitimacy. ?]
 
 @mussolini
+max-visits: 1
 view-if: foreign_minister_party == "SPD"
 choose-if: time_left >= 1 and not italo_ethiopian_war
 unavailable-subtitle: [? if time_left < 1 : It takes time to live, but no time to die. ?][? if italo_ethiopian_war : Mussolini is too busy being a horrible person to help fight horrible people. ?]
 on-arrival: rome_berlin = 1; reichswehr_loyalty += 0.1
+go-to: warmenu
 
 We reach out to Mussolini in secret. He agrees strongly that Hitler is a maniac who has to be stopped, still upset over Dollfuß's deposal. As Breitscheid returns home, news breaks out of Italy proclaiming "Pax Romana" and staunch opposition to Austrian actions. Their confidence helps inspire some in the Reichswehr.
 
