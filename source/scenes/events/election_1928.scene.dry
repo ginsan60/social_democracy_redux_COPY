@@ -456,8 +456,32 @@ As expected, the
 - @national_front_coalition
 - @no_majority_hitler
 - @no_govt_3
+- @ddp_majority
 
 # TODO: black-brown coalition
+
+@ddp_majority
+title: The [+ ddp_name +] has won a majority.
+view-if: ddp_r >= 50
+subtitle: [+ ddp_name +] ([+ ddp_r +]%)
+
+Well, that's a wrap.
+
+The [+ ddp_name +], upon winning a majority, immediately forms an all-liberal government. Revealing themselves to have been the puppet of an international Illuminati all along, the [+ ddp_name +] swears in Einstein as president. This turns out to be for the better, though. Using advanced psionic technologies, the entire reactionary movement is pacified, becoming content with life in the new Germany, as regular people. The all-liberal agenda is implemented; states are abolished, the Moon is colonized, dinosaurs are brought back to life, and the police force is replaced with an all-new Liberal Crime Squad. Otto Braun and Thälmann kiss, while Hitler undergoes reconstruction following an experience with LSD and becomes a Bavarian gardener noted for his kind and friendly demeanor. Paul Levi returns from the dead, joining a polycule with Braun and Thälmann, who move to Fukuoka and establish a socialist republic. On the Moon, a large monastery is built, commemorating the efforts of we social democrats in allowing the all-liberal government to form. The bourgeoisie peacefully dissolves as a class, convinced by the socialist arguments in a final refutation of Karl Marx's belief that socialism would not be built by the power of ideas but rather of matter. The utopian socialists, victorious, celebrate by moving to the Moon, drinking champagne as they do so on a voyage funded by the new self-dissolved bourgeoisie, while the Beatles (John Lennon, Paul McCartney, George Harrison and Ringo Starr) follow, opening up a resort on Mars. The world unites under one flag, never again to raise up arms against each other. Earth is free and whole, and all problems are eradicated. Finally, as its last act before dissolving the state in the transition to a high-communist society, the all-liberal government unveils a platform of acid, amnesty, and abortion, upon which a new constitution is enshrined for the liberal world republic. Thereby, class, state and money is abolished; in its place, liberalism, now and forever, shall rule the stars.
+
+- @skeptic: I don't think that's what happened.
+
+@skeptic 
+
+You're right. They just passed some progressive laws and did some privatizations. 
+
+- @awman: Damn.
+
+@damn 
+
+You should've seen the look on your face, though.
+
+- @game_over: Game over.
 
 @national_front_coalition
 title: A "National Front" coalition
