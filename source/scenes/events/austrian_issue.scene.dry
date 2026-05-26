@@ -449,6 +449,7 @@ Austria: [+ austria_strength_disp +] thousand
 
 @scab_attempt
 view-if: scabbing
+max-visits: 1
 on-arrival: scabbing_seen = 1; {!
 
 if (!Q.strike_power) {
@@ -545,7 +546,7 @@ if (Q.rw_munich) {
 if (Q.scabbing) {
     Q.assault_power += Q.bavaria_sa*Q.sa_militancy;
 }
-Q.defense_power += (Q.rb_strength*Q.rb_militancy);
+Q.defense_power += (Q.bavaria_rb*Q.rb_militancy);
 Q.assault_power += (Q.austria_strength*Q.austria_militancy);
 if (!Q.strike_broken) {
     Q.defense_power += Q.strike_power;
