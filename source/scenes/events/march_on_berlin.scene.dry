@@ -29,10 +29,9 @@ go-to: accept_election if nsdap_normalized + dnvp_normalized >= 0.45 and far_rig
 
 @accept_election
 on-arrival: next_election_time = time + 1 if next_election_time > time+1; next_election_month = month + 1 if next_election_time >= time+1; next_election_year = year if next_election_time >= time+1; next_election_year += 1 if next_election_month > 12; next_election_month -= 12 if next_election_month > 12; old_middle_nsdap += 10; new_middle_nsdap += 10; workers_nsdap += 10; rural_nsdap += 10; unemployed_nsdap += 8; workers_spd -= 10; workers_kpd -= 10; sa_strength += 100;
+go-to: austrian_issue if anschluss_attempt
 
 President [+ president +] has called for emergency elections, to be held next month, under a caretaker government. The SA is permitted to act with impunity, intimidating voters into supporting the fascists.
-
-[? if anschluss_attempt : The invading Austronazi forces have stood down, luckily. But the violation of our sovereignty in the name of cross-border Nazi agitation remains a threat. ?]
 
 @accept_hitler
 on-arrival: chancellor = "Hitler"; chancellor_party = "NSDAP"; spd_in_government = 0
@@ -137,8 +136,7 @@ With the mediation of various establishment figures, new elections are called fo
 
 @new_elections_2
 on-arrival: next_election_time = time + 1 if next_election_time > time+1; next_election_month = month + 1 if next_election_time >= time+1; next_election_year = year if next_election_time >= time+1; next_election_year += 1 if next_election_month > 12; next_election_month -= 12 if next_election_month > 12;
-
-[? if anschluss_attempt : The Austronazi forces along the border have withdrawn following the decision of their German allies to stand down. But the violation of our sovereignty in the name of cross-border Nazi agitation remains a threat. ?]
+go-to: austrian_issue if anschluss_attempt
 
 @new_elections_hindenburg_reject
 

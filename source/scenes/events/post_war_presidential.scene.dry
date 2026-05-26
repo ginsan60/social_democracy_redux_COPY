@@ -108,7 +108,7 @@ We have endorsed Konrad Adenauer of the Center Party.
 @convince_z
 view-if: (not z_support_braun and braun_campaign) or (not z_support_schumacher and schumacher_campaign)
 choose-if: (z_relation >= 40 or (z_relation >= 35 and hergt_plurality)) and (z_votes < spd_votes + ddp_votes or (z_votes < spd_votes + ddp_votes + kpd_votes and (kpd_support_braun or kpd_support_schumacher)))
-unavailable_subtitle: The Center Party isn't willing to be convinced.
+unavailable-subtitle: The Center Party isn't willing to be convinced.
 
 The Center Party isn't currently backing our candidate, but is willing to be convinced.
 
@@ -118,7 +118,7 @@ The Center Party isn't currently backing our candidate, but is willing to be con
 
 @pay_z
 choose-if: resources >= 2
-unavailable_subtitle: We don't have the resources.
+unavailable-subtitle: We don't have the resources.
 on-arrival: resources -= 2; adenauer_campaign = 0; z_support_braun = 1 if braun_campaign; z_support_schumacher = 1 if schumacher_campaign
 go-to: spd_presidential
 
@@ -127,7 +127,7 @@ The Center Party has endorsed our candidate and dropped out of the race.
 @appeal_hergt
 choose-if: z_relation >= 40
 view-if: hergt_plurality
-unavailable_subtitle: The Center Party doesn't trust us enough.
+unavailable-subtitle: The Center Party doesn't trust us enough.
 on-arrival: adenauer_campaign = 0; z_support_braun = 1 if braun_campaign; z_support_schumacher = 1 if schumacher_campaign
 go-to: spd_presidential
 
@@ -136,7 +136,7 @@ The Center Party has endorsed our candidate and dropped out of the race.
 @convince_kpd
 view-if: ((not kpd_support_braun and braun_campaign) or (not kpd_support_schumacher and schumacher_campaign)) and not kpd_banned
 choose-if: (kpd_relation >= 40 or (kpd_relation >= 35 and hergt_plurality)) and (kpd_votes < spd_votes + ddp_votes or (kpd_votes < spd_votes + ddp_votes + z_votes and (z_support_braun or z_support_schumacher)))
-unavailable_subtitle: The Communist Party isn't willing to be convinced.
+unavailable-subtitle: The Communist Party isn't willing to be convinced.
 
 The Communists are not currently backing our candidate, but are willing to be convinced.
 
@@ -148,14 +148,14 @@ The Communists are not currently backing our candidate, but are willing to be co
 @use_relations
 choose-if: kpd_relation >= 60 or (kpd_relation >= 50 and kpd_party_leader == "Conciliators")
 on-arrival: communist_coalition += 1; thalmann_campaign = 0; munzenburg_campaign = 0; kpd_support_braun = 1 if braun_campaign; kpd_support_schumacher = 1 if schumacher_campaign;
-unavailable_subtitle: We do not have good enough relations.
+unavailable-subtitle: We do not have good enough relations.
 go-to: spd_presidential
 
 The KPD has endorsed our candidate and dropped out of the race.
 
 @pay_kpd
 choose-if: resources >= 2
-unavailable_subtitle: We don't have the resources.
+unavailable-subtitle: We don't have the resources.
 on-arrival: resources -= 2; thalmann_campaign = 0; munzenburg_campaign = 0; kpd_support_braun = 1 if braun_campaign; kpd_support_schumacher = 1 if schumacher_campaign
 go-to: spd_presidential
 
@@ -164,7 +164,7 @@ The KPD has endorsed our candidate and dropped out of the race.
 @appeal_hergt_2
 choose-if: kpd_relation >= 40
 view-if: hergt_plurality
-unavailable_subtitle: The Communist Party doesn't trust us enough.
+unavailable-subtitle: The Communist Party doesn't trust us enough.
 on-arrival: thalmann_campaign = 0; munzenburg_campaign = 0; kpd_support_braun = 1 if braun_campaign; kpd_support_schumacher = 1 if schumacher_campaign
 go-to: spd_presidential
 
@@ -560,7 +560,7 @@ The Center Party has endorsed our candidate and dropped out of the race.
 
 @pay_z2
 choose-if: resources >= 2
-unavailable_subtitle: We don't have the resources.
+unavailable-subtitle: We don't have the resources.
 on-arrival: resources -= 2; adenauer_campaign = 0; z_support_braun = 1 if braun_campaign; z_support_schumacher = 1 if schumacher_campaign; z_support_luther = 0; z_support_gessler = 0; braun_plurality = 1 if braun_campaign and z_votes + braun_votes >= plurality_votes; schumacher_plurality = 1 if schumacher_campaign = 1 and z_votes + schumacher_votes >= plurality_votes
 go-to: no_majority_round1
 
@@ -569,7 +569,7 @@ The Center Party has endorsed our candidate and dropped out of the race.
 @appeal_hergt2
 choose-if: z_relation >= 40
 view-if: hergt_plurality
-unavailable_subtitle: The Center Party doesn't trust us enough.
+unavailable-subtitle: The Center Party doesn't trust us enough.
 on-arrival: adenauer_campaign = 0; z_support_gessler = 0; z_support_luther = 0; z_support_braun = 1 if braun_campaign; z_support_schumacher = 1 if schumacher_campaign; braun_plurality = 1 if braun_campaign and z_votes + braun_votes >= plurality_votes; schumacher_plurality = 1 if schumacher_campaign = 1 and z_votes + schumacher_votes >= plurality_votes
 go-to: no_majority_round1
 
@@ -578,7 +578,7 @@ The Center Party has endorsed our candidate and dropped out of the race.
 @round2_convince_kpd
 view-if: ((not kpd_support_braun and braun_campaign) or (not kpd_support_schumacher and schumacher_campaign)) and not kpd_banned
 choose-if: (kpd_relation >= 40 or (kpd_relation >= 35 and hergt_plurality)) and (kpd_votes < spd_votes + ddp_votes or (kpd_votes < spd_votes + ddp_votes + z_votes and (z_support_braun or z_support_schumacher)))
-unavailable_subtitle: The Communist Party isn't willing to be convinced.
+unavailable-subtitle: The Communist Party isn't willing to be convinced.
 max-visits: 1
 
 The Communists are not currently backing our candidate, but are willing to be convinced.
@@ -591,14 +591,14 @@ The Communists are not currently backing our candidate, but are willing to be co
 @use_relations2
 choose-if: kpd_relation >= 60 or (kpd_relation >= 50 and kpd_party_leader == "Conciliators")
 on-arrival: communist_coalition += 1; thalmann_campaign = 0; munzenburg_campaign = 0; kpd_support_braun = 1 if braun_campaign; kpd_support_schumacher = 1 if schumacher_campaign; braun_plurality = 1 if braun_campaign and kpd_votes + braun_votes >= plurality_votes; schumacher_plurality = 1 if schumacher_campaign = 1 and kpd_votes + schumacher_votes >= plurality_votes
-unavailable_subtitle: We do not have good enough relations.
+unavailable-subtitle: We do not have good enough relations.
 go-to: no_majority_round1
 
 The KPD has endorsed our candidate and dropped out of the race.
 
 @pay_kpd2
 choose-if: resources >= 2
-unavailable_subtitle: We don't have the resources.
+unavailable-subtitle: We don't have the resources.
 on-arrival: resources -= 2; thalmann_campaign = 0; munzenburg_campaign = 0; kpd_support_braun = 1 if braun_campaign; kpd_support_schumacher = 1 if schumacher_campaign; braun_plurality = 1 if braun_campaign and kpd_votes + braun_votes >= plurality_votes; schumacher_plurality = 1 if schumacher_campaign = 1 and kpd_votes + schumacher_votes >= plurality_votes
 go-to: no_majority_round1
 
@@ -607,7 +607,7 @@ The KPD has endorsed our candidate and dropped out of the race.
 @appeal_hergt2_2
 choose-if: kpd_relation >= 40
 view-if: hergt_plurality
-unavailable_subtitle: The Communist Party doesn't trust us enough.
+unavailable-subtitle: The Communist Party doesn't trust us enough.
 on-arrival: thalmann_campaign = 0; munzenburg_campaign = 0; kpd_support_braun = 1 if braun_campaign; kpd_support_schumacher = 1 if schumacher_campaign; braun_plurality = 1 if braun_campaign and kpd_votes + braun_votes >= plurality_votes; schumacher_plurality = 1 if schumacher_campaign = 1 and kpd_votes + schumacher_votes >= plurality_votes
 go-to: no_majority_round1
 
