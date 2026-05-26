@@ -727,7 +727,7 @@ if (Q.month_actions >= 1) {
                     Q.austria_strength += 10;
                 }
                 if (Q.vienna_influence >= 1) {
-                    Q.vienna_influence += (Q.coup_progress*Q.austria_militancy)/12;
+                    Q.vienna_influence += (Q.coup_progress*Q.austria_militancy)/5;
                 }
             }
         }
