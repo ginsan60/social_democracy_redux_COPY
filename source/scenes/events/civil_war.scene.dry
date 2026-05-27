@@ -915,17 +915,24 @@ We have successfully passed a constitutional amendment to effectively make works
 
 @decrees
 view-if: not decree_decided
-on-arrival: decree_decided = 1; land_seizure_cost = (4 - land_reform); nationalize_budget = 4; nationalize_budget -= 1 if works_councils >= 2; nationalize_budget -= 1 if works_councils >= 3; nationalize_budget -= 1 if socializations + nationalization_progress >= 2;
+on-arrival: decree_decided = 1; judicial_purge_cost = (5 - (judicial_reform*2)); judicial_purge_cost = 1 if judicial_purge_cost < 1; land_seizure_cost = (4 - land_reform); nationalize_budget = 4; nationalize_budget -= 1 if works_councils >= 2; nationalize_budget -= 1 if works_councils >= 3; nationalize_budget -= 1 if socializations + nationalization_progress >= 2;
 
 With our triumph over the reactionaries, we have for a short while near free-reign in molding Germany to our will. Thus various politicians in the party have eagerly drafted decrees which they now present to us for signing. If we sign too many decrees, we risk weakening confidence in the republic and damaging our relations with the bourgeois parties, however.
 
 - @land_seizure: Sweeping land reform to destroy the base of the reactionaries for good.
 - @mass_nationalization: Mass nationalizations of industry.
 - @wealth_seizure: Seize the Reichsbank and other assets of the rich.
+- @judicial_purge: Purge the judiciary of all reactionary elements.
 - @dnvp_ban: Ban the DNVP.
 - @dvp_ban: Ban the DVP.
 - @enable: A sixth-month long Enabling Act to speed denazification up.
 - @agenda_1: That is enough.
+
+@judicial_purge
+view-if: judicial_reform < 5 and not judicial_purge
+on-arrival: judicial_reform += 5; judicial_purge = 1; budget -= judicial_purge_cost; pro_republic -= (4*judicial_purge_cost); coalition_dissent += judicial_purge_cost; reformist_dissent += (judicial_purge_cost*5)
+
+We purge the judiciary, replacing reactionary judges en masse in a process they would doubtlessly label unconstitutional, were they to still hold their positions. In such a victorious post-war position, there are really no limits on our power. This disregard for legalistic norms does disturb our reformists, however.
 
 @land_seizure
 view-if: land_reform < 4 and not land_seizure
