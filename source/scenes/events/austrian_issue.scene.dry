@@ -604,7 +604,7 @@ The worst has come to pass. Our forces are beaten, and Munich falls under Nazi c
 
 @victory_against_hitler
 view-if: not scabbing and not munich_advance
-on-arrival: pro_republic += 5; nationalism -= 5; hitler_dead = 1
+on-arrival: pro_republic += 5; nationalism -= 5; hitler_dead = 1; anschluss_attempt = 0; nazi_austria = 0; vienna_influence = 0
 
 Faced with an inability to use Austria as a launching ground from which to seize all of Germany, and the collapse of his armies, we have essentially won. This victory is cemented quickly, as, in the following days, news comes from Vienna of [? if sdapo_strength >= 4 : a SDAPÖ uprising ?][? if sdapo_strength < 4 : an Austrofascist uprising ?] against Hitler, who has reportedly been shot dead.
 
