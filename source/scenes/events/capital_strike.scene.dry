@@ -3,14 +3,81 @@ subtitle: Germany's industries are idling...
 view-if: (capital_strike_progress >= (10+(dvp_relation/100))) and spd_in_government
 new-page: true
 max-visits: 1
-on-arrival: unemployed += 5; weimar_dissent += 2 if weimar_plan_adopted; workers_spd*= 0.7; new_middle_spd -= 15; new_middle_spd += 3 if new_middle_conscious; old_middle_spd -= 15; unemployed_spd*=0.7; rural_spd -= 15; pro_republic -= 15; capital_strike_seen = 1; z_relation -= 10; dvp_relation -= 10; workers_nsdap += 8 if not capital_nazi; unemployed_nsdap += 10 if not capital_nazi; new_middle_nsdap += 15 if not capital_nazi; old_middle_nsdap += 15 if not capital_nazi ; rral_nsdap += 15 if not capital_nazi; workers_kpd += 4 if capital_nazi; workers_kpd += 2 if capital_nazi and sapd_consolidated == 0; workers_nsdap += 2 if capital_nazi; unemployed_kpd += 7 if capital_nazi; unemployed_nsdap += 2 if capital_nazi; unemployed_dnvp += 1 if capital_nazi; new_middle_kpd += 1 if capital_nazi; new_middle_nsdap += 5 if capital_nazi; new_middle_dnvp += 9 if capital_nazi; old_middle_nsdap += 3 if capital_nazi; old_middle_dnvp += 12 if capital_nazi; rural_dnvp += 15 if capital_nazi; workers_sapd += 2 if sapd_consolidated == 1 and capital_nazi; coalition_dissent += 1; coalition_dissent += 1 if in_grand_coalition; economic_growth -= 4; socialism -= 7
+on-arrival: {! 
+if (Q.weimar_plan_adopted) {
+    Q.weimar_dissent += 2;
+} 
+Q.workers_spd *= (0.5+(Q.socialism/200));
+Q.unemployed_spd *= (0.5+(Q.socialism/200));
+Q.new_middle_spd -= (15*Q.bourgeois_power);
+if (Q.new_middle_conscious) {
+    Q.new_middle_spd += 3*(Q.socialism/100);
+} 
+Q.old_middle_spd -= (15*Q.bourgeois_power); 
+Q.rural_spd -= (15*Q.bourgeois_power); 
+Q.pro_republic -= (15*Q.bourgeois_power); 
+Q.capital_strike_seen = 1; 
+Q.z_relation -= 10; 
+Q.dvp_relation -= 10; 
+if (!Q.capital_nazi) {
+    Q.workers_nsdap += (8*Q.bourgeois_power);
+    Q.unemployed_nsdap += (10*Q.bourgeois_power);
+    Q.new_middle_nsdap += (15*Q.bourgeois_power);
+    Q.old_middle_nsdap += (15*Q.bourgeois_power);
+    Q.rural_nsdap += (15*Q.bourgeois_power);
+}
+if (Q.capital_nazi) {
+    Q.workers_kpd += (4*(Q.socialism/100));
+    Q.workers_nsdap += (2*Q.bourgeois_power);
+    if (!Q.sapd_consolidated) {
+        Q.workers_kpd += (2*(Q.socialism/100));
+    }
+    if (Q.sapd_consolidated) {
+        Q.workers_sapd += (2*(Q.socialism/100));
+    }
+    Q.unemployed_kpd += (7*(Q.socialism/100));
+    Q.unemployed_nsdap += (2*Q.bourgeois_power);
+    Q.unemployed_dnvp += (1*Q.bourgeois_power);
+    Q.new_middle_kpd += (1*(Q.socialism/100));
+    Q.new_middle_nsdap += (5*Q.bourgeois_power);
+    Q.new_middle_dnvp += (9*Q.bourgeois_power);
+    Q.old_middle_nsdap += (3*Q.bourgeois_power);
+    Q.old_middle_dnvp += (12*Q.bourgeois_power);
+    Q.rural_dnvp += (15*Q.bourgeois_power);
+}
+Q.bourgeois_power -= 0.03;
+!} 
 tags: event
 
 = Capital Strike
 
 Our policies have greatly angered the capitalists. Investment has fallen, and factories are idling, preventing the workers from fulfilling their jobs. Meanwhile, the bourgeois press is a constant chorus of venomous invective directed at us and our economic policies.
 
-What can we do?
+- @revolutionary_approach: The class war intensifies.
+- @right_approach: Clearly, a failure in our governance.
+- @address: What can we do?
+
+@revolutionary_approach
+subtitle: The Marxist strategy of the SPD has always been to provoke a confrontation with the capitalists through socialist reforms, through which the rupture leading into socialist transformation would occur. Now, the time for this rupture has come.
+on-arrival: reformist_dissent += 10; left_strength += 10; left_dissent -= 10; class_war += 1; class_war += 1 if left_plan_adopted
+go-to: address
+
+The revolutionaries of the party put forward their proposed approach to the crisis. They say that this is a success of our strategies, so long as we take it to the next level and wage the class war from below, just as the businesses now do so from above by seeking to bleed the economy dry.
+
+The approach has not yet been adopted. It will take more convincing.
+
+@right_approach
+subtitle: Our goal is, ultimately, to improve the living conditions of the workers. We can only do this through constructive governance; not through crises that we directly manufacture through our policies. We have failed, and must remedy this failure.
+on-arrival: left_dissent += 10; reformist_strength += 10; reformist_dissent -= 10; reconcile_business += 1
+go-to: address
+
+The rightists of the party put forward their proposed approach to the crisis.
+
+The approach has not yet been adopted. It will take more convincing.
+
+@address
+
+For the time being, we can make no grander statements as to the character of this crisis. We must focus on the immediate crisis. 
 
 - @seize
 - @capital_controls

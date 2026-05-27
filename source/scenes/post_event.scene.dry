@@ -1026,6 +1026,7 @@ if (Q.month_actions >= 1) {
             Q.rural_z += 4/12;
             Q.workers_z += 2/12;
         }
+        ## todo: "The ideas of the ruling class are, in any age, the ruling ideas" : make passive nazi support gain be the emergent result of bourgeoisie turning to nazis rather than railroaded
         // increase NSDAP vote share
         Q.bourgeoisie_dvp -= 5/12;
         Q.bourgeoisie_dnvp -= 10/12;
