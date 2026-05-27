@@ -978,7 +978,13 @@ if (Q.month_actions >= 1) {
             Q.new_middle_dnvp -= 2/12;
             Q.old_middle_dnvp -= 1/12;
             Q.workers_dnvp += 2/12;
+            Q.bourgeoisie_dnvp += 5/12;
+            Q.bourgeoisie_other -= 5/12;
         }
+        Q.bourgeoisie_ddp -= 5/12;
+        Q.bourgeoisie_dnvp -= 6/12;
+        Q.bourgeoisie_other += 10/12;
+        Q.bourgeoisie_nsdap += 1/12;
     }
     if (Q.year == 1929) {
         if (Q.president == "Marx") {
@@ -1021,6 +1027,10 @@ if (Q.month_actions >= 1) {
             Q.workers_z += 2/12;
         }
         // increase NSDAP vote share
+        Q.bourgeoisie_dvp -= 5/12;
+        Q.bourgeoisie_dnvp -= 10/12;
+        Q.bourgeoisie_nsdap += 15/12;
+        Q.bourgeoisie_other += 5/12;
         Q.new_middle_nsdap += 8/12;
         Q.old_middle_nsdap += 8/12;
         Q.new_middle_ddp -= 5/12;

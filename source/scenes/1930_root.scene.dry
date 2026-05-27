@@ -218,7 +218,7 @@ Q.unemployed_qol = 100;
 Q.old_middle_qol = 100;
 Q.new_middle_qol = 100;
 
-Q.classes = ['workers', 'old_middle', 'new_middle', 'rural', 'unemployed', 'catholics'];
+Q.classes = ['workers', 'old_middle', 'new_middle', 'rural', 'unemployed', 'catholics', 'bourgeoisie'];
 Q.parties = ['spd', 'sapd', 'kpd', 'z', 'ddp', 'dvp', 'dnvp', 'nsdap', 'other'];
 
 // Support for party by social group
@@ -282,6 +282,18 @@ Q.catholics_dvp = 5;
 Q.catholics_dnvp = 2;
 Q.catholics_nsdap = 0;
 Q.catholics_other = 15;
+
+Q.bourgeoisie_spd = 0;
+Q.bourgeoisie_sapd = 0;
+Q.bourgeoisie_kpd = 0;
+Q.bourgeoisie_z = 10;
+Q.bourgeoisie_ddp = 10;
+Q.bourgeoisie_dvp = 35;
+Q.bourgeoisie_dnvp = 14;
+Q.bourgeoisie_nsdap = 16;
+Q.bourgeoisie_other = 20;
+
+Q.bourgeois_power = 1;
 
 Q.rural_prole = 0.2;
 Q.middle_prole = 0.5;
