@@ -1,0 +1,15 @@
+title: [? if class_war : Class War ?][? if reconcile_business : Capital Flight ?]
+new-page: true
+is-card: true
+on-arrival: class_war_timer += 6; month_actions += 1
+view-if: capital_strike_seen
+card-image: img/portraits/BaadeFritz.jpg
+#tags: govt_affairs
+
+= [? if class_war : Class War ?][? if reconcile_business : Capital Flight ?]
+
+Due to our policies, an economic crisis has triggered. Some in our party consider this a result of our policies, others blame the bourgeoisie. Regardless, something has to be done.
+
+[? if not approach_adopted : We are yet to adopt an approach. Until we do, we are limited in the scope of our response. ?]
+
+[? if class_war >= 5 : We have adopted the revolutionary approach, certifying the crisis as a manufacturing of the bourgeoisie against us, which we must combat by completing the revolution. ?]
