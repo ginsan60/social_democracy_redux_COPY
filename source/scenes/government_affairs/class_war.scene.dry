@@ -31,7 +31,7 @@ The revolutionaries of the party put forward their proposed approach to the cris
 
 [? if class_war < 5 : The approach has not yet been adopted. It will take more convincing. ?]
 
-[? if class_war < 5 >= 5 : The approach has been adopted! We can now work on waging the class struggle. ?]
+[? if class_war >= 5 : The approach has been adopted! We can now work on waging the class struggle. ?]
 
 @right_approach
 view-if: reconcile_business < 5 and class_war < 5

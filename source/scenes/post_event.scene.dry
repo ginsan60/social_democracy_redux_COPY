@@ -733,6 +733,12 @@ if (Q.month_actions >= 1) {
         }
     }
 
+    if (Q.socialism >= (Q.spd_normalized+Q.kpd_normalized)) {
+        Q.socialism -= ((Q.capital_strike_progress*10)*Q.bourgeois_power)/12;
+        Q.workers_spd += 3/12;
+        Q.workers_kpd += 3/12;
+    }
+
     ////////////////////////// annual support changes
     if (Q.year < 1928 && Q.president != "Ebert") {
         Q.sa_strength += 50/36;
