@@ -1606,16 +1606,17 @@ if (Q.month_actions >= 1) {
                 Q.schaumburg_lippe_ddp -= 15/12;
             }
             if (Q.new_middle_ddp_normalized < 40) {
-                Q.new_middle_ddp += 6/12;
+                Q.new_middle_ddp += ((6/12)*Q.bourgeois_power);
             }
             if (Q.new_middle_dvp_normalized < 25) {
-                Q.new_middle_dvp += 3/12;
+                Q.new_middle_dvp += ((3/12)*Q.bourgeois_power);
             }
             if (Q.old_middle_dvp_normalized < 40) {
-                Q.old_middle_dvp += 6/12;
+                Q.old_middle_dvp += ((6/12)*Q.bourgeois_power);
             }
             if (Q.rural_dnvp_normalized < 40) {
-                Q.rural_dnvp += 6/12;
+                Q.rural_dnvp += ((6/12)*Q.bourgeois_power);
+                Q.rural_dnvp -= Q.land_reform;
             }
             if (Q.catholics_z_normalized < 40 && !Q.z_party_leader == "Stegerwald") {
                 Q.catholics_z += 6/12;
@@ -1672,12 +1673,12 @@ if (Q.month_actions >= 1) {
                 Q.unemployed_spd -= 2/12;
             }
             if (Q.other_votes < 8 && !Q.electoral_threshold && Q.z_party_leader != "Stegerwald") {
-                Q.new_middle_other += 5/12;
-                Q.old_middle_other += 5/12;
-                Q.rural_other += 5/12;
-                Q.catholics_other += 4/12;
-                Q.workers_other += 2/12;
-                Q.unemployed_other += 2/12;
+                Q.new_middle_other += ((5/12)*Q.bourgeois_power);
+                Q.old_middle_other += ((5/12)*Q.bourgeois_power);
+                Q.rural_other += ((5/12)*Q.bourgeois_power);
+                Q.catholics_other += ((4/12)*Q.bourgeois_power);
+                Q.workers_other += ((2/12)*Q.bourgeois_power);
+                Q.unemployed_other += ((2/12)*Q.bourgeois_power);
             }
             if (Q.nazi_reform && Q.dnvp_reform && Q.dvp_relation < 35) {
                 if (Q.spanish_civil_war && Q.spain_involved) {
