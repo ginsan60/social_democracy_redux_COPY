@@ -61,7 +61,7 @@ if (!Q.capital_nazi) {
 This is, unfortunately, quite the worrying development. With the bourgeoisie still controlling newspapers and printing presses all across Germany, it is very probable that this will influence opinions, as ridiculous as the pamphlet is.
 
 @pathetic
-view-if: not socialized_media
+view-if: socialized_media
 on-arrival: {!
 
 Q.new_middle_spd *= (0.5+(0.5*(Q.socialism/100)));
