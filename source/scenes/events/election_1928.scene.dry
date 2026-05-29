@@ -2516,19 +2516,35 @@ Otto Wels's appointment as chancellor is approved by our potential allies.
 @braun
 choose-if: (president != "Hindenburg" or not spd_sackings)
 title: Otto Braun for Chancellor
-view-if: not historical_mode or not spd_prussia
-subtitle: Braun is currently the Minister-President of Prussia, and is one of our most popular leaders. However, other parties may have qualms about concentrating too much power in one man.
+subtitle: [? if spd_prussia : Braun is currently the Minister-President of Prussia, and is one of our most popular leaders. However, other parties may have qualms about concentrating too much power in one man. ?]
 
-The Center party has significant qualms about appointing Braun as chancellor, given that he is already Minister-President of Prussia. They ask for either more cabinet positions, or for Braun to resign his state government role.
+[? if spd_prussia : The Center party has significant qualms about appointing Braun as chancellor, given that he is already Minister-President of Prussia. They ask for either more cabinet positions, or for Braun to resign his state government role. ?]
+
+[? if not spd_prussia : The Center party has no qualms about appointing Braun as chancellor. ?]
+
+- @another_chancellor: Shucks, we'll have to pick a different chancellor after all.
+- @braun_2: Let the Center have their cabinet positions.
+- @braun_resigned: Let the Center have Prussia.
+- @no_qualms: That's good, then.
+
+@no_qualms
+view-if: not spd_prussia
+on-arrival: spd_in_government = 1; chancellor = "Braun"; chancellor_party = "SPD"; in_grand_coalition = 1 if in_weimar_coalition == 0
+go-to: ministries
+
+Otto Braun is sure to make a great chancellor.
+
+@another_chancellor
+view-if: spd_prussia
+
+The prospect of appointing another chancellor, while unfortunate, really isn't that big of a deal.
 
 - @muller
 - @wels
-- @braun_2: Let the Center have their cabinet positions.
-- @braun_resigned: Let the Center have Prussia.
 
 @braun_2
 subtitle: Otto Braun will be Chancellor.
-view-if: not historical_mode
+view-if: not historical_mode and not spd_prussia
 on-arrival: spd_in_government = 1; chancellor = "Braun"; chancellor_party = "SPD"; leverage -= 10; in_grand_coalition = 1 if in_weimar_coalition == 0
 go-to: ministries
 
@@ -2536,7 +2552,7 @@ We have promised to let the Center have more influence in the government in resp
 
 @braun_resigned
 subtitle: Adam Stegerwald will be Minister-President.
-choose-if: spd_prussia
+view-if: spd_prussia
 unavailable-subtitle: Wait, what? Damn, this shit's bugged. Ping me on discord or on reddit, I'll fix it.
 on-arrival: spd_prussia = 0; z_prussia = 1; spd_in_government = 1; chancellor = "Braun"; chancellor_party = "SPD"; in_grand_coalition = 1 if in_weimar_coalition == 0
 go-to: ministries
