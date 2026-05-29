@@ -212,6 +212,15 @@ if (Q.spd_r) {
             });
 }
 
+if (Q.vonc_r && Q.vonc_formed) {
+    data.push({
+            "id": "vonc",
+            "legend": "VONC",
+            "name": "VONC",
+            "seats": Math.round(Q.vonc_r*5),
+            });
+}
+
 if (Q.ddp_r) {
     data.push({
             "id": "ddp",
@@ -257,12 +266,39 @@ if (Q.dvp_r) {
             });
 }
 
-if ( deliber## gamebreking bug hehe.. 
+if (Q.other_r) {
     data.push({
-            "id": "bvp",
-            "legend": "BVP",
-            "name": "BVP",
-            "seats": Math.round(Q.bvp_r*5),
+            "id": "other",
+            "legend": "Other",
+            "name": "Other",
+            "seats": Math.round(Q.other_r*5),
+            });
+}
+
+if (Q.dnvp_r) {
+    data.push({
+            "id": "dnvp",
+            "legend": "DNVP",
+            "name": "DNVP",
+            "seats": Math.round(Q.dnvp_r*5),
+            });
+}
+
+if (Q.dne_r && Q.dne_formed) {
+    data.push({
+            "id": "dne",
+            "legend": "DNE",
+            "name": "DNE",
+            "seats": Math.round(Q.dne_r*5),
+            });
+}
+
+if (Q.nsdap_r) {
+    data.push({
+            "id": "dnvp",
+            "legend": "DNVP",
+            "name": "DNVP",
+            "seats": Math.round(Q.dnvp_r*5),
             });
 }
 
