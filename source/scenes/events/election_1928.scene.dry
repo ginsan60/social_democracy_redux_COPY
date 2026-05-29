@@ -185,6 +185,8 @@ Q.election_records.push(election_result);
 !}
 on-departure: nazi_urgency = 1 if (nazi_urgency == 0 and nsdap_r >= 15)
 on-display: {!
+const data = [];
+
 if (Q.kpd_r) {
     data.push({
             "id": "kpd",
@@ -295,10 +297,10 @@ if (Q.dne_r && Q.dne_formed) {
 
 if (Q.nsdap_r) {
     data.push({
-            "id": "dnvp",
-            "legend": "DNVP",
-            "name": "DNVP",
-            "seats": Math.round(Q.dnvp_r*5),
+            "id": "nsdap",
+            "legend": "NSDAP",
+            "name": "NSDAP",
+            "seats": Math.round(Q.nsdap_r*5),
             });
 }
 
