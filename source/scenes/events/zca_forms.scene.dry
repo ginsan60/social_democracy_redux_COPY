@@ -63,6 +63,27 @@ if (Q.socialized_media) {
     Q.bourgeoisie_zca += (3*Q.capital_strike_progress);
 }
 
+Q.workers_zca += Q.workers_other;
+Q.new_middle_zca += Q.new_middle_other;
+Q.old_middle_zca += Q.old_middle_other;
+Q.rural_zca += Q.rural_other;
+Q.unemployed_zca += Q.unemployed_other;
+Q.catholics_zca += Q.catholics_other;
+
+Q.workers_other *= (1-(Q.socialism/100));
+Q.new_middle_other *= (1-(Q.socialism/100));
+Q.old_middle_other *= (1-(Q.socialism/100));
+Q.rural_other *= (1-(Q.socialism/100));
+Q.unemployed_other *= (1-(Q.socialism/100));
+Q.catholics_other *= (1-(Q.socialism/100));
+
+Q.workers_zca -= Q.workers_other;
+Q.new_middle_zca -= Q.new_middle_other;
+Q.old_middle_zca -= Q.old_middle_other;
+Q.rural_zca -= Q.rural_other;
+Q.unemployed_zca -= Q.unemployed_other;
+Q.catholics_zca -= Q.catholics_other;
+
 !}
 
 = The Centre Christian Alliance
