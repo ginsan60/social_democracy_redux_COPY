@@ -2067,7 +2067,7 @@ if (Q.month_actions >= 1) {
         Q.old_middle_dnvp -= 3/12;
         Q.new_middle_dnvp -= 3/12;
     }
-    if (Q.zca_formed && !Q.zca_formed) {
+    if (Q.zca_formed) {
         if (Q.nsdap_banned && Q.workers_nsdap >= 0) {
             Q.workers_nsdap -= 8/12;
             Q.workers_zca += 3/12;
