@@ -733,7 +733,7 @@ if (Q.month_actions >= 1) {
         }
     }
 
-    if ((Q.socialism/100) >= (Q.spd_normalized+Q.kpd_normalized)) {
+    if (((Q.socialism/100) >= (Q.spd_normalized+Q.kpd_normalized)) && !Q.wealth_seized) {
         if (Q.capital_strike_progress < 15) {
             Q.socialism -= ((5+Q.capital_strike_progress)*Q.bourgeois_power)/12;
         }
