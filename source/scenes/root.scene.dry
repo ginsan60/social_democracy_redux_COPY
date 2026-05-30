@@ -584,6 +584,7 @@ Q.buyer_referendum_timer = 0;
 Q.council_development_timer = 0;
 Q.spanish_war_timer = 0;
 Q.postal_affairs_timer = 0;
+Q.class_war_timer = 0;
 // event timers
 Q.emergency_cuts_timer = 0;
 Q.unemployment_insurance_timer = 0;
