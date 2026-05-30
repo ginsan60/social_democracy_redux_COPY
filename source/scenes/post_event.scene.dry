@@ -425,6 +425,7 @@ if (Q.month_actions >= 1) {
     }
     }
     // economy health rating - vibes based
+    Q.old_economic_health = Q.economic_health || 0;
     Q.economic_health = Q.economic_growth*10;
     Q.economic_health -= Q.unemployed;
     if (Q.inflation < 0) {
@@ -433,7 +434,20 @@ if (Q.month_actions >= 1) {
     if (Q.inflation >= 3) {
         Q.economic_health -= (Q.inflation-3);
     }
+    Q.economic_difference = (Q.economic_health-Q.old_economic_health);
     /// economy effects support
+    if (Q.zca_formed && Q.spd_in_government) {
+        var support_factor = Q.economic_difference/100;
+        if (support_factor >= 0.1) {
+            support_factor = 0.1;
+        }
+        Q.workers_zca *= (1-(support_factor*(1-Q.bourgeois_power)));
+        Q.new_middle_zca *= (1-(support_factor*(1-Q.bourgeois_power)));
+        Q.old_middle_zca *= (1-(support_factor*(1-Q.bourgeois_power)));
+        Q.rural_zca *= (1-(support_factor*(1-Q.bourgeois_power)));
+        Q.unemployed_zca *= (1-(support_factor*(1-Q.bourgeois_power)));
+        Q.catholics_zca *= (1-(support_factor*(1-Q.bourgeois_power)));
+    }
     if (Q.unemployed >= 15 && !Q.spd_in_government) {
         Q.workers_spd += (Q.unemployed/8)/12;
         Q.workers_kpd += (Q.unemployed/10)/12;
@@ -733,12 +747,12 @@ if (Q.month_actions >= 1) {
         }
     }
 
-    if (((Q.socialism/100) >= (Q.spd_normalized+Q.kpd_normalized)) && !Q.wealth_seized) {
+    if (((Q.socialism/100) >= (Q.spd_normalized+Q.kpd_normalized+(1-Q.bourgeois_power))) && !Q.wealth_seized) {
         if (Q.capital_strike_progress < 15) {
-            Q.socialism -= ((5+Q.capital_strike_progress)*Q.bourgeois_power)/12;
+            Q.socialism -= (((5-(Q.financing_banned*5)-(Q.socialized_media*5))+Q.capital_strike_progress)*Q.bourgeois_power)/12;
         }
         if (Q.capital_strike_progress >= 15) {
-            Q.socialism -= (15*Q.bourgeois_power)/12;
+            Q.socialism -= ((15-(Q.financing_banned*5)-(Q.socialized_media*5))*Q.bourgeois_power)/12;
         }
         Q.workers_spd += 3/12;
         Q.workers_kpd += 3/12;
@@ -748,6 +762,9 @@ if (Q.month_actions >= 1) {
         Q.new_middle_spd += 4/12;
         Q.new_middle_kpd += 2/12;
         Q.catholics -= (Q.socialism/50)/12;
+    }
+    if ((Q.socialism/100) < (1-Q.bourgeois_power)) {
+        Q.socialism += Q.socialism/120;
     }
 
     ////////////////////////// annual support changes

@@ -237,7 +237,7 @@ if (Q.z_r) {
             "id": "z",
             "legend": "Z",
             "name": "Z",
-            "seats": Math.round(Q.z_r*5),
+            "seats": Math.round(Q.z_minus_bvp_r*5),
             });
 }
 
@@ -338,6 +338,8 @@ go-to: coalition_menu if not vonc_formed; coalition_vonc if vonc_formed
 {!<tr><td><div class="box" style='background-color:#8B0000'> </div> !}KPD: {!</td><td>!} [+ kpd_r +]% {!</td><td>!} [+ str_change_kpd +] {!</td></tr>!}
 
 {!<tr><td><div class="box" style='background-color:#DCCA4A'> </div> !} [+ ddp_name +]: {!</td><td>!} [+ ddp_r +]% {!</td><td>!} [+ str_change_ddp +] {!</td></tr>!}
+
+[? if zca_formed : {!<tr><td><div class="box" style='background-color:#85754e'> </div> !}ZCA: {!</td><td>!} [+ zca_r +]% {!</td><td>!} [+ str_change_zca +] {!</td></tr>!} ?]
 
 {!<tr><td><div class="box" style='background-color:#000'> </div> !} Z: {!</td><td>!} [+ z_minus_bvp_r +]% {!</td><td>!} [+ str_change_z +] {!</td></tr>!}
 

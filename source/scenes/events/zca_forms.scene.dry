@@ -38,12 +38,12 @@ Q.rural_dvp = 0;
 Q.unemployed_dvp = 0;
 Q.catholics_dvp = 0;
 
-Q.new_middle_spd *= (Q.socialism/100);
-Q.old_middle_spd *= (Q.socialism/100);
-Q.rural_spd *= (Q.socialism/100);
-Q.catholics_spd *= (Q.socialism/100);
-Q.unemployed_spd *= (1-((Q.socialism/100)*0.25));
-Q.workers_spd *= (1-((Q.socialism/100)*0.25));
+Q.new_middle_spd *= (1-((Q.socialism/100)*0.5));
+Q.old_middle_spd *= (1-((Q.socialism/100)*0.5));
+Q.rural_spd *= (1-((Q.socialism/100)*0.5));
+Q.catholics_spd *= (1-((Q.socialism/100)*0.5));
+Q.unemployed_spd *= (1-((Q.socialism/100)*0.1));
+Q.workers_spd *= (1-((Q.socialism/100)*0.1));
 
 if (Q.capital_strike_progress < 20) {
     Q.socialism -= (Q.capital_strike_progress*Q.bourgeois_power);
