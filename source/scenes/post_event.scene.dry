@@ -734,9 +734,20 @@ if (Q.month_actions >= 1) {
     }
 
     if (Q.socialism >= (Q.spd_normalized+Q.kpd_normalized)) {
-        Q.socialism -= ((Q.capital_strike_progress*10)*Q.bourgeois_power)/12;
+        if (Q.capital_strike_progress < 15) {
+            Q.socialism -= ((5+Q.capital_strike_progress)*Q.bourgeois_power)/12;
+        }
+        if (Q.capital_strike_progress >= 15) {
+            Q.socialism -= (15*Q.bourgeois_power)/12;
+        }
         Q.workers_spd += 3/12;
         Q.workers_kpd += 3/12;
+    }
+    if ((Q.socialism/100) >= Q.bourgeois_power && (Q.bourgeoisie > Q.bourgeois_power)) {
+        Q.bourgeoisie *= (0.9+(0.1*Q.bourgeois_power));
+        Q.new_middle_spd += 4/12;
+        Q.new_middle_kpd += 2/12;
+        Q.catholics -= (Q.socialism/50)/12;
     }
 
     ////////////////////////// annual support changes

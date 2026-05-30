@@ -24,7 +24,7 @@ Due to our policies, an economic crisis has triggered. Some in our party conside
 @revolutionary_approach
 view-if: class_war < 5 and reconcile_business < 5
 subtitle: The Marxist strategy of the SPD has always been to provoke a confrontation with the capitalists through socialist reforms, through which the rupture leading into socialist transformation would occur. Now, the time for this rupture has come.
-on-arrival: reformist_dissent += 10; left_strength += 10; left_dissent -= 10; class_war += 1; class_war += 1 if left_plan_adopted
+on-arrival: reformist_dissent += 10; left_strength += 10; left_dissent -= 10; class_war += 1; class_war += 1 if left_plan_adopted; coup_progress += 1 if spd_in_government
 go-to: address
 
 The revolutionaries of the party put forward their proposed approach to the crisis. They say that this is a success of our strategies, so long as we take it to the next level and wage the class war from below, just as the businesses now do so from above by seeking to bleed the economy dry.

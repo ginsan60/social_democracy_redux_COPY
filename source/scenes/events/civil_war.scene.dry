@@ -1,6 +1,6 @@
 title: Civil War
 audio: music/communist/A_las_barricadas.ogg
-on-arrival: {!
+on-arrival: decree_decided = 0; chancellorship_decided = 0; government_decided = 0; constitution_decided = 0; communists_decided = 0; reichstag_decided = 0; {!
 Q.rb_strength = Math.round(Q.rb_strength);
 Q.sh_strength = Math.round(Q.sh_strength);
 Q.sa_strength = Math.round(Q.sa_strength);
@@ -931,6 +931,7 @@ With our triumph over the reactionaries, we have for a short while near free-rei
 @judicial_purge
 view-if: judicial_reform < 5 and not judicial_purge
 on-arrival: judicial_reform += 5; judicial_purge = 1; budget -= judicial_purge_cost; pro_republic -= (4*judicial_purge_cost); coalition_dissent += judicial_purge_cost; reformist_dissent += (judicial_purge_cost*5)
+go-to: decrees_2
 
 We purge the judiciary, replacing reactionary judges en masse in a process they would doubtlessly label unconstitutional, were they to still hold their positions. In such a victorious post-war position, there are really no limits on our power. This disregard for legalistic norms does disturb our reformists, however.
 
