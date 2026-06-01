@@ -205,7 +205,7 @@ if (Q.z_r) {
             "id": "z",
             "legend": "Z",
             "name": "Z",
-            "seats": Math.round(Q.z_r*5),
+            "seats": Math.round(Q.z_minus_bvp_r*5),
             });
 }
 
