@@ -38,10 +38,10 @@ Q.rural_dvp = 0;
 Q.unemployed_dvp = 0;
 Q.catholics_dvp = 0;
 
-Q.new_middle_spd *= (1-((Q.socialism/100)*0.5));
-Q.old_middle_spd *= (1-((Q.socialism/100)*0.5));
-Q.rural_spd *= (1-((Q.socialism/100)*0.5));
-Q.catholics_spd *= (1-((Q.socialism/100)*0.5));
+Q.new_middle_spd *= (1-((Q.socialism/100)*0.25));
+Q.old_middle_spd *= (1-((Q.socialism/100)*0.25));
+Q.rural_spd *= (1-((Q.socialism/100)*0.25));
+Q.catholics_spd *= (1-((Q.socialism/100)*0.25));
 Q.unemployed_spd *= (1-((Q.socialism/100)*0.1));
 Q.workers_spd *= (1-((Q.socialism/100)*0.1));
 
@@ -88,6 +88,15 @@ Q.old_middle_zca -= Q.old_middle_other;
 Q.rural_zca -= Q.rural_other;
 Q.unemployed_zca -= Q.unemployed_other;
 Q.catholics_zca -= Q.catholics_other;
+
+if (Q.sh_force+Q.sa_force < Q.rb_force+Q.rfb_force) {
+    Q.workers_zca *= (1-(((Q.rb_strength*(Q.left_strength/100)+Q.rfb_strength)/100)*0.1));
+    Q.new_middle_zca *= (1-(((Q.rb_strength*(Q.left_strength/100)+Q.rfb_strength)/100)*0.1));
+    Q.old_middle_zca *= (1-(((Q.rb_strength*(Q.left_strength/100)+Q.rfb_strength)/100)*0.1));
+    Q.rural_zca *= (1-(((Q.rb_strength*(Q.left_strength/100)+Q.rfb_strength)/100)*0.1));
+    Q.unemployed_zca *= (1-(((Q.rb_strength*(Q.left_strength/100)+Q.rfb_strength)/100)*0.1));
+    Q.catholics_zca *= (1-(((Q.rb_strength*(Q.left_strength/100)+Q.rfb_strength)/100)*0.1));
+}
 
 !}
 
