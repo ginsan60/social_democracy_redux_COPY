@@ -2222,7 +2222,7 @@ if (Q.month_actions >= 1) {
     }
     if (Q.rb_force && Q.left_strength >= Q.socialism) {
         var socialist_diff = (Q.left_strength-Q.socialism)/100;
-        Q.rb_strength *= (1-(Q.rb_militancy*socialist_diff));
+        Q.rb_strength *= (1-((Q.rb_militancy*socialist_diff)*0.25));
         // if the SPD is more socialistic than the actual public support for socialism, the reichsbanner's membership will dwindle, accelerated by the reichsbanner's militancy
     }
     if (Q.spanish_civil_war) {
