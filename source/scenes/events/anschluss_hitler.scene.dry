@@ -24,7 +24,7 @@ The first issue is the matter of recognizing his government. If we do not do thi
 
 @recognize
 subtitle: This will upset our Austrian comrades, and countless here at home.
-on-arrival: hitler_recognized = 1; left_dissent += 15; center_dissent += 10; reformist_dissent += 5; neorevisionist_dissent += 15; workers_spd -= 5; workers_kpd += 2; workers_sapd += 2 if sapd_consolidated; west_relation -= 1; east_relation -= 1; workers_nsdap += 2; new_middle_nsdap += 3; old_middle_nsdap += 4; rural_nsdap += 4; unemployed_nsdap += 3; nationalism += 5; pro_republic -= 3
+on-arrival: hitler_recognized = 1; left_dissent += 15; center_dissent += 10; reformist_dissent += 5; neorevisionist_dissent += 15; workers_spd -= 5; workers_kpd += 2; workers_sapd += 2 if sapd_consolidated; west_relation -= 1; east_relation -= 1; soviet_relation -= 1; workers_nsdap += 2; new_middle_nsdap += 3; old_middle_nsdap += 4; rural_nsdap += 4; unemployed_nsdap += 3; nationalism += 5; pro_republic -= 3
 
 There is no point in continuing to fight the fact of the matter, which, albeit regretful, is that Hitler now rules Austria. We will have to conduct business with this state eventually, especially if we wish to represent all Germans, even those in Austria.
 

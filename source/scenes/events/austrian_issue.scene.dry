@@ -200,10 +200,10 @@ The KPD has, since the days of the disastrous Bavarian Soviet, always been a sma
 max-visits: 1
 choose-if: time_left >= 1 and (foreign_minister_party == "SPD" or comintern_seen)
 unavailable-subtitle: [? if time_left < 1 : It takes time to live, but no time to die. ?][? if time_left >= 1 : We have no way of contacting the Soviets. ?]
-on-arrival: time_left -= 1; east_relation += 1; communist_coalition += 1 if east_relation >= 1; kpd_relation += 5 if east_relation >= 1; west_relation -= 1 if west_relation < 2
+on-arrival: time_left -= 1; soviet_relation += 1; communist_coalition += 1 if soviet_relation >= 1; kpd_relation += 5 if soviet_relation >= 1; west_relation -= 1 if west_relation < 2
 go-to: warmenu
 
-We reach out to the Soviets, asking them for help. [? if east_relation < 1 : Stalin, frankly, does not care, rendering the whole thing a waste of time. We have, at least, mildly improven our relations. ?][? if east_relation >= 1 : While they are completely incapable of providing immediate help, Stalin is happy to be thought of, and assures us he will tell the KPD to assist in defending against the reactionary and fascist menace, while simultaneously issuing a condemnation of Hitler's actions and calling for the restoration of regular Austrian government. ?] [? if west_relation < 2 : The Entente powers are a bit annoyed by our validation of the USSR. ?]
+We reach out to the Soviets, asking them for help. [? if soviet_relation < 1 : Stalin, frankly, does not care, rendering the whole thing a waste of time. We have, at least, mildly improven our relations. ?][? if soviet_relation >= 1 : While they are completely incapable of providing immediate help, Stalin is happy to be thought of, and assures us he will tell the KPD to assist in defending against the reactionary and fascist menace, while simultaneously issuing a condemnation of Hitler's actions and calling for the restoration of regular Austrian government. ?] [? if west_relation < 2 : The Entente powers are a bit annoyed by our validation of the USSR. ?]
 
 @reichswehr
 max-visits: 1

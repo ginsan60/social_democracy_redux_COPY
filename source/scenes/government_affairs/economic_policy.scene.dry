@@ -3,7 +3,7 @@ new-page: true
 is-card: true
 tags: govt_affairs
 on-arrival: economic_policy_timer += 12; month_actions += 1; synthesis_budget = 3; synthesis_budget -= 1 if economic_democracy+nationalization_progress >= 3; synthesis_budget -= 1 if synthesis_progress >= 1; nationalize_budget = 4; nationalize_budget -= 1 if works_councils >= 2; nationalize_budget -= 1 if works_councils >= 3; nationalize_budget -= 1 if socializations + nationalization_progress >= 2; wtb_budget = 4; wtb_budget -= 1 if works_councils >= 2 or socializations >= 1 or pro_labor >= 2
-view-if: spd_in_government = 1 and (economic_minister_party == "SPD" or finance_minister_party == "SPD") and economic_policy_timer <= 0 and economic_plan > 0
+view-if: spd_in_government = 1 and (economic_minister_party == "SPD" or finance_minister_party == "SPD") and economic_policy_timer <= 0 and (economic_plan > 0 or capital_flight)
 card-image: img/portraits/SchmidtRobert.jpg
 #subtitle: Policies to address the economic crisis.
 
@@ -22,6 +22,9 @@ We have already formulated an economic plan. Now we have to implement it.
 - @moderate_plan_limited_budget
 - @synthesis_plan
 - @synthesis_only_works
+- @five_year_plan
+- @further_plan
+- @cybersyn
 - @root: Do not implement the economic plan.
 - @cancel_advisor_action
 - @easy_discard
@@ -276,3 +279,28 @@ on-arrival: reformist_vote = 1; reformist_budget = 1
 go-to: reformist_done_2 if not legislature_enabled; legislative_menu if legislature_enabled
 
 We propose a bill to begin a public works program.
+
+@five_year_plan
+title: Implement a comprehensive economic plan using our control over the economy.
+view-if: capital_flight and not five_year_plan
+choose-if: budget > 0
+subtitle: -[? if budget <= 5 : -[+ budget +] budget. ?][? if budget > 5 : -5 budget. ?]
+on-arrival: invested = budget if budget <= 5; invested = 5 if budget > 5; budget = 0 if budget <= 5; budget -= 5 if budget > 5; economic_growth += 0.8*invested; unemployed -= 1.4*invested; inflation += 1*invested; inflation += 0.5*invested if inflation < 3; economic_growth += 0.4 if invested >= 3; economic_growth += 0.2 if invested == 5; unemployed -= 0.6 if invested >= 3; unemployed -= 1 if invested == 5; five_year_plan = 1
+
+We have begun, using our control over the economy, to implement a comprehensive economic plan, with which we hope to reduce unemployment to neglible margins and restore the economy. In a sense, this plan will be the trial of socialism; it is our task to demonstrate the superiority of this economic system. 
+
+@further_plan
+view-if: five_year_plan and capital_flight
+title: Invest further resources into the five-year plan.
+subtitle: -1 budget. [? if budget < 1 : We will enter deficit spending. ?]
+on-arrival: budget -= 1; economic_growth += 0.6; unemployed -= 1.1; inflation += 0.9; inflation += 0.4 if inflation < 3; inflation += 0.4 if budget < 0; invested += 1
+
+We have slated more funds for our economic plan, which will allow it to achieve greater success in its implementation.
+
+@cybersyn
+view-if: five_year_plan and invested >= 5 and science >= 3
+title: Look into the unorthodox and speculative ideas of some of our planners and scientists.
+subtitle: Some suggest that future advances in computation could revolutionize planning.
+on-arrival: cybersyn += 1
+
+We have begun to investigate the possibility of future advances in automated computation, tabulation, and statistical methods enabling an eventual revolutionization of planning. Currently, research remains overwhelmingly speculative, and some planners are annoyed that we are focusing on this, rather than the more pressing and immediate concerns of their constituents.

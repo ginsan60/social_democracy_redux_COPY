@@ -2220,7 +2220,7 @@ if (Q.month_actions >= 1) {
     if (Q.spd_toleration || Q.spd_in_government || Q.in_right_coalition || Q.in_bourgeois_coalition) {
         Q.political_crisis = 0;
     }
-    if ((Q.rb_force && Q.left_strength >= Q.socialism) && (Q.rb_strength >= (2000*((Q.left_strength/100)*(Q.socialism/100))))) {
+    if ((Q.rb_force && Q.left_strength >= Q.socialism) && (Q.rb_strength >= (2000*((Q.left_strength/100)*(Q.socialism/100)*(Q.spd_normalized/(Q.socialism/100)))))) {
         var socialist_diff = (Q.left_strength-Q.socialism)/100;
         if (Q.commissars) {
             socialist_diff *= 0.5;
