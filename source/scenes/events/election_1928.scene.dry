@@ -255,7 +255,7 @@ if (Q.z_r) {
             "id": "bvp",
             "legend": "BVP",
             "name": "BVP",
-            "seats": 3,
+            "seats": 15,
             });
 }
 

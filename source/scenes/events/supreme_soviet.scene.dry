@@ -218,12 +218,12 @@ if (Q.zca_formed && Q.zca_r) {
             });
 }
 
-if (Q.bvp_r) {
+if (Q.z_r) {
     data.push({
             "id": "bvp",
             "legend": "BVP",
             "name": "BVP",
-            "seats": Math.round(Q.bvp_r*5),
+            "seats": 15,
             });
 }
 
