@@ -63,6 +63,7 @@ Our policies have greatly angered the capitalists. Investment has fallen, and fa
 - @address: What can we do?
 
 @revolutionary_approach
+choose-if: left_strength+(center_strength*(socialism/100)) >= 50
 subtitle: The Marxist strategy of the SPD has always been to provoke a confrontation with the capitalists through socialist reforms, through which the rupture leading into socialist transformation would occur. Now, the time for this rupture has come.
 on-arrival: reformist_dissent += 10; left_strength += 10; left_dissent -= 10; class_war += 1; class_war += 1 if left_plan_adopted
 go-to: address
@@ -72,6 +73,7 @@ The revolutionaries of the party put forward their proposed approach to the cris
 The approach has not yet been adopted. It will take more convincing.
 
 @right_approach
+choose-if: reformist_strength+neorevisionist_strength+(labor_strength*(1-(socialism/100))) >= 50
 subtitle: Our goal is, ultimately, to improve the living conditions of the workers. We can only do this through constructive governance; not through crises that we directly manufacture through our policies. We have failed, and must remedy this failure.
 on-arrival: left_dissent += 10; reformist_strength += 10; reformist_dissent -= 10; reconcile_business += 1; reconcile_business += 1 if wtb_adopted or weimar_plan_adopted
 go-to: address
