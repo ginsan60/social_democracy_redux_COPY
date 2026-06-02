@@ -19,6 +19,9 @@ if (Q.pro_republic >= 100) {
 if (Q.socialism < 0) {
     Q.socialism = 0;
 }
+if (Q.bourgeois_power < 0) {
+    Q.bourgeois_power = 0;
+}
 if (Q.socialism >= 100) {
     Q.socialism = 99;
 }
@@ -761,7 +764,9 @@ if (Q.month_actions >= 1) {
         Q.bourgeoisie *= (0.9+(0.1*Q.bourgeois_power));
         Q.new_middle_spd += 4/12;
         Q.new_middle_kpd += 2/12;
-        Q.catholics -= (Q.socialism/50)/12;
+        if (Q.catholics > 0) {
+            Q.catholics -= (Q.socialism/50)/12;
+        }
         Q.workers_zca *= (1-(0.02*(1-Q.bourgeois_power)));
         Q.new_middle_zca *= (1-(0.02*(1-Q.bourgeois_power)));
         Q.old_middle_zca *= (1-(0.02*(1-Q.bourgeois_power)));
@@ -2136,13 +2141,19 @@ if (Q.month_actions >= 1) {
             Q.rural_zca += 5/12;
         }
         if (Q.zca_votes >= (100-Q.socialism)) {
-            Q.new_middle_zca -= 5/12;
-            Q.old_middle_zca -= 5/12;
-            Q.rural_zca -= 5/12;
-            Q.catholics_zca -= 5/12;
-            Q.workers_zca -= 5/12;
-            Q.unemployed_zca -= 5/12;
-            Q.socialism -= 5/12;
+            Q.new_middle_zca -= 6/12;
+            Q.old_middle_zca -= 6/12;
+            Q.rural_zca -= 6/12;
+            Q.catholics_zca -= 6/12;
+            Q.workers_zca -= 6/12;
+            Q.unemployed_zca -= 6/12;
+            Q.socialism -= (6/12)*Q.bourgeois_power;
+            Q.workers_zca *= 1-(0.1*(1-Q.bourgeois_power));
+            Q.new_middle_zca *= 1-(0.1*(1-Q.bourgeois_power));
+            Q.old_middle_zca *= 1-(0.05*(1-Q.bourgeois_power));
+            Q.rural_zca *= 1-(0.05*(1-Q.bourgeois_power));
+            Q.unemployed_zca *= 1-(0.1*(1-Q.bourgeois_power));
+            Q.catholics_zca *= 1-(0.1*(1-Q.bourgeois_power));
         }
     }
     if (Q.kpd_banned && Q.sapd_formed) {
