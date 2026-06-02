@@ -1,6 +1,6 @@
 title: Capital Flight
 subtitle: After failing to retake their country, the nation's business magnates pack up and leave
-view-if: capital_strike_seen and capital_strike_timer < 1 and class_war >= 7 and zca_formed and ((nationalization_progress+economic_democracy)/bourgeois_power) >= zca_votes and (month < (fun_value/10)) and socialism >= (1-bourgeois_power)*100;
+view-if: capital_strike_seen and capital_strike_timer < 1 and class_war >= 7 and zca_formed and (((nationalization_progress+economic_democracy)/bourgeois_power) >= zca_votes) and (month < (fun_value/10)) and (socialism >= (1-bourgeois_power)*100)
 tags: event
 new-page: true
 max-visits: 1
