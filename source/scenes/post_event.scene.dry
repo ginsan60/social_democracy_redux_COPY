@@ -37,6 +37,18 @@ if (Q.reichswehr_loyalty < 0) {
 if (Q.reichswehr_loyalty >= 1) {
     Q.reichswehr_loyalty = 1;
 }
+if (Q.rb_strength < 0) {
+    Q.rb_strength = 0;
+}
+if (Q.rfb_strength < 0) {
+    Q.rfb_strength = 0;
+}
+if (Q.sa_strength < 0) {
+    Q.sa_strength = 0;
+}
+if (Q.sh_strength < 0) {
+    Q.sh_strength = 0;
+}
 // re-calculate party support
 // calculate normalized class voting for the achievements
 for (var c of Q.classes) {
@@ -65,6 +77,9 @@ for (var c of Q.classes) {
             if (Q.year >= 1934) {
                 Q[c+'_'+party] *= 0.98;
             }
+        }
+        if (class_votes < 50) {
+            Q[c+'_'+party] *= 1.01;
         }
     }
 }
