@@ -69,7 +69,7 @@ By firmly taking a side we would split, as the communists want us to. We will wa
 
 @kpd_vs_army
 view-if: spd_revolution
-on-arrival: harzburg_strength += army_force
+on-arrival: harzburg_strength += (reichswehr_strength*reichswehr_militancy)
 go-to: kpd_victory if communist_strength > harzburg_strength; kpd_beaten if harzburg_strength >= communist_strength
 
 @kpd_victory

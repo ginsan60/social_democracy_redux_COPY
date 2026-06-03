@@ -1,4 +1,4 @@
-title: [? if class_war : Class War ?][? if reconcile_business : Capital Flight ?]
+title: Class War
 new-page: true
 is-card: true
 on-arrival: class_war_timer += 2; month_actions += 1; nationalize_budget = 4; nationalize_budget -= 1 if works_councils >= 2; nationalize_budget -= 1 if works_councils >= 3; nationalize_budget -= 1 if socializations + nationalization_progress >= 2;
@@ -6,7 +6,7 @@ view-if: capital_strike_seen and class_war_timer < 1 and not capital_flight
 card-image: img/class_war.jpg
 tags: govt_affairs
 
-= [? if class_war : Class War ?][? if reconcile_business : Capital Flight ?]
+= Class War
 
 Due to our policies, an economic crisis has triggered. Some in our party consider this a result of our policies, others blame the bourgeoisie. Regardless, something has to be done.
 
@@ -24,7 +24,7 @@ Due to our policies, an economic crisis has triggered. Some in our party conside
 @revolutionary_approach
 view-if: class_war < 5 and reconcile_business < 5
 subtitle: The Marxist strategy of the SPD has always been to provoke a confrontation with the capitalists through socialist reforms, through which the rupture leading into socialist transformation would occur. Now, the time for this rupture has come.
-on-arrival: reformist_dissent += 10; left_strength += 10; left_dissent -= 10; class_war += 1; class_war += 1 if left_plan_adopted; coup_progress += 1 if spd_in_government
+on-arrival: peoples_party_support -= class_war+1; reformist_dissent += 10; left_strength += 10; left_dissent -= 10; class_war += 1; class_war += 1 if left_plan_adopted; coup_progress += 1 if spd_in_government
 go-to: address
 
 The revolutionaries of the party put forward their proposed approach to the crisis. They say that this is a success of our strategies, so long as we take it to the next level and wage the class war from below, just as the businesses now do so from above by seeking to bleed the economy dry.
