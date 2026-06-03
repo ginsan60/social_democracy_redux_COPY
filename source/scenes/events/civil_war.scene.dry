@@ -925,8 +925,17 @@ With our triumph over the reactionaries, we have for a short while near free-rei
 - @judicial_purge: Purge the judiciary of all reactionary elements.
 - @dnvp_ban: Ban the DNVP.
 - @dvp_ban: Ban the DVP.
+- @zca_ban: Ban the ZCA.
 - @enable: A sixth-month long Enabling Act to speed denazification up.
 - @agenda_1: That is enough.
+
+@zca_ban
+view-if: zca_formed and not zca_banned
+on-arrival: zca_banned = 1; pro_republic -= 10; socialism -= 5; coup_progress += 10; sa_strength += 200; sh_strength += 150; bourgeois_power -= 0.05; west_relation -= 3; east_relation -= 3; soviet_relation += 1
+subtitle: They are a trojan horse for reaction.
+go-to: decrees_2
+
+We ban the ZCA, denying the bourgeoisie their unified party. This provokes quite the response, as most considered, of course incorrectly, them to be harmless liberal democrats.
 
 @judicial_purge
 view-if: judicial_reform < 5 and not judicial_purge

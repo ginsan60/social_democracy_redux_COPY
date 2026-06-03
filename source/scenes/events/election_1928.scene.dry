@@ -123,6 +123,7 @@ Q.national_front_r = Q.nsdap_r + Q.dnvp_r + Q.dvp_r + Q.other_r + 3;
 if (Q.z_national) {
     Q.national_front_r += Q.z_minus_bvp_r;
 }
+Q.counterrevolution_r = Q.zca_r + Q.ddp_r + Q.dvp_r + Q.z_r + Q.other_r;
 
 Q.leverage = Q.spd_r;
 
@@ -414,8 +415,41 @@ As expected, the
 - @no_majority_hitler
 - @no_govt_3
 - @ddp_majority
+- @counterrevolution
 
-# TODO: black-brown coalition
+@counterrevolution
+title: The counterrevolutionaries have won a majority.
+subtitle: ZCA + Others ([+ counterrevolution_r +]%)
+view-if: zca_formed and counterrevolution_r >= 50
+on-arrival: bourgeois_power += 0.1; socialism -= (counterrevolution_r/10); workers_zca += 5; new_middle_zca += 5; old_middle_zca += 5; rural_zca += 5; unemployed_zca += 5; sh_militancy += bourgeois_power/2; sh_militancy += 0.05; sa_militancy += 0.02
+
+Somehow, the bourgeoisie have won this class war, even with our whole combined effort against them. Immediately, they form a government, unveiling their plan to save Germany from socialism. Already, they are planning to privatize the industries we had seized, while the Harzburg Front swells in the countryside.
+
+- @unacceptable: Unacceptable! Call a general strike!
+- @insurrection: Then we must join the KPD's insurrection.
+- @ggsbro: There is nothing we can do.
+
+@unacceptable
+choose-if: not supreme_soviet and (workers_spd_normalized*(1-dissent))+workers_kpd_normalized+workers_sapd_normalized >= 50
+unavailable-subtitle: We lack the support of the workers.
+on-arrival: socialism += 5; workers_zca -= 10
+
+We call a general strike, forcing the ZCA to slow down their agenda. Socialism is preserved, for now, but capitalism is on the upswing. The future of Germany is uncertain, though it may be molded into a corporatist state by the necessities of the bourgeoisie to compromise in their crawling back toward power. Hopefully, we can preserve workers' power in spite of this.
+
+- @game_over: Aw man, that's the end? I guess it WOULD be feature creep if this one possible outcome out of hundreds spawned a detailed event chain...
+
+@insurrection
+on-arrival: reichswehr_militancy += 1 if reichswehr_militancy < 4; kpd_relation += 15
+
+We have launched an uprising with the KPD, to defend socialism. 
+
+- @civil_war: It is a civil war.
+
+@ggsbro
+
+Welp, that's a wrap.
+
+- @game_over: Game over, for now, until I feature-creep an entire unique route for shock therapy.
 
 @ddp_majority
 title: The [+ ddp_name +] has won a majority.

@@ -1,0 +1,10 @@
+title: Food Shortages
+subtitle: We are suffering shortages of food
+view-if: capital_strike_seen and spd_in_government and capital_strike_timer == 3
+#tags: event
+max-visits: 2
+on-arrival: capital_strike_timer -= 1
+
+= Food Shortages
+
+Huh! 

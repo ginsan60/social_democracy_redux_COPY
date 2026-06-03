@@ -68,6 +68,8 @@ if (Q.socialized_media) {
     Q.bourgeoisie_zca += (3*Q.capital_strike_progress);
 }
 
+Q.old_zca_r = 0;
+
 Q.workers_zca += Q.workers_other;
 Q.new_middle_zca += Q.new_middle_other;
 Q.old_middle_zca += Q.old_middle_other;
