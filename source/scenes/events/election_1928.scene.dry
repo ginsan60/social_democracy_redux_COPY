@@ -423,7 +423,9 @@ subtitle: ZCA + Others ([+ counterrevolution_r +]%)
 view-if: zca_formed and counterrevolution_r >= 50
 on-arrival: bourgeois_power += 0.1; socialism -= (counterrevolution_r/10); workers_zca += 5; new_middle_zca += 5; old_middle_zca += 5; rural_zca += 5; unemployed_zca += 5; sh_militancy += bourgeois_power/2; sh_militancy += 0.05; sa_militancy += 0.02
 
-Somehow, the bourgeoisie have won this class war, even with our whole combined effort against them. Immediately, they form a government, unveiling their plan to save Germany from socialism. Already, they are planning to privatize the industries we had seized, while the Harzburg Front swells in the countryside.
+Somehow, the bourgeoisie have won this class war, even with our whole combined effort against them. Immediately, they form a government, unveiling their plan to save Germany from socialism. Already, they are planning to privatize the industries we had seized, while the Harzburg Front swells in the countryside. 
+
+Their first policies are to prepare for the restoration of "civilian rule", seeking to produce arrest warrants against our leaders for violation of the Weimar constitution while directing the remnants of the Reichswehr to prepare for elections. At the least, it does seem that the reactionaries no longer seek the restoration of Imperial Germany, but merely of bourgeois rule in any form. We have moved the goalposts successfully, for now.
 
 - @unacceptable: Unacceptable! Call a general strike!
 - @insurrection: Then we must join the KPD's insurrection.
