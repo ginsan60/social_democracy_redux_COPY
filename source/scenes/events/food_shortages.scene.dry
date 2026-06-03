@@ -65,7 +65,7 @@ Farmers are hurt by this policy, as cheap imported grain leads to ruin for some 
 @reconcile_town_and_country
 view-if: not reconcile_town_and_country
 subtitle: -3 budget. Many are skeptical; this does little to address the immediate crisis.
-on-arrival: budget -= 3; inflation -= 0.2; inflation -= 0.5 if capital_flight; inflation -= nationalization_progress/10 if five_year_plan; coalition_dissent += 2; labor_dissent += 5; rural -= 1; workers += 1; reconcile_town_and_country
+on-arrival: budget -= 3; inflation -= 0.2; inflation -= 0.5 if capital_flight; inflation -= nationalization_progress/10 if five_year_plan; coalition_dissent += 2; labor_dissent += 5; rural -= 1; workers += 1; reconcile_town_and_country += 1
 
 We have set aside significant funding towards the development of urban agriculture as a step towards the reconciliation of town and country, as advocated by Marx. In the short term, this yields very little results, and the issue of food shortages remains present on the minds of many who grow frustrated with our failure to address their immediate issues. We counter by saying that we are treating the cause and not the symptom, and that the long term crisis requires a fundamental re-evaluation of labor divisions. Unfortunately for us, it does not seem trade unions like being lectured to on Marxist theory. We will have to hope for results to vindicate our thesis.
 

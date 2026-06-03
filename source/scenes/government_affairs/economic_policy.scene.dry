@@ -24,6 +24,12 @@ We have already formulated an economic plan. Now we have to implement it.
 - @synthesis_only_works
 - @five_year_plan
 - @further_plan
+- @reconcile_town_and_country1
+- @reconcile_town_and_country2
+- @reconcile_town_and_country3
+- @reconcile_town_and_country4
+- @reconcile_town_and_country5
+- @reconcile_town_and_country6
 - @cybersyn
 - @root: Do not implement the economic plan.
 - @cancel_advisor_action
@@ -278,7 +284,10 @@ choose-if: budget >= 1
 on-arrival: reformist_vote = 1; reformist_budget = 1
 go-to: reformist_done_2 if not legislature_enabled; legislative_menu if legislature_enabled
 
-We propose a bill to begin a public works program.
+We propose a bill to begin a public works program.ù
+
+##############################
+# Five-year plan
 
 @five_year_plan
 title: Implement a comprehensive economic plan using our control over the economy.
@@ -296,6 +305,33 @@ subtitle: -1 budget. [? if budget < 1 : We will enter deficit spending. ?]
 on-arrival: budget -= 1; economic_growth += 0.6; unemployed -= 1.1; inflation += 0.9; inflation += 0.4 if inflation < 3; inflation += 0.4 if budget < 0; invested += 1
 
 We have slated more funds for our economic plan, which will allow it to achieve greater success in its implementation.
+
+@reconcile_town_and_country1
+view-if: five_year_plan and reconcile_town_and_country == 1
+title: Continue to undertake the development of urban agriculture.
+subtitle: We will reconcile town & country!
+on-arrival: reconcile_town_and_country += 1; inflation -= nationalization_progress/10; rural -= (invested/10); workers += (invested/10); unemployed -= (nationalization_progress+invested)/12
+
+We have continued to organize the development of urban agriculture, so as to increase the self-reliance of each and every city and reduce the divide between the country and the city. This is only the first step in working towards a permanent solution.
+
+## todo: make food shortages a gov card which appears after the first event
+
+@reconcile_town_and_country2
+view-if: reconcile_town_and_country == 2 or reconcile_town_and_country == 3
+title: Enlist urban planners to conceptualize new settlements, based on a blend between the town and country.
+subtitle: We will reconcile town & country!
+on-arrival: reconcile_town_and_country += 1; labor_dissent += 5
+
+We have tasked our urban planners with beginning to conceptualize a new kind of settlement, unlike those built before, along the lines of the Marxist aim of reconciling town and country, something the disurbanists of the Soviet Union attempted to tackle as well.
+
+## Many have looked to Ebenezer Howard's "garden cities" for inspiration, with their attempt at making reasonably sized and self-sufficient cities to blend town and country together.
+
+@reconcile_town_and_country3
+view-if: reconcile_town_and_country == 2 or reconcile_town_and_country == 3
+title: Launch an education initiative to teach workers basic agricultural skills.
+subtitle: We will reconcile town & country!
+
+
 
 @cybersyn
 view-if: five_year_plan and invested >= 5 and science >= 3
