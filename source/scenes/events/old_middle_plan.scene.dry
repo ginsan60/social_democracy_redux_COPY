@@ -36,10 +36,11 @@ Q.sa_militancy += 0.03;
 Q.sa_strength += 200;
 Q.sh_strength += 50;
 
-Q.old_middle -= Q.nationalization_progress;
-if (Q.old_middle < 0) {
-    Q.old_middle = 0;
-}
+// Q.old_middle -= Q.nationalization_progress;
+// if (Q.old_middle < 0) {
+//    Q.old_middle = 0;
+//}
+// note: should they really lose their class identity?
 
 !}
 
