@@ -24,6 +24,7 @@ We have already formulated an economic plan. Now we have to implement it.
 - @synthesis_only_works
 - @five_year_plan
 - @further_plan
+- @tighten_controls
 - @reconcile_town_and_country1
 - @reconcile_town_and_country2
 - @reconcile_town_and_country3
@@ -356,8 +357,17 @@ We organize seasonal rotations of urban & rural workers, bringing the two fields
 @reconcile_town_and_country6
 view-if: reconcile_town_and_country == 6
 title: Reconcile town & country!
+subtitle: We will reconcile town & country!
+on-arrival: inflation -= 3 if inflation >= 3; economic_growth += 2; rural -= invested; workers += invested; workers += rural if rural < 0; rural = 0 if rural < 0
 
-Wow. Hold on.
+We have reconciled town and country, or at least made significant progress towards doing so, anyway. While there is still a long ways to go, we have constructed many new settlements based around the principle, and through seasonal labor rotation and the construction of urban agriculture in existing cities, we are helping to reduce the conflict in other manners as well.
+
+@tighten_controls
+view-if: price_controls
+title: Tighten control on prices and wages, to lower inflation.
+on-arrival: inflation_goal -= 1 if inflation_goal > price_controls; capital_strike_progress += 2; inflation -= 2; black_market += 6; hyperinflation = 0; coalition_dissent += 1; unemployed += 1; old_middle_spd -= 2; new_middle_spd -= 2; rural_spd -= 4; workers_spd -= 1; unemployed_spd += 2; labor_dissent += 3; dvp_relation -= 3; z_relation -= 2; ddp_relation -= 2; economic_growth -= 0.2
+
+We tighten price controls, aiming to reduce inflation further beyond its current levels. This causes further growth in the black market.
 
 @cybersyn
 view-if: five_year_plan and invested >= 5 and science >= 3

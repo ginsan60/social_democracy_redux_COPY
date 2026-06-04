@@ -48,6 +48,9 @@ if (Q.capital_nazi) {
     Q.bourgeoisie_dnvp += 20;
 }
 Q.bourgeois_power -= 0.03;
+if (Q.price_controls) {
+    Q.black_market += 6;
+}
 
 Q.timers.push('capital_strike');
 Q.capital_strike_timer = Q.capital_strike_progress;
