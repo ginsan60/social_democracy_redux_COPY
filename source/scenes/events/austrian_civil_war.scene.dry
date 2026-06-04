@@ -67,7 +67,6 @@ We provide diplomatic and some financial and material support to the SDAPÖ forc
 title: Can we bring the sides together for a peace?
 view-if: spd_in_government and foreign_minister_party = "SPD" and sdapo_strength = 5
 on-arrival: austria_peace = 1; pro_republic += 3; coup_progress -= 1; socialism += 1
-
 achievement: arbeiter_von_wien
 
 The Austrian government obviously sees us as biased, so there is no way they will let us host peace negotiations. However, negotiations begin nonetheless. In Switzerland, with Fascist Italy as the Austrofascists' protector and Germany as the SDAPÖ's, a peace deal is hammered out. The socialists are disarmed and give up all pretense of revolution, while the right-wing paramilitaries are also disarmed. Dictatorship ends, and normal government is restored, with free elections. [? if hitler_deported : The only true loser here is Hitler, who has been arrested by this new government, neither side willing to defend him. ?]

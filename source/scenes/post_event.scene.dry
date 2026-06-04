@@ -807,6 +807,20 @@ if (Q.month_actions >= 1) {
             Q.socialism += Q.unemployed/24;
         }
     }
+    if (Q.socialism >= Q.workers+Q.new_middle+Q.unemployed && Q.burgerstalgia) {
+        Q.socialism -= 2;
+    }
+    if (Q.burgerstalgia) {
+        Q.rural_spd -= 3/12;
+        Q.rural_kpd -= 6/12;
+        Q.old_middle_spd -= 3/12;
+        Q.old_middle_kpd -= 6/12;
+        Q.catholics_spd -= 3/12;
+        Q.catholics_kpd -= 6/12;
+        if (Q.catholics < 30) {
+            Q.catholics += 6/12;
+        }
+    }
 
     ////////////////////////// annual support changes
     if (Q.year < 1928 && Q.president != "Ebert") {
