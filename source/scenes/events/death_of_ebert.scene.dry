@@ -212,7 +212,6 @@ if (Q.jarres_campaign) {
     Q.jarres_votes += Q.nsdap_normalized/4;
     if (Q.bvp_support_jarres) {
         Q.jarres_votes += 0.03;
-        Q.jarres_votes += Q.nationalism/5000;
     }
 }
 if (Q.ludendorff_campaign) {
