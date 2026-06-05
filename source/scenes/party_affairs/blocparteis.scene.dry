@@ -20,19 +20,17 @@ With the ZCA's formation and the banning of private party financing, the remnant
 
 @ddp_bloc
 subtitle: -1 resource
-on-arrival: resources -= 1
 choose-if: resources >= 1
 view-if: ddp_bloc < 5
-on-arrival: ddp_bloc += 1; ddp_bloc += 1 if interior_minister_party == "SPD"; ddp_relation += 10*ddp_bloc; new_middle_ddp += ddp_bloc; old_middle_ddp += ddp_bloc/1.5; rural_ddp += ddp_bloc/2; rural_ddp += (ddp_bloc*land_reform)/5
+on-arrival: resources -= 1; ddp_bloc += 1; ddp_bloc += 1 if interior_minister_party == "SPD"; ddp_relation += 10*ddp_bloc; new_middle_ddp += ddp_bloc; old_middle_ddp += ddp_bloc/1.5; rural_ddp += ddp_bloc/2; rural_ddp += (ddp_bloc*land_reform)/5
 
 We have attempted to work on turning the [+ ddp_name +] into a bloc party, our organizers reaching out to their remaining insolvent party branches and infiltrating them [? if interior_minister_party == "SPD" : with the help of the Interior Ministry?].
 
 @z_bloc
 subtitle: -1 resource
-on-arrival: resources -= 1
 choose-if: resources >= 1
 view-if: z_bloc < 5
-on-arrival: z_bloc += 1; z_bloc += 1 if interior_minister_party == "SPD"; z_relation += 10*z_bloc; catholics_z += z_bloc; catholics_zca -= z_bloc
+on-arrival: resources -= 1; z_bloc += 1; z_bloc += 1 if interior_minister_party == "SPD"; z_relation += 10*z_bloc; catholics_z += z_bloc; catholics_zca -= z_bloc
 
 We have attempted to work on turning the Z into a bloc party, our organizers reaching out to their remaining insolvent party branches and infiltrating them [? if interior_minister_party == "SPD" : with the help of the Interior Ministry?].
 
