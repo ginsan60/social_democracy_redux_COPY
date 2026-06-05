@@ -768,6 +768,42 @@ Q.enabling_r = Math.round((Q.enabling_r/total_r)*100);
 go-to: enabling_act_passed if enabling_r >= 67; enabling_act_failed if enabling_r < 67
 
 @enabling_act_passed
+go-to: enabling_act_passed2 if fun_value < 100; time_travel if fun_value == 100
+
+@time_travel
+
+Despite our best efforts...the Enabling Act has passed with [+ enabling_r +]% of the votes. [+ chancellor +] has near limitless power, and will begin the process of eliminating any remaining roadblocks.
+
+Germany is lost.
+
+- @time_traveller: Game ov...?
+
+@time_traveller
+subtitle: Wait, who are those guys by the door?
+
+Just as the Enabling Act is passed, a group of strange men bursts through the Reichstag door armed with what appear to be guns, though not any we've ever seen before. Proclaiming themselves time travellers from the future, they declare that they have come to stop Hitler, who, according to them, would go on to plunge the world into a war to kill millions, including millions of innocent minorities who would find themselves the victims of a horrific genocide.
+
+Growing agitated, Hitler orders the SA to apprehend the "communist putschists", and a gunfight breaks out.
+
+- @duck: Holy shit! Duck!
+
+@duck
+subtitle: Get your head down!
+
+Our deputies duck beneath their chairs as the crackle of gunfire fills the chamber. Shouts and screams can be heard as bullets tear through furniture and, on occassion, people. Hitler is hit in the shoulder, and evacuated by the SA as reinforcements pour in from outside. The self-purported time travellers, with their admittedly superior firearms, are forced out of the building.
+
+- @okay_now_what: So...what happened?
+
+@okay_now_what
+subtitle: Is Hitler dead?
+
+As the gunfight subsides and our deputies cautiously peek their heads back out, it becomes clear that the Reichstag remains under Nazi control. Some hold out hope for the time travellers, but in the following days, it becomes clear that they were apprehended evacuating back to their time machine by a police unit, and that Hitler survived, after all. The time travellers are summarily executed by the SA, their weapons, of which they apparently had a bountiful stockpile in the time machine which the Nazis now possess, being repurposed for Nazi aims.
+
+Germany is lost, after all. And so is the world, as Hitler goes on to triumph over the Allied powers and extend his dictatorship over all of Earth.
+
+- @game_over: Game over.
+
+@enabling_act_passed2
 
 Despite our best efforts...the Enabling Act has passed with [+ enabling_r +]% of the votes. [+ chancellor +] has near limitless power, and will begin the process of eliminating any remaining roadblocks.
 
