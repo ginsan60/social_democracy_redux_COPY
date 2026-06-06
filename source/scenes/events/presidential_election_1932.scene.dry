@@ -76,6 +76,7 @@ Fine. We have thrown our support to Chairman Thälmann of the KPD. [? if hindenb
 - @convince_kpd: Convince the Communists.
 - @convince_liberals: Convince the remaining liberals, wherever they are.
 - @final_election: The final vote...
+- @hold_the_phone: We have finally received a reply from the Americans!
 
 @hindenburg_reluctant
 
@@ -466,8 +467,21 @@ There is no majority in this round. In the second round, any candidate who wins 
 - @round2_convince_kpd: Convince the KPD to switch their support to us. 
 - @round2_hindenburg: Switch our support to Hindenburg.
 - @round2_thalmann: Switch our support to Thälmann of the KPD.
+- @hold_the_phone: Let the second round voting begin.
 - @round2_vote: Let the second round voting begin.
 
+@hold_the_phone
+view-if: spa_ties
+
+Just as we are about to enter the runoff against Hindenburg, we receive through our international contacts a message.
+
+- @yay: We have finally received a reply from the Americans!
+
+@yay
+
+The Socialist Party of America wishes our party luck in the upcoming presidential runoff against Hindenburg.
+
+- @round2_vote: Now, the second round...
 
 @round2_convince_z
 view-if: braun_campaign > 0 and z_support_braun != 1 
@@ -600,6 +614,7 @@ We have switched our support to Hindenburg.
 - @round2_vote: Let the second round voting begin.
 
 @round2_vote
+view-if: not braun_campaign or not spa_ties
 go-to: election_algorithm
 set-jump: post_election
 
