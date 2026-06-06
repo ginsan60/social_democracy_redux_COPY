@@ -2040,6 +2040,16 @@ if (Q.month_actions >= 1) {
         Q.catholics_dne += Q.army_force/120;
         Q.strife -= Q.dne_votes/120;
     }
+    if (Q.capital_strike_seen && Q.class_war && !Q.financing_banned && Q.capital_strike_timer > 0) {
+        if (Q.z_relation >= (Q.socialism-Q.left_strength)) {
+            Q.z_relation -= (Q.capital_strike_progress*Q.bourgeois_power)/6;
+            Q.z_tension += 1;
+        }
+        if (Q.ddp_relation >= (Q.socialism-Q.left_strength)) {
+            Q.ddp_relation -= (Q.capital_strike_progress*Q.bourgeois_power)/6;
+            Q.ddp_tension += 1;
+        }
+    }
     if (Q.nazi_peak) {
         if (Q.nazi_peaked) {
             Q.nazi_peak = 0;

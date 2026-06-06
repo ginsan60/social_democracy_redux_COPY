@@ -52,13 +52,14 @@ if (Q.kpd_relation >= 60) {
 // general strike strength
 // maximum (given 25 labor strength) is 400
 // use normalized workers_spd instead of labor_strength?
-Q.normalized_workers_spd = 100*Q.workers_spd/(Q.workers_spd + Q.workers_kpd + Q.workers_nsdap + Q.workers_other + Q.workers_dnvp + Q.workers_z);
-Q.normalized_workers_kpd = 100*Q.workers_kpd/(Q.workers_spd + Q.workers_kpd + Q.workers_nsdap + Q.workers_other + Q.workers_dnvp + Q.workers_z);
-Q.normalized_workers_total = Q.normalized_workers_spd;
+Q.normalized_workers_total = Q.workers_spd_normalized;
 if (Q.kpd_relation >= 60) {
-    Q.normalized_workers_total += Q.normalized_workers_kpd;
+    Q.normalized_workers_total += Q.workers_kpd_normalized;
 } else if (Q.kpd_relation >= 45) {
-    Q.normalized_workers_total += Q.normalized_workers_kpd*0.5;
+    Q.normalized_workers_total += Q.workers_kpd_normalized*0.5;
+}
+if (Q.sapd_formed) {
+    Q.normalized_workers_total += Q.workers_sapd_normalized;
 }
 Q.total_power += (2 - Q.labor_dissent/100)*Q.normalized_workers_total*(2 - Q.unemployed/100)*2.5;
 console.log("Supporter strength:", Q.total_power);
@@ -931,6 +932,8 @@ With our triumph over the reactionaries, we have for a short while near free-rei
 
 @zca_ban
 view-if: zca_formed and not zca_banned
+choose-if: rb_force+rfb_force >= army_force
+unavailable-subtitle: The Reichswehr forbids it.
 on-arrival: zca_banned = 1; pro_republic -= 10; socialism -= 5; coup_progress += 10; sa_strength += 200; sh_strength += 150; bourgeois_power -= 0.05; west_relation -= 3; east_relation -= 3; soviet_relation += 1
 subtitle: They are a trojan horse for reaction.
 go-to: decrees_2
@@ -939,6 +942,8 @@ We ban the ZCA, denying the bourgeoisie their unified party. This provokes quite
 
 @judicial_purge
 view-if: judicial_reform < 5 and not judicial_purge
+choose-if: rb_force+rfb_force >= (army_force*(1-reichswehr_loyalty))
+unavailable-subtitle: The Reichswehr forbids it.
 on-arrival: judicial_reform += 5; judicial_purge = 1; budget -= judicial_purge_cost; pro_republic -= (4*judicial_purge_cost); coalition_dissent += judicial_purge_cost; reformist_dissent += (judicial_purge_cost*5)
 go-to: decrees_2
 
@@ -946,6 +951,8 @@ We purge the judiciary, replacing reactionary judges en masse in a process they 
 
 @land_seizure
 view-if: land_reform < 4 and not land_seizure
+choose-if: rb_force+rfb_force >= (army_force*(1-reichswehr_loyalty))
+unavailable-subtitle: The Reichswehr forbids it.
 subtitle: -[+ land_seizure_cost +] budget.
 on-arrival: budget -= land_seizure_cost; land_seizure = 1; land_reform += land_seizure_cost; pro_republic -= (4*land_seizure_cost); coalition_dissent += land_seizure_cost; rural_spd += land_seizure_cost*(5*(1-dissent)); rural_nsdap -= land_seizure_cost*(4*(1-dissent)); unemployed -= land_seizure_cost if unemployed >= 5; dvp_relation -= (5*land_seizure_cost); z_relation -= (4*land_seizure_cost); left_strength += (8*land_seizure_cost); left_dissent -= (5*land_seizure_cost); rural_sol += (3*land_seizure_cost); rural_policy += land_seizure_cost; sa_strength += 25; sh_strength += 10; sa_militancy += 0.05
 
@@ -954,6 +961,8 @@ In a sweeping program of land reform, we seize aristocratic estates and distribu
 - @decrees_2: Excellent.
 
 @mass_nationalization
+choose-if: rb_force+rfb_force >= army_force and left_strength >= reformist_strength+neorevisionist_strength
+unavailable-subtitle: [? if rb_force+rfb_force < army_force : The Reichswehr forbids it. ?][? if left_strength < reformist_strength+neorevisionist_strength : The party forbids it. ?]
 subtitle: -[+ nationalize_budget +] budget. [? if works_councils >= 3 : Our works councils have reduced the budget necessary for this program. ?] [? if socializations >= 2: Our existing socialization policies have reduced the budget necessary for this program. ?]
 view-if: not mass_nationalization and not sapd_formed
 on-arrival: mass_nationalization = 1; ddp_relation -= 4; z_relation -= 5; dvp_relation -= 7; coalition_dissent += 1; capital_strike_progress += 1; pro_republic -= 6; reformist_dissent += 4
@@ -1027,6 +1036,8 @@ The capitalists are, predictably, up in arms about our policy of legalizing fact
 
 @wealth_seizure
 view-if: not wealth_seized
+choose-if: rb_force+rfb_force >= army_force
+unavailable-subtitle: The Reichswehr forbids it.
 subtitle: +7 budget.
 on-arrival: wealth_seized = 1; upper_tax_rates += 3; bourgeois_power -= 0.25; coalition_dissent += 3; workers_spd += 6*(1-dissent); unemployed_spd += 6*(1-dissent); z_relation -= 10; ddp_relation -= 12; dvp_relation -= 16; pro_republic -= 8; budget += 7; capital_strike_progress += 15; old_middle_spd *= 0.25; new_middle_spd *= 0.6
 
@@ -1036,6 +1047,8 @@ We seize the assets of the rich and even the Reichsbank in a mass redistribution
 
 @dnvp_ban
 view-if: not dnvp_banned
+choose-if: rb_force+rfb_force >= army_force and left_strength >= 50
+unavailable-subtitle: [? if left_strength >= 50 : The Reichswehr forbids it. ?][? if left_strength < 50 : The party forbids it. ?]
 subtitle: We will deny the remaining reactionaries a party.
 on-arrival: dnvp_banned = 1; dvp_relation -= 5; z_relation -= 4 if z_party_leader != "Joos"; pro_republic -= 4; old_middle_dnvp *= 0.9; rural_dnvp *= 0.95; new_middle_dnvp *= 0.8; sh_strength *= 0.9; sh_militancy -= 0.05
 
@@ -1044,6 +1057,8 @@ Recognizing the DNVP's own participation in the far-right struggle against the R
 - @decrees_2: Excellent.
 
 @dvp_ban
+choose-if: rb_force+rfb_force >= army_force
+unavailable-subtitle: The Reichswehr forbids it.
 view-if: not dvp_banned and (left_strength > reformist_strength + center_strength) and dnvp_banned
 subtitle: The DVP are hardly better than the other reactionaries.
 on-arrival: dvp_banned = 1; reformist_dissent += 15; center_dissent += 5; z_relation -= 10; ddp_relation -= 10; coalition_dissent += 2; pro_republic -= 7; new_middle_spd -= 4; old_middle_spd -= 5

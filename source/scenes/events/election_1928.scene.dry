@@ -1151,14 +1151,15 @@ However, the DNVP and its leader Hugenberg is refusing to partake in a coalition
 
 @right_coalition_2
 view-if: right_coalition_failed != 1 and right_coalition >= 50
-on-arrival: spd_in_government = 0; spd_toleration = 0; chancellor = "Brüning"; chancellor_party = "Z"; foreign_minister_party = "DVP"; interior_minister_party = "Z"; justice_minister_party = "Z"; labor_minister_party = "Z"; reichswehr_minister_party = "I"; economic_minister_party = "Z"; finance_minister_party = "Z"; agriculture_minister_party = "Z"; in_right_coalition = 1; workers_spd -= 3; new_middle_spd -= 2; judicial_reform -= 1; reichswehr_loyalty -= 0.05; interior_police_loyalty -= 0.05; welfare -= 1; budget += 1; nationalism += 6
 go-to: right_coalition_3 if dnvp_reform; right_coalition_old if not dnvp_reform
 
 @right_coalition_old
+on-arrival: spd_in_government = 0; spd_toleration = 0; chancellor = "Brüning"; chancellor_party = "Z"; foreign_minister_party = "DVP"; interior_minister_party = "Z"; justice_minister_party = "Z"; labor_minister_party = "Z"; reichswehr_minister_party = "I"; economic_minister_party = "Z"; finance_minister_party = "Z"; agriculture_minister_party = "Z"; in_right_coalition = 1; workers_spd -= 3; new_middle_spd -= 2; judicial_reform -= 1; reichswehr_loyalty -= 0.05; interior_police_loyalty -= 0.05; welfare -= 1; budget += 1; nationalism += 6
 
 Even though the DNVP is very reluctant to participate in such a coalition, they still accede to [? if president == "Hindenburg" : President Hindenburg's wishes ?][? if president != "Hindenburg" : the Center Party's wishes ?] and to allow a government to be formed. Thus, a majority center-right coalition is formed, with Brüning as chancellor.
 
 @right_coalition_3
+on-arrival: spd_in_government = 0; spd_toleration = 0; chancellor = "Brüning"; chancellor_party = "Z"; foreign_minister_party = "DVP"; interior_minister_party = "Z"; justice_minister_party = "Z"; labor_minister_party = "Z"; reichswehr_minister_party = "I"; economic_minister_party = "Z"; finance_minister_party = "Z"; agriculture_minister_party = "Z"; in_right_coalition = 1; workers_spd -= 3; new_middle_spd -= 2; judicial_reform -= 1; reichswehr_loyalty -= 0.05; interior_police_loyalty -= 0.05; welfare -= 1; budget += 1; nationalism += 6
 
 With the DNVP's new more amicable position towards participation in parliamentary politics, the right-wing coalition is successfully formed.
 

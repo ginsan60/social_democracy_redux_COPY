@@ -1,6 +1,6 @@
 title: Through the Eye of a Needle
 subtitle: Even the bourgeoisie can find their way to socialism.
-view-if: capital_strike_seen and not z_socialist and (capital_strike_timer >= 10 or capital_strike_timer == 0) and z_relation >= 75 and socialism >= 60 and class_war and financing_banned and (in_weimar_coalition or in_popular_front) and pro_republic >= nationalism*2 and z_party_leader == "Joos"
+view-if: capital_strike_seen and not z_socialist and (capital_strike_timer == 0) and z_relation >= 75 and socialism >= 60 and class_war and (financing_banned or z_tension >= 12) and (in_weimar_coalition or in_popular_front) and pro_republic >= nationalism*2 and z_party_leader == "Joos"
 tags: event
 new-page: true
 max-visits: 1

@@ -55,6 +55,7 @@ We have increased state purchasing of food staples to provide to urban workers a
 
 @state_buyer
 title: State Buyer
+view-if: not state_buyer
 subtitle: -2 budget - Create a state monopoly for grain purchases, guaranteeing prices for farmers and stable prices for consumers. [? if judicial_reform < 2 : The judiciary would never allow this. ?]
 choose-if: budget >= 2 and judicial_reform >= 2
 max-visits: 1
