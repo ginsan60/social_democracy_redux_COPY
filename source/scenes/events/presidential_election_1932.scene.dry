@@ -76,7 +76,6 @@ Fine. We have thrown our support to Chairman Thälmann of the KPD. [? if hindenb
 - @convince_kpd: Convince the Communists.
 - @convince_liberals: Convince the remaining liberals, wherever they are.
 - @final_election: The final vote...
-- @hold_the_phone: We have finally received a reply from the Americans!
 
 @hindenburg_reluctant
 
@@ -478,6 +477,7 @@ Just as we are about to enter the runoff against Hindenburg, we receive through 
 - @yay: We have finally received a reply from the Americans!
 
 @yay
+on-arrival: spa_ties = 0
 
 The Socialist Party of America wishes our party luck in the upcoming presidential runoff against Hindenburg.
 
