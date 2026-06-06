@@ -123,7 +123,13 @@ Q.national_front_r = Q.nsdap_r + Q.dnvp_r + Q.dvp_r + Q.other_r + 3;
 if (Q.z_national) {
     Q.national_front_r += Q.z_minus_bvp_r;
 }
-Q.counterrevolution_r = Q.zca_r + Q.ddp_r + Q.dvp_r + Q.z_r + Q.other_r;
+Q.counterrevolution_r = Q.zca_r + Q.ddp_r + Q.dvp_r + Q.z_r + Q.other_r + Q.dnvp_r + Q.nsdap_r;
+if (Q.z_socialist) {
+    Q.counterrevolution_r -= Q.z_r;
+}
+if (Q.ddp_socialist) {
+    Q.counterrevolution_r -= Q.ddp_r;
+}
 
 Q.leverage = Q.spd_r;
 
@@ -419,7 +425,7 @@ As expected, the
 
 @counterrevolution
 title: The counterrevolutionaries have won a majority.
-subtitle: ZCA + Others ([+ counterrevolution_r +]%)
+subtitle: ZCA & Friends ([+ counterrevolution_r +]%)
 view-if: zca_formed and counterrevolution_r >= 50
 on-arrival: bourgeois_power += 0.1; socialism -= (counterrevolution_r/10); workers_zca += 5; new_middle_zca += 5; old_middle_zca += 5; rural_zca += 5; unemployed_zca += 5; sh_militancy += bourgeois_power/2; sh_militancy += 0.05; sa_militancy += 0.02
 
@@ -1131,7 +1137,7 @@ title: A right-wing coalition may be formed.
 subtitle: Z + [+ bvp_name +] + DVP + DNVP + Others ([+ right_coalition +]%)
 unavailable-subtitle: The DNVP is not interested in a coalition with the Center.
 view-if: right_coalition >= 50
-choose-if: year < 1928 or dnvp_reform
+choose-if: year < 1928 or dnvp_reform or ((not zca_formed or counterrevolution_r < 50) and (weimar_coalition < 50 or z_willing != 1) and (grand_coalition < 50 or grand_coalition_failed == 1 or dvp_willing != 1) and far_right_coalition < 50 and (hitler_right_coalition < 50 or left_strength < 50 or political_crisis_progress < 1 or chancellor != "Brüning" or bb_failed) and bourgeois_coalition < 50 and not (dne_formed and chancellor == "Schleicher"))
 go-to: no_right_coalition if year >= 1930 and not dnvp_reform; right_coalition_2 if year <= 1929 and not dnvp_reform; right_coalition_3 if dnvp_reform
 
 There are enough votes for a right-wing coalition of the Center (+ [+ bvp_name +]), DVP, DNVP, and minor conservative parties.

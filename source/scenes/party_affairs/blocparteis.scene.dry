@@ -2,7 +2,7 @@ title: Bloc Parties
 new-page: true
 on-arrival: month_actions += 1
 is-card: true
-card-image: img/blocparteis.jpg
+card-image: img/blocpartei.jpg
 frequency: 20
 tags: party_affairs
 view-if: zca_formed and not (ddp_socialist and z_socialist) and not blocparteis_rejected and financing_banned
@@ -11,10 +11,10 @@ view-if: zca_formed and not (ddp_socialist and z_socialist) and not blocparteis_
 
 With the ZCA's formation and the banning of private party financing, the remnants of the Zentrumspartei and [+ ddp_name +] which refused to merge into that bourgeois collosus present to us an opportunity, with some in our party advocating that we might effectively take over their party infrastructures to establish socialist bloc parties, to compete for votes with the bourgeois parties amongst bourgeois demographics.
 
-- @ddp_bloc: Let's try to make the [+ ddp_name +] into a bloc party.
-- @z_bloc: Let's try to make the Z into a bloc party.
 - @ddp_bloc2: We can make the [+ ddp_name +] into a bloc party!
 - @z_bloc2: We can make the Z into a bloc party!
+- @ddp_bloc: Let's try to make the [+ ddp_name +] into a bloc party.
+- @z_bloc: Let's try to make the Z into a bloc party.
 - @reject: What a backhanded proposal.
 - @easy_discard
 
