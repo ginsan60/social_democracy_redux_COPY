@@ -1,6 +1,6 @@
 title: Industrial Conflict
 subtitle: The bourgeoisie attempt to retake their occupied factories!
-view-if: factory_takeovers > 0 and factory_battles_timer < 1 and not capital_flight 
+view-if: factory_takeovers > 0 and factory_battles_timer < 1 and not capital_flight and (not sa_banned or not sh_banned)
 tags: event
 on-arrival: factory_battles_timer += (6/bourgeois_power); sa_militancy += 0.05*bourgeois_power; picket_power = 0; scabber_power = 0; scabber_power += sa_strength*sa_militancy; scabber_power += sh_strength*sh_militancy; scabber_power += prussian_police_strength*prussian_police_militancy*(1-prussian_police_loyalty) if not spd_prussia; workers_nsdap -= 5; {!
 Q.normalized_workers_total = Q.workers_spd_normalized;
