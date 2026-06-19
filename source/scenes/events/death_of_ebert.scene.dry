@@ -213,7 +213,6 @@ if (Q.jarres_campaign) {
     if (Q.bvp_support_jarres) {
         Q.jarres_votes += 0.03;
         if (Q.jarres_votes >= Q.marx_votes) {
-            // rig election!!
             Q.jarres_votes -= 0.03;
             Q.marx_votes += 0.03;
             Q.1925_rigged = 1;
@@ -296,7 +295,6 @@ for (var k of Q.presidents_25) {
 }
 !}
 go-to: hindenburg_wins if hindenburg_majority == 1; marx_wins if marx_majority == 1; braun_wins if braun_majority == 1; gessler_wins if gessler_majority == 1; no_majority_round1 if majority_25 == 0 and round25 == 1; round2_results if round25 >= 2
-
 Results:
 
 [? if thalmann_campaign : Thälmann - [+ thalmann_votes_disp +]% ?]
