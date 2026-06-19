@@ -1143,7 +1143,7 @@ go-to: no_right_coalition if year >= 1930 and not dnvp_reform; right_coalition_2
 There are enough votes for a right-wing coalition of the Center (+ [+ bvp_name +]), DVP, DNVP, and minor conservative parties.
 
 @no_right_coalition
-go-to: no_majority if president == "Hindenburg"; no_majority_marx if president == "Marx"; no_majority_adenauer if president == "Adenauer"
+go-to: no_majority if president == "Hindenburg"; no_majority_marx if president == "Marx"; no_majority_adenauer if president == "Adenauer"; brauns_dilemma if president == "Braun" or president == "Schumacher" or president == "Juchacz"
 
 However, the DNVP and its leader Hugenberg is refusing to partake in a coalition with the "November criminals" in the Center Party. Thus, there is no clear path towards a Reichstag majority.
 
