@@ -493,8 +493,8 @@ go-to: root
 
 @bourgeois_coalition
 title: A "Bourgeois" Coalition
-subtitle: Z + BVP + [+ ddp_name +] + DVP + Others ([+ bourgeois_coalition +]%)
-view-if: bourgeois_coalition >= 50 and (weimar_coalition < 50 or z_willing != 1) and not dvp_banned
+subtitle: Z + BVP + [+ ddp_name +] [? if not dvp_banned : + DVP ?] + Others ([+ bourgeois_coalition +]%)
+view-if: bourgeois_coalition >= 50 and (weimar_coalition < 50 or z_willing != 1)
 
 The constitutional bourgeois parties have enough votes to form a coalition on their own, without even needing toleration from us. It is likely that such a government will be formed unless we act to prevent it.
 
