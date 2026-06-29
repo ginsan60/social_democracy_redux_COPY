@@ -1237,7 +1237,7 @@ Luckily, the difficult decision has been made for us, as regardless of how we vo
 
 @no_majority_adenauer
 title: There is no clear governing majority.
-view-if: (not zca_formed or counterrevolution_r < 50) and (weimar_coalition < 50 or not z_willing) and (grand_coalition < 50 or grand_coalition_failed == 1 or dvp_willing != 1) and president = "Adenauer" and far_right_coalition < 50 and (right_coalition < 50 or right_coalition_failed) and bourgeois_coalition < 50
+view-if: (not zca_formed or counterrevolution_r < 50) and (weimar_coalition < 50 or not z_willing) and (grand_coalition < 50 or grand_coalition_failed == 1 or dvp_willing != 1) and president = "Adenauer" and far_right_coalition < 50 and (right_coalition < 50 or right_coalition_failed or (not dnvp_reform and year >= 1928)) and bourgeois_coalition < 50
 on-arrival: no_majority_elections += 1
 go-to: bruning_lead if no_majority_elections < 2; stegerwald_lead if (((z_relation + spd_r < z_r + dvp_r + other_r) or (z_relation + spd_r < national_front and z_national == 1)) and bourgeois_coalition+far_right_coalition >= 50) and no_majority_elections >= 2; wirth_lead if (((z_relation + spd_r >= z_r + dvp_r + other_r and z_national != 1) or (z_relation + spd_r >= national_front)) or bourgeois_coalition+far_right_coalition < 50) and no_majority_elections >= 2
 
