@@ -8,4 +8,4 @@ on-arrival: capital_strike_over = 1; capital_strike_progress *= 0.5; capital_str
 // dendryUI.dendryEngine.state.visits.capital_strike = 0;
 !}
 
-The capital strike has come to an end, and Germany's economy begun to recover from the incident.
+The capital strike has come to an end, and Germany's economy begun to recover from the incident. [? if class_war : The revolutionary window of opportunity seems to have passed. ?]
