@@ -2245,6 +2245,11 @@ if (Q.month_actions >= 1) {
     if (Q.dvp_relation >= 50 && Q.capital_strike_progress > 0 && Q.in_grand_coalition) {
         Q.capital_strike_progress -= 3/12;
     }
+    if (Q.capital_strike_seen && Q.economic_growth > 0) {
+        Q.capital_strike_progress -= (Q.economic_growth*Q.bourgeois_power)/12;
+        Q.capital_strike_progress += (Q.nationalization_progress)/12;
+        Q.capital_strike_progress -= (12-Q.capital_strike_timer)/12;
+    }
     if (!Q.victory_republic && Q.nsdap_votes >= 30) {
         Q.sa_strength += Q.unemployed_nsdap_normalized;
     }
