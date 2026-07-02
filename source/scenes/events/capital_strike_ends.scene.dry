@@ -5,7 +5,9 @@ new-page: true
 tags: event
 max-visits: 1
 on-arrival: capital_strike_over = 1; capital_strike_progress *= 0.5; capital_strike_progress -= 5 if capital_strike_progress >= 10; economic_growth += 3*bourgeois_power; unemployed -= 3*bourgeois_power; workers_ddp += 2; workers_dvp += 2; new_middle_spd -= 3; old_middle_spd -= 3; rural_spd -= 3; {! 
-// dendryUI.dendryEngine.state.visits.capital_strike = 0;
+if (Q.experimental_feature) {
+    dendryUI.dendryEngine.state.visits.capital_strike = 0;
+}
 !}
 
 The capital strike has come to an end, and Germany's economy begun to recover from the incident. [? if class_war : The revolutionary window of opportunity seems to have passed. ?]
