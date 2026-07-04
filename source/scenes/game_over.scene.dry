@@ -122,6 +122,14 @@ if ((Q.welfare > 0 && Q.judicial_reform >= 2 && Q.womens_work >= 1 && Q.family_l
 - #endings
 - @end_game: End game.
 
+@sapd_victory
+view-if: secret_ending
+title: The SAPD is in undisputed control over Germany.
+tags: endings
+go-to: eg_menu
+
+Crazy stuff. 
+
 @schleicher_victory
 view-if: schleicher_victory
 title: Kurt von Schleicher is in undisputed control over Germany.

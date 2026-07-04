@@ -395,6 +395,7 @@ As expected, the
 
 @coalition_menu
 
+- @sapd_majority
 - @spd_majority
 - @weimar_coalition
 - @grand_coalition
@@ -422,6 +423,16 @@ As expected, the
 - @no_govt_3
 - @ddp_majority
 - @counterrevolution
+
+@sapd_majority
+title: The SAPD has won a majority.
+subtitle: SAPD ([+ sapd_r +]%) - What the hell? They can do that?
+view-if: sapd_r >= 50
+on-arrival: secret_ending = 1
+
+The SAPD has won a majority. Wow. There envelops the SPD a sweeping sense of shame - what could we have possibly done to create such a powerful socialist movement, only to forsake it so greatly? This ending is quite the peculiar one, and necessarily implicates us in quite the great anti-worker travesties, yet simultaneously implicates us too in creating the conditions for such a sweeping socialist transformation. Was it worth it? Where did we go wrong, where did we go right?
+
+- @game_over: Game over.
 
 @counterrevolution
 title: The counterrevolutionaries have won a majority.
