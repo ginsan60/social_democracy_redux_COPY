@@ -197,7 +197,7 @@ if (Q.nazi_peak || Q.return_to_normalcy || Q.victory_republic || Q.nsdap_banned)
 }
 
 Q.proletariat = Q.workers + (Q.rural*Q.rural_prole) + (Q.new_middle*Q.middle_prole) + (Q.unemployed*Q.lumpenprole);
-Q.catholic_proletariat = 15;
+Q.catholic_proletariat = (Q.catholics/2);
 Q.urban_proletariat = ((Q.workers/Q.proletariat)*85);
 Q.rural_proletariat = (((Q.rural*Q.rural_prole)/Q.proletariat)*85);
 Q.middle_proletariat = (((Q.new_middle*Q.middle_prole)/Q.proletariat)*85);
@@ -1942,6 +1942,13 @@ if (Q.month_actions >= 1) {
         }
         if (Q.black_thursday_seen && Q.nazi_urgency && !Q.return_to_normalcy && !Q.capital_nazi && Q.kpd_relation < 39) {
             Q.kpd_relation += Q.nazi_urgency/3;
+        }
+        if (Q.army_force <= 30) {
+            Q.reichswehr_militancy += 0.1/12;
+            Q.exception += 0.1/12;
+            if (!Q.exception) {
+                Q.exception = (0.1/12);
+            }
         }
     }
     if (Q.nazi_reform && Q.nazi_reform_timer > 0) {
