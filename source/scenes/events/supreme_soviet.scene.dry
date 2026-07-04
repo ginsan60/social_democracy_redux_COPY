@@ -330,6 +330,7 @@ There are some potential coalition arrangements.
 
 @coalition_menu
 
+- @election_1928.sapd_majority
 - @election_1928.spd_majority
 - @election_1928.weimar_coalition
 - @election_1928.grand_coalition
