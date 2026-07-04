@@ -1,6 +1,6 @@
 title: Martial Law!
 subtitle: Hitler has called the army in to restore order
-view-if: president == "Hitler" and resisted_hitler and time == panic_time
+view-if: (president == "Hitler" or president == "Göring") and resisted_hitler and time >= panic_time
 tags: event
 new-page: true
 on-arrival: reichswehr_loyalty -= 0.05 if reichswehr_loyalty >= 0.05; reichswehr_loyalty = 0 if reichswehr_loyalty < 0.05; reichswehr_loyalty -= 0.05 if judicial_reform < 2; reichswehr_loyalty = 0 if reichswehr_loyalty < 0
