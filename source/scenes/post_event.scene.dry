@@ -1702,6 +1702,20 @@ if (Q.month_actions >= 1) {
             }
         }
         if (Q.return_to_normalcy) {
+            if (Q.inflation < 0) {
+                Q.inflation += 1/12;
+                Q.economic_growth += 0.7/12;
+            }
+            if (Q.economic_growth < 0 && Q.inflation >= 0) {
+                Q.economic_growth += Q.inflation/12;
+            }
+            if ((Q.unemployed > (5-Q.welfare)) && Q.economic_growth >= 0) {
+                Q.unemployed -= Q.economic_growth/12;
+            }
+            if (Q.inflation > 3) {
+                Q.economic_growth -= (Q.inflation-3)/12;
+                Q.inflation -= (Q.unemployed/5)/12;
+            }
             if (Q.marx_relation < Q.z_relation) {
                 Q.marx_relation += 10/12;
             }
