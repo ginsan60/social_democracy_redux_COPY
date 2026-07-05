@@ -61,7 +61,7 @@ We have found that the Nazis were responsible for the recent March on Berlin, ha
 Unfortunately, our investigation has failed to turn up anything. Rumors are that the targets of our investigation were tipped off by infiltrators within the police.
 
 @prosecute_far_right
-view-if: prosecution_unlocked
+view-if: prosecution_unlocked and not nsdap_banned
 choose-if: investigate_far_right > 4
 unavailable-subtitle: We need to gather more evidence.
 on-arrival: investigate_far_right -= 1
@@ -115,7 +115,7 @@ We have successfully pressed charges against several key Nazi leaders using the 
 - @dont: There is no need for that right now.
 
 @suspend_nsdap
-view-if: nazis_bannable
+view-if: nazis_bannable and not nazis_suspended
 choose-if: president != "Hindenburg" and judicial_reform >= (nsdap_votes/5)
 unavailable-subtitle: [? if president == "Hindenburg" : Hindenburg would never allow this. ?][? if judicial_reform < (nsdap_votes/5) : The courts would never allow this. ?]
 on-arrival: nazis_suspended = 1; workers_nsdap *= 0.5*(1-(sa_force/100)); new_middle_nsdap *= 0.5*(1-(sa_force/100)); old_middle_nsdap *= 0.5*(1-(sa_force/100)); unemployed_nsdap *= 0.5*(1-(sa_force/100)); rural_nsdap *= 0.8*(1-(sa_force/100)); pro_republic -= 5; coup_progress += 5; reichswehr_loyalty -= 0.05; reichswehr_loyalty = 0 if reichswehr_loyalty < 0; coalition_dissent += 1 if kpd_relation > 30 or not rfb_banned; coalition_dissent += 1 if in_grand_coalition and dvp_relation < 50
@@ -123,7 +123,7 @@ on-arrival: nazis_suspended = 1; workers_nsdap *= 0.5*(1-(sa_force/100)); new_mi
 By suspending the Nazi party's rights for the time being, we are moving towards a full ban in the future pending judicial review while securing the republic immediately. This decision is quite unpopular amongst the right.
 
 @dont
-view-if: nazis_bannable
+view-if: nazis_bannable and not nazis_suspended
 
 We will not move towards this just yet.
 
