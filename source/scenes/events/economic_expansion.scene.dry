@@ -23,7 +23,7 @@ We are not a party to turn away supports just because of their economic class; w
 
 @ew
 view-if: capital_strike_progress < 0 and expansion_seen >= 2 and not in_grand_coalition and peoples_party
-unavailable-subtitle: <span style="color:rgb(170,150,60);font-family:'Times New Roman',serif;font-weight:700;letter-spacing:0.5px;">Who's we? I'm not!</span>
+unavailable-subtitle: <span style="color:rgb(170,150,60);font-family:'Times New Roman',serif;font-weight:700;letter-spacing:0.5px;">Who's we? I don't!</span>
 choose-if: not capital_spd
 on-arrival: capital_rejected = 1; capital_strike_progress = 2
 
