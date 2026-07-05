@@ -1706,7 +1706,7 @@ if (Q.month_actions >= 1) {
                 Q.unemployed += ((Math.floor(Math.random() * 6) + 1)+Q.recession_severity)/12;
                 Q.inflation -= ((Math.floor(Math.random() * 3) + 1)+Q.recession_severity)/36;
                 Q.economic_growth -= ((Math.floor(Math.random() * 3) + 1)+Q.recession_severity)/24;
-                Q.recession_severity -= 1;
+                Q.recession_severity -= 0.5;
             }
             if (Q.nsdap_banned && (Q.nsdap_votes >= (100-Q.pro_republic))) {
                 Q.workers_nsdap -= 3/12;
