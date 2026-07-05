@@ -13,7 +13,7 @@ view-if: spd_in_government = 1 and interior_minister_party = "SPD"
 As we have control over the Interior Ministry, we can direct police and intelligence services to investigate internal enemies. We can proscribe various organizations.
 
 - @deport_hitler
-- @ban_nsdap
+- @ban_nsdap: Ban the NSDAP.
 - @ban_sa: Ban the SA.
 - @unban_sa: Unban the SA.
 - @persecute_sa
@@ -27,6 +27,7 @@ As we have control over the Interior Ministry, we can direct police and intellig
 - @root: Take no action for now.
 
 @ban_nsdap
+subtitle: They attempted to overthrow the republic.
 view-if: nazis_suspended and not nsdap_banned
 choose-if: judicial_reform >= (3+(nsdap_votes/5))
 unavailable-subtitle: The courts are obstructing.
