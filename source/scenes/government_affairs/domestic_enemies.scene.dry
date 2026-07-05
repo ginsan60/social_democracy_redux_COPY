@@ -1,5 +1,5 @@
 title: Investigating Domestic Enemies
-subtitle: [? if nazis_suspended : We can ban the NSDAP. ?]
+subtitle: [? if nazis_suspended and not nsdap_banned : We can ban the NSDAP. ?]
 on-arrival: month_actions += 1
 view-if: spd_in_government = 1 and interior_minister_party = "SPD"
 #card-image: img/portraits/SeveringCarl.jpg
