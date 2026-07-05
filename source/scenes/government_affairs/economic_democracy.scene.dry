@@ -74,7 +74,7 @@ Sectorial works councils can now negotiate wage and price policies for entire ec
 @nationalize_1
 title: Begin to socialize key industries.
 subtitle: -1 budget - we should buy out industries and govern them together with workers and consumers.
-unavailable-subtitle: <span style="color:rgb(170,150,60);font-family:'Times New Roman',serif;font-weight:700;text-transform:uppercase;letter-spacing:0.5px;">But that would infringe upon the right to private property!</span>
+unavailable-subtitle: <span style="color:rgb(170,150,60);font-family:'Times New Roman',serif;font-weight:700;letter-spacing:0.5px;">But that would infringe upon the right to private property!</span>
 choose-if: budget >= 1 and not capital_spd
 max-visits: 3
 on-arrival: socialization_vote = 1

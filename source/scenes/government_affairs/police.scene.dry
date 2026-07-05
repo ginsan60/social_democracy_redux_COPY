@@ -34,6 +34,8 @@ Current interior police loyalty: [+ interior_police_loyalty : loyalty +]
 
 
 @investigate_corruption
+choose-if: not capital_spd
+unavailable-subtitle: <span style="color:rgb(170,150,60);font-family:'Times New Roman',serif;font-weight:700;letter-spacing:0.5px;">Nothing to see here.</span>
 go-to: investigate_corruption_success if interior_police_loyalty >= 0.5; investigate_corruption_failure if interior_police_loyalty < 0.5
 
 @investigate_corruption_success

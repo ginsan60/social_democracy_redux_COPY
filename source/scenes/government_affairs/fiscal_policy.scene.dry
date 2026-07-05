@@ -33,7 +33,7 @@ Lower-income tax rates: [+ lower_tax_rates : taxation +]
 
 @raise_progressive
 subtitle: This does not change overall revenue. [? if lower_tax_rates < -5 : Lower-class tax rates are too low to cut anymore. ?] [? if upper_tax_rates > 5 : Upper-class tax rates are too high to increase. ?][? if status_quo : We have agreed to leave the budget untouched. ?]
-unavailable-subtitle: <span style="color:rgb(170,150,60);font-family:'Times New Roman',serif;font-weight:700;text-transform:uppercase;letter-spacing:0.5px;">Think of the economy! You're better than this.</span>
+unavailable-subtitle: <span style="color:rgb(170,150,60);font-family:'Times New Roman',serif;font-weight:700;letter-spacing:0.5px;">Think of the economy! You're better than this.</span>
 choose-if: lower_tax_rates >= -5 and upper_tax_rates <= 5 and not status_quo and not capital_spd
 on-arrival: progressive_tax_vote = 1
 go-to: progressive_tax_done if not legislature_enabled; legislative_menu if legislature_enabled
@@ -47,7 +47,7 @@ Making the tax system more progressive is popular among our base, but it upsets 
 
 @raise_rich
 subtitle: +2 budget
-unavailable-subtitle: [? if not status_quo : Tax rates are already too high. ?][? if status_quo : We have agreed to leave the budget untouched. ?][? if capital_spd : <span style="color:rgb(170,150,60);font-family:'Times New Roman',serif;font-weight:700;text-transform:uppercase;letter-spacing:0.5px;">Think of the economy! You're better than this.</span> ?]
+unavailable-subtitle: [? if not status_quo : Tax rates are already too high. ?][? if status_quo : We have agreed to leave the budget untouched. ?][? if capital_spd : <span style="color:rgb(170,150,60);font-family:'Times New Roman',serif;font-weight:700;letter-spacing:0.5px;">Think of the economy! You're better than this.</span> ?]
 choose-if: upper_tax_rates <= 5 and not status_quo and not capital_spd
 on-arrival: raise_rich_vote = 1
 go-to: raise_rich_done if not legislature_enabled; legislative_menu if legislature_enabled
