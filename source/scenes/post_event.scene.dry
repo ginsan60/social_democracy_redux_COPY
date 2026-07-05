@@ -1702,6 +1702,13 @@ if (Q.month_actions >= 1) {
             }
         }
         if (Q.return_to_normalcy) {
+            if (Q.nsdap_banned && (Q.nsdap_votes >= (100-Q.pro_republic))) {
+                Q.workers_nsdap -= 3/12;
+                Q.new_middle_nsdap -= 3/12;
+                Q.rural_nsdap -= (1+Q.land_reform)/12;
+                Q.unemployed_nsdap -= 3/12;
+                Q.old_middle_nsdap -= 3/12;
+            }
             if (Q.inflation < 0) {
                 Q.inflation += 1/12;
                 Q.economic_growth += 0.7/12;
