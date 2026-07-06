@@ -630,12 +630,12 @@ if (Q.month_actions >= 1) {
     // Maybe there should be differences for positive/negative growth?
     if (Q.bourgeois_power >= (0.9+((Q.nationalization_progress+Q.economic_democracy)/100))) {
         if ((Q.bourgeois_power < 1 || (!Q.spd_in_government && Q.bourgeois_power < (1.25-((Q.nationalization_progress+Q.economic_democracy)/10)))) && Q.economic_growth > 0) {
-            Q.bourgeois_power += (Q.economic_growth/100);
+            Q.bourgeois_power += (Q.economic_growth/100)/12;
         }
         Q.bourgeois_power += 0.01/12;
     }
     if ((Q.bourgeois_power >= (0.9-((Q.nationalization_progress+Q.economic_democracy)/100))) && Q.economic_growth < 0) {
-        Q.bourgeois_power += (Q.economic_growth/100);
+        Q.bourgeois_power += (Q.economic_growth/100)/12;
     }
     if ((Q.bourgeois_power < (0.9-((Q.nationalization_progress+Q.economic_democracy)/100))) && !Q.spd_in_government) {
         Q.bourgeois_power += 0.01/12;
