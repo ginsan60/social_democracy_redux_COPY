@@ -438,6 +438,14 @@ The SAPD has won a majority. Wow. There envelops the SPD a sweeping sense of sha
 title: The counterrevolutionaries have won a majority.
 subtitle: ZCA & Friends ([+ counterrevolution_r +]%)
 view-if: zca_formed and counterrevolution_r >= 50
+go-to: class_war if class_war; normal_bourgeois if not class_war
+
+@normal_bourgeois
+go-to: let_it_form
+
+The ZCA takes charge of a bourgeois coalition.
+
+@class_war
 on-arrival: bourgeois_power += 0.1; socialism -= (counterrevolution_r/10); workers_zca += 5; new_middle_zca += 5; old_middle_zca += 5; rural_zca += 5; unemployed_zca += 5; sh_militancy += bourgeois_power/2; sh_militancy += 0.05; sa_militancy += 0.02
 
 Somehow, the bourgeoisie have won this class war, even with our whole combined effort against them. Immediately, they form a government, unveiling their plan to save Germany from socialism. Already, they are planning to privatize the industries we had seized, while the Harzburg Front swells in the countryside. 
