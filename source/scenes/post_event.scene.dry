@@ -628,6 +628,26 @@ if (Q.month_actions >= 1) {
     }
     // accumulated economic growth/decline
     // Maybe there should be differences for positive/negative growth?
+    if (Q.bourgeois_power >= (0.9+((Q.nationalization_progress+Q.economic_democracy)/100))) {
+        if ((Q.bourgeois_power < 1 || (!Q.spd_in_government && Q.bourgeois_power < (1.25-((Q.nationalization_progress+Q.economic_democracy)/10)))) && Q.economic_growth > 0) {
+            Q.bourgeois_power += (Q.economic_growth/100);
+        }
+        Q.bourgeois_power += 0.01/12;
+    }
+    if ((Q.bourgeois_power >= (0.9-((Q.nationalization_progress+Q.economic_democracy)/100))) && Q.economic_growth < 0) {
+        Q.bourgeois_power += (Q.economic_growth/100);
+    }
+    if ((Q.bourgeois_power < (0.9-((Q.nationalization_progress+Q.economic_democracy)/100))) && !Q.spd_in_government) {
+        Q.bourgeois_power += 0.01/12;
+    }
+    if (Q.bourgeois_power < 1) {
+        if (!Q.spd_in_government) {
+            Q.bourgeois_power += (Q.bourgeois_power)/1200;
+        }
+        if (Q.spd_in_government && (Q.in_grand_coalition || Q.in_weimar_coalition)) {
+            Q.bourgeois_power += (Q.bourgeois_power*(Q.coalition_dissent+1))/4800;
+        }
+    }
     if (Q.economic_growth < 0) {
         if (Q.economic_expansion > 0) {
             Q.economic_expansion = 0;
