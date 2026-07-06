@@ -648,6 +648,19 @@ if (Q.month_actions >= 1) {
             Q.bourgeois_power += (Q.bourgeois_power*(Q.coalition_dissent+1))/4800;
         }
     }
+    var diff = (Q.bourgeois_power - Q.assessed_bourgeois);
+    if (Q.interior_minister_party == "SPD") {
+        Q.assessed_bourgeois += (diff*Q.interior_police_loyalty*(Q.investigate_corruption/10))/12;
+    }
+    Q.assessed_bourgeois += (diff*(1-Q.dissent))/24;
+    if (Q.assessed_bourgeois >= (Q.bourgeois_power*1.25)) {
+        Q.assessed_bourgeois -= (Q.investigate_corruption/100)/12;
+        Q.inaccuracy = 1;
+    }
+    if (Q.assessed_bourgeois <= (Q.bourgeois_power*0.75)) {
+        Q.assessed_bourgeois += (Q.investigate_corruption/100)/12;
+        Q.inaccuracy = 1;
+    }
     if (Q.economic_growth < 0) {
         if (Q.economic_expansion > 0) {
             Q.economic_expansion = 0;
