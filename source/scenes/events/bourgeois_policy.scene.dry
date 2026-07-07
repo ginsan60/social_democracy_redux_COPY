@@ -151,6 +151,14 @@ subtitle: The bourgeoisie engage with their international counterparts
 
 The government has entered into negotiations with Germany's neighbors, seeking to improve relations for peace in Europe.
 
+@diplomacy2
+frequency: 200
+view-if: in_right_coalition
+on-arrival: soviet_relation += 1; reichswehr_militancy += 0.05; gov_tension += 1 if soviet_relation > west_relation
+subtitle: The bourgeoisie engage in dialogue with the Soviets
+
+The government has entered into negotiations with the Soviet Union, seeking to further the goal of rearmament and foster a broader anti-Versailles bloc despite ideological divergences.
+
 @eu_talks
 frequency: 200
 view-if: west_relation >= 5 and east_relation >= 4 and not in_right_coalition and not eu
