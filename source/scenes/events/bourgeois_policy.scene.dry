@@ -1,6 +1,6 @@
 title: The Governance of Germany
 subtitle: [+ chancellor +] is busy at work
-view-if: spd_toleration or in_bourgeois_coalition or in_right_coalition and (year >= 1935 or (year >= 1934 and month >= 4)) and (time >= next_policy_time)
+view-if: (spd_toleration or in_bourgeois_coalition or in_right_coalition) and (year >= 1935 or (year >= 1934 and month >= 4)) and (time >= next_policy_time)
 tags: event
 new-page: true
 on-arrival: policy_seen += 1; {!
@@ -38,6 +38,9 @@ Under the governance of [+ chancellor +], Germany's administration continues. Bu
 - @unbanning_financing: Unbanning private party financing
 - @suppressing_reichsbanner: Suppressing the Reichsbanner
 - @suppressing_communists: Suppressing communists
+- @anti_state_buyer: Removing the state monopoly on grain
+- @chud_agenda: Rolling back womens & homosexual rights
+- @agricultural_subsidies: Agricultural subsidies
 - @collapse: The government collapses!
 
 @tax_cuts
@@ -78,6 +81,9 @@ on-arrival: budget += 1; workers_dvp -= 3; workers_z -= 3; workers_ddp -= 3 if n
 
 The government has reduced levels of social welfare spending. This means more poverty and suffering for the working class. 
 
+- @break_toleration
+- @tolerate
+
 @welfare_hikes
 frequency: (50 * budget)
 view-if: ((welfare+2) < budget) and (in_recession or unemployed >= 10) and inflation < 3.5 and budget > 0
@@ -117,7 +123,7 @@ On the other hand, agricultural producers and some small businesses benefit from
 
 @diplomacy
 frequency: 200
-view-if: not in_right_coalition and west_relation < 5 or east_relation < 4
+view-if: not in_right_coalition and (west_relation < 5 or east_relation < 4)
 on-arrival: west_relation += 1; east_relation += 1
 subtitle: The bourgeoisie engage with their international counterparts
 
@@ -125,7 +131,7 @@ The government has entered into negotiations with Germany's neighbors, seeking t
 
 @eu_talks
 frequency: (100 * (eu_progress+1))
-view-if: west_relation >= 5 or east_relation >= 4 and not in_right_coalition and not eu
+view-if: west_relation >= 5 and east_relation >= 4 and not in_right_coalition and not eu
 on-arrival: eu_progress += 1; west_relation += 1
 go-to: success if west_relation >= 5 and east_relation >= 4 and eu_progress >= 2
 subtitle: The bourgeoisie discuss a combined continental market
@@ -309,27 +315,214 @@ The government has enacted a program of privatizations, reversing our own nation
 - @break_toleration
 - @tolerate
 
+@lifting_price_controls
+view-if: price_controls and inflation < 5
+frequency: 10000
+on-arrival: price_controls = 0; black_market = 0; capital_strike_progress -= 3; inflation += 3; unemployed -= 1; old_middle_dvp += 4; new_middle_dvp += 3; rural_dvp += 5; workers_dvp += 2; rural_ddp += 2 if not in_right_coalition; rural_dnvp += 4 if in_right_coalition; unemployed_spd += 3; economic_growth += 0.4
+subtitle: The bourgeoisie lift price and wage controls
+
+The government has lifted the price and wage controls that we implemented, leading to a steep rise in inflation as the economy readjusts, although the decision is relatively popular for now, at least divorced from its potential consequences.
+
+- @break_toleration
+- @tolerate
+
+@privatizing_media
+view-if: socialized_media
+frequency: 1000000
+subtitle: The bourgeoisie restores its control over the narrative
+on-arrival: socialized_media = 0; economic_growth += 3*bourgeois_power; unemployed -= 2*bourgeois_power; inflation -= 1*bourgeois_power; bourgeois_power += 0.1; coup_progress -= 5; socialism -= 5; socialism -= 8 if state_media; workers_spd -= 6 if state_media; unemployed_spd -= 6 if state_media; new_middle_spd -= 6 if state_media; old_middle_spd -= 6 if state_media; rural_spd -= 5 if state_media; state_media = 0
+
+The government has restored private control over the media, championing the freedom of the press as it hands printing presses and newspapers back over to private control.
+
+- @break_toleration
+- @tolerate
+
+@unbanning_financing
+view-if: financing_banned
+frequency: 10000000
+subtitle: The bourgeoisie restores its influence on politics
+on-arrival: financing_banned = 0; economic_growth += 1*bourgeois_power; unemployed += 0.7*bourgeois_power; inflation += 0.5*bourgeois_power; bourgeois_power += 0.05; coup_progress -= 3; socialism -= 5
+
+The government has lifted the ban on private party financing, relegalizing it completely. This is paired with a general campaign by their parties to recoup support, and attack socialism.
+
+- @break_toleration
+- @tolerate
+
+@suppressing_reichsbanner
+view-if: (rb_exit and rb_force >= 20) or (in_right_coalition and rb_force >= 5)
+frequency: (rb_force * 5)
+subtitle: The bourgeoisie suppress the Reichsbanner
+on-arrival: rb_militancy -= 0.05*(1-interior_police_loyalty); rb_militancy -= 0.05*(1-interior_police_loyalty) if in_right_coalition; gov_tension += 1 if not rb_exit; left_strength += 5; neorevisionist_strength -= 5
+
+The government has enacted wide-ranged suppressions of the Reichsbanner, confiscating guns and military equipment. The left proclaims vindication.
+
+- @break_toleration
+- @tolerate
+
+@suppressing_communists
+view-if: kpd_votes+rfb_force >= dnvp_votes
+on-arrival: kpd_relation += 3 if not spd_toleration; workers_kpd -= 4*(1-interior_police_loyalty); unemployed_kpd -= 4*(1-interior_police_loyalty); rfb_militancy -= 0.05*(1-interior_police_loyalty) if rfb_militancy >= 0.05; workers_sapd -= 3*(1-interior_police_loyalty) if in_right_coalition or sapd_votes >= 5; workers_spd -= 5*(1-interior_police_loyalty)*(left_strength/100) if in_right_coalition or left_strength >= 50; gov_tension += 1 if in_right_coalition and left_strength < 50 and sapd_votes < 5
+frequency: (kpd_votes+rfb_force)*(socialism/10)
+subtitle: The bourgeoisie suppresses the communists [? if in_right_coalition : and Marxists in a broader sense ?]
+
+The government has enacted wide-ranged suppressions of the communists and their affiliated organizations, with the effects of this suppression bleeding into broader Marxist associations as well.
+
+- @break_toleration
+- @tolerate
+
+@anti_state_buyer
+view-if: state_buyer
+frequency: 1000
+on-arrival: bourgeois_power += 0.05; budget += 2; state_buyer = 0; rural_spd -= 2*dissent; inflation += 0.5 if inflation < 3; rural_nsdap += 3*dissent; rural_dvp -= 3; rural_dnvp -= 6 if in_right_coalition; rural_dvp -= 6 if not in_right_coalition; capital_strike_progress -= 1; economic_growth -= 0.4; socialism += 2; old_middle_dvp += 5*bourgeois_power; new_middle_dvp += 5*bourgeois_power
+subtitle: The bourgeoisie remove the state monopoly on grain purchases
+
+The repeal of the state buyer program restores free market dominance in the distribution of food, increasing prices for consumers and threatening farmers with instability. Despite this, the capitalist presses frame this as a landmark repeal of a horrible policy, and the urban middle classes are motivated into feeling the same.
+
+- @break_toleration
+- @tolerate
+
+@chud_agenda
+view-if: progressive_coalition < 50 and (womens_rights or homosexual_rights)
+frequency: (womens_rights+homosexual_rights) * 50
+on-arrival: gov_tension += 1 if not in_right_coalition
+subtitle: Traditionalists pursue a return to "traditional" German values
+max-choices: 1
+
+The government has decided to pursue a return to traditional German values by repealing landmark progressive reforms we have enacted.
+
+- @repeal_175: Reinstate Paragraph 175.
+- @reform_183: Reinstate an unmodified Paragraph 183.
+- @change_sex: Remove legal processes for changing sex.
+- @labor: Repeal policies that help women in the workforce.
+- @family: Restore old marriage, divorce, and property laws.
+- @welfare: Cut welfare for single mothers and children.
+- @liberalize: Tighten abortion laws.
+
+@labor
+subtitle: Paid maternal leave policies, equal pay policies, and so on.
+view-if: womens_work
+on-arrival: womens_work -= 1; womens_rights -= 1; new_middle_ddp -= 4 if not in_right_coalition; economic_growth -= 0.1;
+
+The government has repealed the policies which help women in the workplace, under the antiquated idea that women should focus on the family.
+
+- @break_toleration
+- @tolerate
+
+@family
+subtitle: Change family and inheritance law to treat women more unfairly.
+view-if: family_law
+on-arrival: family_law -= 1; womens_rights -= 1; new_middle_ddp -= 2 if not in_right_coalition; workers_ddp -= 3 if not in_right_coalition; old_middle_dvp += 4; rural_dvp += 4; rural_dnvp += 4 if in_right_coalition; catholics_z += 6
+
+These policies aimed to ensure that women had equal rights within a marriage, including the right to divorce. The more conservative segments of society treat our reforms as deleterious to the social fabric, and, now in government, have undone them.
+
+- @break_toleration
+- @tolerate
+
+@welfare
+subtitle: +1 budget
+view-if: womens_welfare
+on-arrival: welfare -= 1; womens_welfare -= 1; workers_dvp -= 3; workers_ddp -= 3 if not in_right_coalition; unemployed_spd += 4*(1-dissent); budget += 1; womens_rights -= 1; unemployed += 0.4; inflation -= 0.2; economic_growth -= 0.3;
+
+The government has cut welfare spending for women. This hurts single families, especially of working women.
+
+- @break_toleration
+- @tolerate
+
+@liberalize
+view-if: abortion_rights
+frequency: 10000
+on-arrival: abortion_rights -= 1; womens_rights -= 1; catholics_z += 10; workers_z += 3; new_middle_z += 3; old_middle_z += 3; old_middle_dnvp += 3; rural_dnvp += 3; workers_nsdap -= 3; new_middle_nsdap -= 3; old_middle_nsdap -= 2; rural_nsdap -= 2; unemployed_nsdap -= 2; unemployed_z += 3
+
+Backed by the conservatives, the government has once again restricted abortion in Germany. This has disheartened our more progressive supporters. With the increasing political discourse around abortion, the religiously-oriented Center Party and DNVP have gained conservative votes at the expense of the NSDAP.
+
+- @break_toleration
+- @tolerate
+
+@repeal_175
+subtitle: Paragraph 175 once criminalized homosexual acts. Though we repealed it, the government will reinstate it.
+view-if: repealed_175
+on-arrival: repealed_175 = 0; homosexual_rights -= 1; catholics_z += 4; economic_growth -= 0.1;
+
+Together with the DNVP, the Center Party has passed a law to reinstate Paragraph 175. Persecution of homosexuals for their private acts will continue, despite our best attempts to stop it.
+
+- @break_toleration
+- @tolerate
+
+@reform_183
+subtitle: Paragraph 183 once criminalized public homosexual displays and cross-dressing. Though we reformed it, the government will reinstate it.
+view-if: reformed_183
+on-arrival: reformed_183 = 0; homosexual_rights -= 1; catholics_z += 4; economic_growth -= 0.1;
+
+Voting together with the conservatives in the DVP and DNVP, the Center Party has reformed Paragraph 183 so that it once more criminalizes public homosexuality and cross-dressing.
+
+- @break_toleration
+- @tolerate
+
+@change_sex
+subtitle: We created a legal process for individuals to change their sex, making their lives easier. The government will now remove it.
+view-if: trans_rights
+on-arrival: trans_rights = 0; homosexual_rights -= 1; catholics_z += 4; economic_growth -= 0.1;
+
+We had passed a bill to allow legal recognition of transsexual and transvestite individuals as the sex in which they live, and allow them to change their name, dress as they wish without police persecution, and undergo medical treatment.
+
+Now, the government has repealed this bill, returning transsexual and transvestite individuals to persecution.
+
+- @break_toleration
+- @tolerate
+
+@agricultural_subsidies
+subtitle: The bourgeoisie gives hand outs to farmers
+frequency: (rural_spd_normalized * budget * 5)
+view-if: budget > 2 and (rural_spd_normalized >= (rural_dvp_normalized+rural_other_normalized+rural_z_normalized+rural_ddp_normalized)) or (in_right_coalition and (rural_dnvp_normalized < (rural_spd_normalized+rural_other_normalized+rural_nsdap_normalized)))
+on-arrival: budget -= 1; agricultural_finance += 1; rural_spd -= 5*bourgeois_power; rural_nsdap -= 3*bourgeois_power; rural_dvp += 5*bourgeois_power; rural_dvp += 3*bourgeois_power if not in_right_coalition; rural_dnvp += 6*bourgeois_power if in_right_coalition; rural_sol += 4; economic_growth += 0.2;
+
+The government has increased financial support for small farmers, providing access to credit and insurance, saving them from privation.
+
+@break_toleration
+title: We will end our toleration agreement.
+subtitle: This will likely mean new elections.
+on-arrival: time_to_election = 3; z_relation -= 3; ddp_relation -= 2; dvp_relation -= 2; left_dissent -= 2
+call: set_next_election_time
+
+We have broken off our toleration agreement, forcing new elections set for [+ next_election_month : month +] [+ next_election_year +].
+
+@tolerate
+title: We have no choice but to tolerate these actions.
+subtitle: This will upset our base.
+on-arrival: left_dissent += 10; labor_dissent += 5; workers_spd -= 5; unemployed_spd -= 5; new_middle_spd -= 3; socialism -= 2
+
+Our toleration of the government is unpopular throughot the party, and dampens enthusiasm.
+
+@collapse
+view-if: gov_tension
+frequency: 10 * (gov_tension * gov_tension * gov_tension)
+on-arrival: time_to_election = 4; ddp_relation += 5 if not in_right_coalition; z_relation += 5 if in_right_coalition
+call: set_next_election_time
+subtitle: The government has fallen to its internal disagreements
+
+The fall of the government has led to snap elections, set for [+ next_election_month : month +] [+ next_election_year +].
 
 
-Tax cuts (requires enough budget to do)
-Tax hikes (requires low budget and high inflation)
-Welfare cuts (requires either high welfare or low budget)
-Welfare hikes (requires low welfare and high budget and high unemployment)
-Tariff hikes (requires either low budget or low bourgeois rural support, and low enough inflation)
-Tariff cuts (requires high enough budget and high inflation or good relations with the west?)
-Diplomacy (improves relations with either west or east, requires no DNVP in government)
-EU negotiations (if relations are high enough, more likely to appear the more times it has appeared before until eventually the EU is formed by the bourgeois)
-Concordat (requires no DNVP in government?)
-Supporting employers in labor disputes (requires no Joos Z?)
-Compromise in labor disputes (requires Joos Z?)
-Rearmament (requires DNVP in government and budget)
-Anti - judicial reform (requires high judicial reform and DNVP in government)
-Anti - interior reform (requires high police loyalty and DNVP in government)
-Disempowering works councils (requires empowered works councils and less powerful bourgeoisie)
-Privatizations (requires nationalizations, wont remove the dedicated event tho this will just be another way for the same effect to fire)
-Lifting price controls (requires price controls)
-Privatizing media (requires socialized media)
-Unbanning private party financing (requires private party financing)
-Suppressing the Reichsbanner (should probably also make this a dedicated event like privatizations, requires militant reichsbanner with centrists & liberals left)
-Suppressing communists (would also effect a leftist SPD, and SAPD, if DNVP is in government)
-Maybe also one for the government collapsing of its own accord
+
+## Tax cuts (requires enough budget to do)
+## Tax hikes (requires low budget and high inflation)
+## Welfare cuts (requires either high welfare or low budget)
+## Welfare hikes (requires low welfare and high budget and high unemployment)
+## Tariff hikes (requires either low budget or low bourgeois rural support, and low enough inflation)
+## Tariff cuts (requires high enough budget and high inflation or good relations with the west?)
+## Diplomacy (improves relations with either west or east, requires no DNVP in government)
+## EU negotiations (if relations are high enough, more likely to appear the more times it has appeared before until eventually the EU is formed by the bourgeois)
+## Concordat (requires no DNVP in government?)
+## Supporting employers in labor disputes (requires no Joos Z?)
+## Compromise in labor disputes (requires Joos Z?)
+## Rearmament (requires DNVP in government and budget)
+## Anti - judicial reform (requires high judicial reform and DNVP in government)
+## Anti - interior reform (requires high police loyalty and DNVP in government)
+## Disempowering works councils (requires empowered works councils and less powerful bourgeoisie)
+## Privatizations (requires nationalizations, wont remove the dedicated event tho this will just be another way for the same effect to fire)
+## Lifting price controls (requires price controls)
+## Privatizing media (requires socialized media)
+## Unbanning private party financing (requires private party financing)
+## Suppressing the Reichsbanner (should probably also make this a dedicated event like privatizations, requires militant reichsbanner with centrists & liberals left)
+## Suppressing communists (would also effect a leftist SPD, and SAPD, if DNVP is in government)
+## Maybe also one for the government collapsing of its own accord

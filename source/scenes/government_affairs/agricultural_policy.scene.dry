@@ -58,7 +58,6 @@ title: State Buyer
 view-if: not state_buyer
 subtitle: -2 budget - Create a state monopoly for grain purchases, guaranteeing prices for farmers and stable prices for consumers. [? if judicial_reform < 2 : The judiciary would never allow this. ?]
 choose-if: budget >= 2 and judicial_reform >= 2
-max-visits: 1
 on-arrival: state_buyer_vote = 1
 go-to: state_buyer_done if not legislature_enabled; legislative_menu if legislature_enabled
 
