@@ -334,6 +334,9 @@ on-arrival: bourgeois_power += 0.03; socialism -= 3; unemployed += 2 if unemploy
 
 Sectorial works councils can no longer negotiate wage and price policies for entire economic sectors, greatly disempowering the workers in favor of capital.
 
+- @break_toleration
+- @tolerate
+
 @privatizations
 view-if: nationalization_progress > 0 and ((not (president == "Braun" or president == "Schumacher" or president == "Juchacz" or president == "Thälmann" or president == "Münzenberg")) or (in_bourgeois_coalition or in_right_coalition))
 on-arrival: socialism -= 1; nationalization_progress -= 1; capital_strike_progress -= 2; bourgeois_power += 0.05; unemployed += 3.5 if unemployed < 6; unemployed += 1.2 if works_councils < 3; workers -= 2 if nationalization_progress >= 2; budget += 3; works_program -= 1; workers_spd += 2*(1-dissent); unemployed_spd += 3*(1-dissent); new_middle_spd -= 2; new_middle_spd += 1 if new_middle_conscious; old_middle_spd -= 3; inflation -= 2; economic_growth -= 1.7 if economic_growth >= 5
