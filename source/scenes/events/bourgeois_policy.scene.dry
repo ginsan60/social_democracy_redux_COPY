@@ -515,7 +515,7 @@ The government has increased financial support for small farmers, providing acce
 @break_toleration
 title: We will end our toleration agreement.
 subtitle: This will likely mean new elections.
-on-arrival: time_to_election = 3; z_relation -= 3; ddp_relation -= 2; dvp_relation -= 2; left_dissent -= 2
+on-arrival: spd_toleration = 0; time_to_election = 3; z_relation -= 3; ddp_relation -= 2; dvp_relation -= 2; left_dissent -= 2
 call: set_next_election_time
 view-if: spd_toleration
 
