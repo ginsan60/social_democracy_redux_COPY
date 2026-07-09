@@ -54,7 +54,7 @@ view-if: march_on_berlin_seen >= 1 and not victory_republic and not nazis_implic
 go-to: investigate_march_success if interior_police_loyalty >= 0.6; investigate_march_failure if interior_police_loyalty < 0.6
 
 @investigate_march_success
-on-arrival: nazis_implicated = 1; coup_progress += 3; sa_banned = 1; sa_strength -= (sa_strength*0.2*interior_police_loyalty)
+on-arrival: nazis_implicated = 1; coup_progress += 3; sa_banned = 1; sa_strength -= (sa_strength*0.2*interior_police_loyalty); investigate_far_right += 1 if investigate_far_right >= 3
 
 We have found that the Nazis were responsible for the recent March on Berlin, having organized it as a putsch and even made preparations for civil war. This is grounds to ban them, if we get the judiciary on our side. For now, we have cracked down on the SA, but gone no further.
 
