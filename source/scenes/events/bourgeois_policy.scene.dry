@@ -198,7 +198,7 @@ By voting against, we have prevented the European Union from being formed, but o
 
 @concordat
 frequency: 100
-view-if: not in_right_coalition and chancellor_party == "Z" and gov_tension < 2
+view-if: not in_right_coalition and chancellor_party == "Z" and gov_tension < 2 and not reichskonkordat
 on-arrival: reichskonkordat_progress += 2; gov_tension += 1;
 go-to: concordat_signed if reichskonkordat_progress >= 4 and gov_tension < 2
 subtitle: The Center seeks a Concordat
