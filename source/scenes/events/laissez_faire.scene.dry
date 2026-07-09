@@ -5,7 +5,7 @@ on-arrival: welfare_cut = 0; tax_cut = 0; tariff_hike = 0; welfare_cut = 1 if we
 Q.laissez_faire_timer = Math.floor(Math.random() * (14 - 8 + 1)) + 8;
 !}
 new-page: true
-tags: event
+#tags: event
 go-to: menu
 # todo: max visits 3, 12 month cooldown
 
