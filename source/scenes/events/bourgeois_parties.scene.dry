@@ -1,0 +1,158 @@
+title: The Weimar Party System
+subtitle: Parties take actions
+view-if: (year >= 1935 or (year >= 1934 and month >= 4)) and (time >= next_party_time)
+tags: event
+new-page: true
+on-arrival: {! 
+
+Q.next_policy_time = (Q.time + (Math.floor(Math.random() * 6) + 1) + (Math.floor(Math.random() * 6) + 1));
+
+!}
+max-choices: 1
+
+= The Weimar Party System
+
+Germany has many political parties, and each is an active player in the political arena, dedicated to furthering the interests of its primary backers and ideological proponents. To this end, they continue to make active decisions.
+
+- @kpd: The Communist Party of Germany.
+- @sapd: The Socialist Workers' Party of Germany.
+- @ddp: The [? if ddp_name == "DDP" : German Democratic Party. ?][? if ddp_name == "DStP" : The German State Party. ?][? if ddp_name == "RDP" : The Radical Democratic Party. ?]
+- @z: The Center Party.
+- @zca: The Center Christian Alliance.
+- @dvp: The German People's Party.
+- @dnvp: The German National People's Party.
+- @nsdap: The National Socialist German Workers' Party.
+
+@kpd
+subtitle: Revolutionary Marxist-Leninists dedicated to the overthrow of capitalism through force of arms.
+max-choices: 1
+
+[? if kpd_r >= 20 : The KPD is a dominant party in German politics, shaping decisions with significant weight, especially when compared to its historical fortunes as a party on the fringe facing constant persecution. ?]
+
+[? if kpd_r >= 10 and kpd_r < 20 : The KPD is a major player in German politics. It is not a leading party by any measure, but it has its influence and exerts it well. ?]
+
+[? if kpd_r >= 5 and kpd_r < 10 : The KPD is in a sorry state, but by no means moribund. It retains a base and an apparatus with which it intends and hopes to ultimately rebound and overcome all obstacles laid out by reaction. ?]
+
+[? if kpd_r < 5 : The KPD has fallen into moribundance, faced with the possibility of irrelevance and destitution. It will do its best to resist this fate. ?]
+
+- @kpd_workers: The Communists campaign amongst the workers.
+- @kpd_unemployed: The Communists campaign amongst the unemployed.
+- @kpd_third_period: The Communists rally against Social Democracy.
+- @kpd_united_left: The Communists rally for the united front.
+- @rfb: The Communists funnel funds to the RFB.
+- @sabotage: The Communists engage in industrial sabotage.
+- @insurrection: The Communists engage in insurrectionary activity.
+
+@kpd_workers
+frequency: 100
+view-if: not kpd_banned
+on-arrival: workers_kpd += 3*(socialism/100); workers_spd -= 3*(left_dissent/100); workers_kpd += 2*(left_dissent/100) if not sapd_consolidated
+
+The Communists launch a campaign amongst the workers, aiming to increase their support amongst a key demographic to them.
+
+@kpd_unemployed
+frequency: 100
+view-if: not kpd_banned
+on-arrival: unemployed_kpd += 9*(socialism/100); unemployed_nsdap -= 5*(1-bourgeois_power); unemployed_nsdap -= 3*(socialism/100);
+
+The Communists campaign amongst the unemployed, more susceptible to radicalization given their intense precarity and disempowerment by capitalism.
+
+@kpd_third_period
+frequency: 100
+view-if: (third_period or year <= 1935) and kpd_relation < 50 and not kpd_banned
+on-arrival:  workers_spd -= 4*(left_dissent/100); workers_kpd += 3*(left_dissent/100); unemployed_spd -= 6*(left_dissent/100); unemployed_kpd += 6*(left_dissent/100); workers_kpd -= 3*(left_strength/100); unemployed_kpd -= 6*(left_strength/100); kpd_relation -= 5; socialism -= 1
+
+The Communists campaign on their third period slogan, assaulting Social Democracy as the left-wing of fascism and calling for the workers to reject us.
+
+@kpd_united_left
+frequency: 100
+view-if: kpd_relation >= 65 and left_strength > reformist_strength and not third_period and not kpd_banned
+on-arrival: socialism += (kpd_relation/100); workers_kpd += 5*(socialism/100); workers_spd -= 2*(left_dissent/100); unemployed_kpd += 5*(socialism/100); unemployed_spd -= 3*(left_dissent/100)
+
+The Communists rally for the united front, organizing alongside our organizations to fight in the daily struggles of the workers.
+
+@rfb
+frequency: 50
+view-if: not rfb_banned or communist_coalition < 3
+on-arrival: rfb_strength += kpd_votes; rfb_militancy += ((kpd_votes/1000)+0.02)
+
+The Communists funnel funding to the RFB, helping it arm and gear up for the eventual revolutionary confrontation.
+
+@sabotage
+frequency: 25
+view-if: kpd_banned or (kpd_votes >= kpd_relation+socialism and kpd_votes < (economic_growth*2))
+on-arrival: workers_kpd -= economic_growth if economic_growth > 0; economic_growth -= (workers_kpd_normalized/100)
+
+The Communists dedicate themselves to a campaign of sabotage, seeking to slow down the economy through illegal strikes and other more direct forms of sabotage. This isolates them from the broader masses of the workers.
+
+@insurrection
+frequency: 150
+view-if: (chancellor_party == "NSDAP" or chancellor_party == "DNVP" or (third_period and kpd_relation < 0 and in_emergency_government) or kpd_banned) and rfb_force >= 1
+on-arrival: strife += 1; rfb_militancy += 0.05; rfb_strength -= (sa_strength/100)*(sa_militancy); sa_strength -= (rfb_strength/100)*(rfb_militancy); reichswehr_militancy -= (rfb_militancy*rfb_militancy); workers_kpd -= 6*(pro_republic/100)
+
+The Communists engage in insurrectionary activity, compelling the RFB to intensified streetfighting and insurgency-level activities. 
+
+@sapd
+subtitle: Centrist Marxists dedicated to the building of a united proletarian front to lead the rupture with capital.
+view-if: sapd_formed
+max-choices: 1
+
+[? if not sapd_consolidated : The SAPD remains more of a pressure group than a true party of its own, though this could change through consolidation if we are not careful. ?]
+
+[? if sapd_consolidated : The SAPD has grown into a large party of its own, threatening constantly to tear supporters from our left flank should we fail in delivering to the workers. ?]
+
+@ddp
+subtitle: Liberals of a more republican and left-wing orientation.
+max-choices: 1
+view-if: not ddp_banned
+
+[? if ddp_r >= 10 : The [+ ddp_name +] has seen surprising success, blooming into a capable mass party of its own right. ?]
+
+[? if ddp_r >= 5 and ddp_r < 10 : The [+ ddp_name +] has become a minor but relevant party, able to swing key votes and mobilize support for or against crucial policies from time to time. Still, its relevance has fallen, and it has to fight hard to avoid moribundance. ?]
+
+[? if ddp_r < 5 : The [+ ddp_name +] has fared poorly in recent times, faced with increasing polarization and radicalization. Perhaps one day, it will claw its way back from being moribund. ?]
+
+@z
+subtitle: Catholics.
+max-choices: 1
+view-if: not z_banned
+
+The Catholic Center Party fights for the Church, and the rights of all Catholics in Germany.
+
+@zca
+subtitle: The mass party of the whole bourgeoisie united against an ascendant socialism.
+max-choices: 1
+view-if: zca_formed
+
+The ZCA has, since its emergence, posed a major and competent threat to socialist administration, fighting tooth and nail for the restoration of a liberal democracy, something that we once fought tooth and nail to defend from those seeking the restoration of reactionary autocracy yet which has now become something to be disgarded in favor of history's continued progression. 
+
+@dvp
+subtitle: Liberals of a more nationalistic and right-wing orientation, chained to industrialist interests.
+max-choices: 1
+view-if: not dvp_banned
+
+[? if dvp_r >= 10 : The DVP has seen surprising success, blooming into a capable mass party of its own right. ?]
+
+[? if dvp_r < 10 and dvp_r >= 5 : The DVP has become a minor but relevant party, able to swing key votes and mobilize support for or against crucial policies from time to time. Still, its relevance has fallen, and it has to fight hard to avoid moribundance. ?]
+
+[? if dvp_r < 5 : The DVP has fared poorly in recent times, faced with increasing polarization and radicalization. Perhaps one day, it will claw its way back from being moribund. ?]
+
+@dnvp
+subtitle: Virulent reactionaries and antisemites dedicated to the restoration of Imperial Germany.
+max-choices: 1
+view-if: not dnvp_banned
+
+[? if dnvp_r >= 20 : The DNVP is a key player in German politics, shaping decisions with significant weight on behalf of the aristocratic and bourgeois interests it represents. We will have to do our best to combat this influence, or else see Germany returned to imperial rule. ?]
+
+[? if dnvp_r >= 10 and dnvp_r < 20 : The DNVP is a major player in German politics. It is not a leading party currently, but possesses outsized influence given the interests it represents, something we will do our best to combat. ?]
+
+[? if dnvp_r >= 5 and dnvp_r < 10 : The DNVP is in a sorry state, but by no means moribund. It retains a following and backing with which it hopes to rebound and reassert imperial authority with one day. ?]
+
+[? if dnvp_r < 5 : The DNVP has fallen into obscurity, the fact of its narrow interest group backing finally catching up to it as nostalgia for the old times withers away under prosperity with the new. ?]
+
+@nsdap
+subtitle: Fascists seeking the imposition of their will upon the whole European continent through violent dictatorship, conquest, and war.
+max-choices: 1
+
+The Nazis are a dangerous movement, indeed the most out of them all. They are Germany's adaptation of fascism, and threaten democracy acutely and constantly, even in times of relative stabilization.
+
