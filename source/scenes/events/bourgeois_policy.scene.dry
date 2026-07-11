@@ -1,11 +1,11 @@
 title: The Governance of Germany
 subtitle: [+ chancellor +] is busy at work
-view-if: not spd_in_government and (spd_toleration or in_bourgeois_coalition or in_right_coalition) and (year >= 1935 or (year >= 1934 and month >= 4)) and (time >= next_policy_time)
+view-if: not spd_in_government and (spd_toleration or in_bourgeois_coalition or in_right_coalition) and ((year >= 1935 or (year >= 1934 and month >= 4)) or return_to_normalcy) and (time >= next_policy_time)
 tags: event
 new-page: true
 on-arrival: policy_seen += 1; {!
 
-Q.next_policy_time = (Q.time + (Math.floor(Math.random() * 6) + 1) + (Math.floor(Math.random() * 6) + 1));
+Q.next_policy_time = (Q.time + (Math.floor(Math.random() * 2) + 1) + (Math.floor(Math.random() * 2) + 1) + (Math.floor(Math.random() * 1)));
 
 Q.tax_cuts_frequency = Math.max(1, Math.min(1000, 200 * (Q.upper_tax_rates + Q.budget + 4)));
 Q.tax_hikes_frequency = Math.max(1, Math.min(1000, 50 * Q.inflation));
