@@ -5,7 +5,7 @@ view-if: (year >= 1935 or (year >= 1934 and month >= 4)) and (time >= next_party
 new-page: true
 on-arrival: {! 
 
-Q.next_policy_time = (Q.time + (Math.floor(Math.random() * 6) + 1) + (Math.floor(Math.random() * 6) + 1));
+Q.next_party_time = (Q.time + (Math.floor(Math.random() * 6) + 1) + (Math.floor(Math.random() * 6) + 1));
 
 !}
 max-choices: 1
@@ -16,7 +16,7 @@ Germany has many political parties, and each is an active player in the politica
 
 - @kpd: The Communist Party of Germany.
 - @sapd: The Socialist Workers' Party of Germany.
-- @ddp: The [? if ddp_name == "DDP" : German Democratic Party. ?][? if ddp_name == "DStP" : The German State Party. ?][? if ddp_name == "RDP" : The Radical Democratic Party. ?]
+- @ddp: The [? if ddp_name == "DDP" : German Democratic Party. ?][? if ddp_name == "DStP" : German State Party. ?][? if ddp_name == "RDP" : Radical Democratic Party. ?]
 - @z: The Center Party.
 - @zca: The Center Christian Alliance.
 - @dvp: The German People's Party.
@@ -39,19 +39,21 @@ max-choices: 1
 - @kpd_unemployed: The Communists campaign amongst the unemployed.
 - @kpd_third_period: The Communists rally against Social Democracy.
 - @kpd_united_left: The Communists rally for the united front.
+- @kpd_relations: The Communists seek to improve our relationship.
+- @kpd_policy: The Communists seek to implement policy through their ministries.
 - @rfb: The Communists funnel funds to the RFB.
 - @sabotage: The Communists engage in industrial sabotage.
 - @insurrection: The Communists engage in insurrectionary activity.
 
 @kpd_workers
-frequency: 100
+frequency: 200
 view-if: not kpd_banned
 on-arrival: workers_kpd += 3*(socialism/100); workers_spd -= 3*(left_dissent/100); workers_kpd += 2*(left_dissent/100) if not sapd_consolidated
 
 The Communists launch a campaign amongst the workers, aiming to increase their support amongst a key demographic to them.
 
 @kpd_unemployed
-frequency: 100
+frequency: 200
 view-if: not kpd_banned
 on-arrival: unemployed_kpd += 9*(socialism/100); unemployed_nsdap -= 5*(1-bourgeois_power); unemployed_nsdap -= 3*(socialism/100);
 
@@ -70,6 +72,13 @@ view-if: kpd_relation >= 65 and left_strength > reformist_strength and not third
 on-arrival: socialism += (kpd_relation/100); workers_kpd += 5*(socialism/100); workers_spd -= 2*(left_dissent/100); unemployed_kpd += 5*(socialism/100); unemployed_spd -= 3*(left_dissent/100)
 
 The Communists rally for the united front, organizing alongside our organizations to fight in the daily struggles of the workers.
+
+@kpd_relations
+frequency: 50
+view-if: ((kpd_party_leader == "Conciliators" or kpd_relation >= (100-nsdap_votes-left_strength)) and left_strength > left_dissent) and kpd_relation < socialism
+on-arrival: kpd_relation += 3; left_strength += 6
+
+The Communists have reached out to us, seeking to build a broader socialist front and collaborate, reconciling our divides.
 
 @rfb
 frequency: 50
@@ -101,6 +110,62 @@ max-choices: 1
 
 [? if sapd_consolidated : The SAPD has grown into a large party of its own, threatening constantly to tear supporters from our left flank should we fail in delivering to the workers. ?]
 
+- @sapd_workers: The Socialists campaign amongst the workers.
+- @sapd_unemployed: The Socialists campaign amongst the unemployed.
+- @sapd_new_middle: The Socialists campaign amongst the new middle class.
+- @sapd_rural: The Socialists campaign amongst the farmers. 
+- @sapd_united_frontism: The Socialists work towards a united front.
+- @sapd_centrists: The Socialists attempt to appeal to Centrists.
+- @sapd_labor: The Socialists attempt to win over the trade unions.
+
+@sapd_workers
+frequency: 200
+on-arrival: workers_sapd += 3*(socialism/100); workers_sapd += 3*(socialism/100) if sapd_consolidated; workers_kpd -= 3*(pro_republic/100) if third_period and kpd_relation < left_strength and sapd_consolidated; workers_spd -= 3*(unemployed/100) if (spd_in_government or spd_toleration) and sapd_consolidated
+
+The SAPD campaigns amongst the workers, seeking to assert itself as the right socialist party for the task of building socialism in Germany, as opposed to us timid Social Democrats and intransingient Communists.
+
+@sapd_unemployed
+frequency: 100
+on-arrival: unemployed_sapd += 1*(socialism/50); unemployed_sapd += 3*(socialism/100) if sapd_consolidated; unemployed_sapd += 3*(1-(unemployed_sapd_normalized/100)) if sapd_consolidated; unemployed_kpd -= 2*(pro_republic/100) if third_period and kpd_relation < left_strength and sapd_consolidated; unemployed_spd -= 3*(unemployed/100) if (spd_in_government or spd_toleration) and sapd_consolidated
+view-if: unemployed >= 10
+
+The SAPD campaigns amongst the unemployed, attempting to break the traditional dominance of the communists amongst the demographic in favor of its vision of socialism.
+
+@sapd_new_middle
+frequency: 50
+view-if: new_middle_conscious or socialism >= 55 or peoples_party
+on-arrival: new_middle_sapd += 2*(socialism/100)*(1-bourgeois_power); new_middle_spd += 4*(socialism/100)*(1-bourgeois_power) if sapd_consolidated
+
+The SAPD campaigns amongst the new middle class, attempting to influence the white collar workers towards its vision for socialism with limited success.
+
+@sapd_rural
+frequency: 25
+view-if: land_reform >= 3 
+on-arrival: rural_sapd += land_reform*(socialism/200)*(1-bourgeois_power); rural_sapd += land_reform*(socialism/100)*(1-bourgeois_power) if sapd_consolidated
+
+The SAPD campaigns in the German countryside, attempting to unite the rural workers with their urban counterparts to limited success. 
+
+@sapd_united_frontism
+frequency: 100
+view-if: kpd_relation < socialism
+on-arrival: kpd_relation += (socialism/100); left_strength += (socialism/100)
+
+The SAPD campaigns for a united front, seeking to bolster the wings in favor of such in both our party as well as the Communist one.
+
+@sapd_centrists
+frequency: 150
+view-if: not centrists_resigned
+on-arrival: center_dissent += (1+sapd_votes)
+
+The SAPD attempts to convince Centrist organizers in the SPD to defect, and bring their skills with them to help turn the party into a greater and grander force.
+
+@sapd_labor
+frequency: 150
+view-if: not unions_independent
+on-arrival: labor_dissent += (1+sapd_votes)
+
+The SAPD attempts to convince the trade unions in the SPD to defect, and bring their organized workers with them to help turn the party into a greater and grander force.
+
 @ddp
 subtitle: Liberals of a more republican and left-wing orientation.
 max-choices: 1
@@ -111,6 +176,47 @@ view-if: not ddp_banned
 [? if ddp_r >= 5 and ddp_r < 10 : The [+ ddp_name +] has become a minor but relevant party, able to swing key votes and mobilize support for or against crucial policies from time to time. Still, its relevance has fallen, and it has to fight hard to avoid moribundance. ?]
 
 [? if ddp_r < 5 : The [+ ddp_name +] has fared poorly in recent times, faced with increasing polarization and radicalization. Perhaps one day, it will claw its way back from being moribund. ?]
+
+- @ddp_workers: The Democrats campaign amongst the workers.
+- @ddp_new_middle: The Democrats campaign amongst the new middle class.
+- @ddp_old_middle: The Democrats campaign amongst the old middle class.
+- @ddp_rural: The Democrats campaign in the countryside.
+- @ddp_democracy: The Democrats rally for democracy.
+#- @ddp_policy: The Democrats implement their policy agendas.
+
+@ddp_workers
+frequency: 50
+view-if: ((socialism/100) < bourgeois_power) or ddp_socialist
+on-arrival: workers_ddp += 3*bourgeois_power*(1-(socialism/100)); workers_ddp += 3*bourgeois_power*(ddp_relation/100); workers_spd -= 3*(left_strength/100)*(1-(socialism/100))*bourgeois_power; workers_ddp += 1 if ddp_name == "RDP"
+
+The Democrats increase their campaigning amongst the workers, attempting to break socialist domination in the working class.
+
+@ddp_new_middle
+frequency: 200
+on-arrival: new_middle_ddp += 6*(pro_republic/100)*bourgeois_power; new_middle_spd -= 3*(1-(socialism/100)) if not new_middle_conscious; new_middle_nsdap -= 3*(pro_republic/100)*(1-(nationalism/100)); new_middle_ddp += 1 if ddp_name == "DDP"
+
+The Democrats campaign amongst the new middle class, shoring up their support amongst white collar professionals as defenders of liberalism. 
+
+@ddp_old_middle
+frequency: 100
+view-if: nationalism < pro_republic
+on-arrival: old_middle_ddp += 3*(pro_republic/100)*(1-(nationalism/100)); old_middle_ddp += 1 if ddp_name == "DStP"
+
+The Democrats campaign amongst the old middle class, intent on turning even the frequently reactionary shopkeeping class towards left liberalism in this time of republican stabilization.
+
+@ddp_rural
+view-if: land_reform 
+frequency: 50
+on-arrival: rural_ddp += land_reform*bourgeois_power; rural_nsdap -= land_reform*(pro_republic/100); rural_dnvp -= land_reform*(pro_republic/100)*(1-(nationalism/100))
+
+The Democrats campaign amongst the countryside, attempting to build an agrarian wing given the gradually more progressive inclination of farmers thanks to land reform programs.
+
+@ddp_democracy
+view-if: pro_republic < nationalism
+frequency: 100
+on-arrival: nationalism -= ddp_votes*(1-(pro_republic/100)); pro_republic += ddp_votes*(1-(unemployed/100))
+
+The Democrats rally for the republic and against the right-wing's reactionary nationalism, limited in the extent to which it can do so by its size and the broader popularity of the republic.
 
 @z
 subtitle: Catholics.
