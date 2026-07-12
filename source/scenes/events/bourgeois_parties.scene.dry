@@ -221,9 +221,16 @@ The Democrats rally for the republic and against the right-wing's reactionary na
 @z
 subtitle: Catholics.
 max-choices: 1
-view-if: not z_banned
+view-if: not z_banned and not zca_formed
 
 The Catholic Center Party fights for the Church, and the rights of all Catholics in Germany.
+
+- @catholics: The Center Party consolidates Catholics.
+
+@catholics
+on-arrival: catholics_z += 5; catholics_other -= 5
+
+The Center Party represents Germany's Catholics, and consolidates its base amongst them.
 
 @zca
 subtitle: The mass party of the whole bourgeoisie united against an ascendant socialism.
@@ -235,7 +242,7 @@ The ZCA has, since its emergence, posed a major and competent threat to socialis
 @dvp
 subtitle: Liberals of a more nationalistic and right-wing orientation, chained to industrialist interests.
 max-choices: 1
-view-if: not dvp_banned
+view-if: not dvp_banned and not zca_formed
 
 [? if dvp_r >= 10 : The DVP has seen surprising success, blooming into a capable mass party of its own right. ?]
 
@@ -255,6 +262,75 @@ view-if: not dnvp_banned
 [? if dnvp_r >= 5 and dnvp_r < 10 : The DNVP is in a sorry state, but by no means moribund. It retains a following and backing with which it hopes to rebound and reassert imperial authority with one day. ?]
 
 [? if dnvp_r < 5 : The DNVP has fallen into obscurity, the fact of its narrow interest group backing finally catching up to it as nostalgia for the old times withers away under prosperity with the new. ?]
+
+- @dnvp_workers: The DNVP campaigns amongst workers.
+- @dnvp_middle: The DNVP campaigns amongst the middle class.
+- @dnvp_rural: The DNVP campaigns in the countryside.
+- @dnvp_nationalism: The DNVP rallies support for nationalism.
+- @dnvp_antirepublic: The DNVP rallies against the republic.
+- @hugenberg: Hugenberg commits the DNVP to *Katastrophenpolitik*.
+- @moderation: The DNVP tries to break from its reputation as an unworkable party.
+
+@dnvp_workers
+view-if: dnvp_reform or ((workers_spd_normalized+workers_kpd_normalized+workers_sapd_normalized) >= nationalism)
+frequency: 50
+on-arrival: workers_dnvp += 4*bourgeois_power*(nationalism/100)*(1-(pro_republic/100))*(1-(socialism/100))
+
+The DNVP attempts to break the hold of organized labor over the working class, and drive our base towards their nationalist ideologies. Luckily, they are unlikely to see much success.
+
+@dnvp_middle
+frequency: 200
+on-arrival: new_middle_dnvp += 6*bourgeois_power*(nationalism/100)*(1-(pro_republic/100)); old_middle_dnvp += 6*bourgeois_power*(nationalism/50)*(1-(pro_republic/100))
+
+The DNVP campaigns amongst the middle classes, primarily the old middle class but also the most reactionary echelons of the new middle class. 
+
+@dnvp_rural
+frequency: 250
+on-arrival: rural_dnvp += 6*bourgeois_power*(nationalism/(50+(land_reform*20)))*(1-(pro_republic/100))
+
+The DNVP campaigns in the countryside, its traditional bastion. 
+
+@dnvp_nationalism
+frequency: 100
+on-arrival: nationalism += 15*dnvp_normalized*(1-(nationalism/100))
+
+The DNVP campaigns for German nationalism and exceptionalism, attempting to reinvigorate support in its militaristic project.
+
+@dnvp_antirepublic
+frequency: 100
+on-arrival: pro_republic -= 15*dnvp_normalized*(pro_republic/100)
+
+The DNVP campaigns against the republic and its institutions, attempting to invigorate support for authoritarian regime, specifically imperial restoration, as an alternative project and mode of governance.
+
+@hugenberg
+frequency: 50
+view-if: not dnvp_reform
+on-arrival: z_relation += dnvp_r/3; dvp_relation += dnvp_r/6; nationalism += dnvp_votes*(1-(pro_republic/100)); pro_republic -= dnvp_votes*(unemployed/100); {!
+
+Q.workers_dnvp -= Q.pro_republic/10;
+Q.workers_dnvp += Q.nationalism/20;
+
+Q.new_middle_dnvp -= Q.pro_republic/10;
+Q.new_middle_dnvp += Q.nationalism/20;
+
+Q.old_middle_dnvp -= Q.pro_republic/10;
+Q.old_middle_dnvp += Q.nationalism/20;
+
+Q.rural_dnvp -= Q.pro_republic/10;
+Q.rural_dnvp += Q.nationalism/20;
+
+Q.coup_progress += Q.sh_force/10;
+
+!}
+
+The DNVP's uncompromising line under Hugenberg pushes the other bourgeois parties towards us by process of elimination, and risks isolating the party from broader masses.
+
+@moderation
+frequency: 50
+view-if: dnvp_reform
+on-arrival: z_relation -= dnvp_r/6; dvp_relation -= dnvp_r/3
+
+The DNVP declares itself a constructive party ready to work with the other bourgeois parties.
 
 @nsdap
 subtitle: Fascists seeking the imposition of their will upon the whole European continent through violent dictatorship, conquest, and war.
