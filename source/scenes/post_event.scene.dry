@@ -210,6 +210,13 @@ for (var party of Q.parties) {
     Q['proletariat_' + party + '_normalized'] += Q.lumpenproletariat*(Q['unemployed_' + party + '_normalized']/100);
     Q['proletariat_' + party + '_normalized'] = Math.round(Q['proletariat_' + party + '_normalized']);
 }
+Q.workers_ratio = Q.urban_proletariat/Q.workers;
+Q.rural_ratio = Q.rural_proletariat/Q.rural;
+Q.new_middle_ratio = Q.middle_proletariat/Q.new_middle;
+Q.unemployed_ratio = Q.lumpenproletariat/Q.unemployed;
+Q.catholics_ratio = Q.catholic_proletariat/Q.catholics;
+Q.old_middle_ratio = 0;
+Q.bourgeoisie_ratio = 0;
 
 Q.prussia_workers = Q.workers*1;
 Q.prussia_new_middle = Q.new_middle*1.25;

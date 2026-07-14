@@ -537,6 +537,12 @@ table {
 }
 
 /* Styles for parties */
+.seat.kapd {
+    fill: #4e0000;
+}
+.seat.faud {
+    fill: #612828;
+}
 .seat.kpd {
     fill: #8B0000;
 }
@@ -586,18 +592,28 @@ table {
 }
 .seat.left {
   fill: #9c0000;
+  stroke: #000;
+  stroke-width: 1.5px;
 }
 .seat.center {
   fill: #e30000;
+  stroke: #000;
+  stroke-width: 1.5px;
 }
 .seat.labor {
   fill: #ff681d;
+  stroke: #000;
+  stroke-width: 1.5px;
 }
 .seat.reformist {
   fill: #ff6ba9;
+  stroke: #000;
+  stroke-width: 1.5px;
 }
 .seat.neorevisionist {
   fill: #ff14a5;
+  stroke: #000;
+  stroke-width: 1.5px;
 }
 
 .tooltip-text {
