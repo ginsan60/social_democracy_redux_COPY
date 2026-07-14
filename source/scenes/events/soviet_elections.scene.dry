@@ -420,14 +420,12 @@ There are some potential coalition arrangements.
 @coalition_menu
 max-choices: 1
 
-- @kpd_majority ## kpd wins
-- @revolutionary ## kpd-kapd-faud wins
-- @left ## kpd-kapd-faud-sapd + spd left
-- @spd_majority ## spd and its factions win
-- @united_front ## spd and kpd - reformists?
-- @dissolutionist ## spd right + bourgeois
-
-## unaffiliated will approve any minority "government"
+- @kpd_majority
+- @revolutionary
+- @left
+- @spd_majority
+- @united_front
+- @dissolutionist
 
 @kpd_majority
 view-if: (kpd_s+unaffiliate_s) >= 50
