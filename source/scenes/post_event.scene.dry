@@ -257,6 +257,9 @@ Q.hamburg_workers = Q.workers*1.05;
 Q.hamburg_new_middle = Q.new_middle*1.5;
 Q.hamburg_old_middle = Q.old_middle*1.5;
 Q.hamburg_unemployed = Q.unemployed*1.1;
+Q.hamburg_rural = Q.rural*0.5;
+Q.hamburg_catholics = Q.catholics*0.1;
+Q.hamburg_bourgeoisie = Q.bourgeoisie;
 
 Q.wurttemberg_workers = Q.workers*0.8;
 Q.wurttemberg_new_middle = Q.new_middle*1.05;
