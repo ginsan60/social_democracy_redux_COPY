@@ -186,6 +186,16 @@ Across Germany, workers' councils exist, operating as "soviets" and electing dep
 
 @post_election_1928
 on-arrival: {!
+
+for (var party of Q.soviet_parties) {
+    Q['proletariat_' + party + '_normalized'] = Q.urban_proletariat*(Q['workers_' + party + '_normalized']/100);
+    Q['proletariat_' + party + '_normalized'] += Q.rural_proletariat*(Q['rural_' + party + '_normalized']/100);
+    Q['proletariat_' + party + '_normalized'] += Q.middle_proletariat*(Q['new_middle_' + party + '_normalized']/100);
+    Q['proletariat_' + party + '_normalized'] += Q.catholic_proletariat*(Q['catholics_' + party + '_normalized']/100);
+    Q['proletariat_' + party + '_normalized'] += Q.lumpenproletariat*(Q['unemployed_' + party + '_normalized']/100);
+    Q['proletariat_' + party + '_normalized'] = Math.round(Q['proletariat_' + party + '_normalized']);
+}
+
 // set old results
 // election threshold constitutional reform
 // banning parties
