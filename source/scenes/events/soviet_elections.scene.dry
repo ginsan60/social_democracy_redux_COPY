@@ -428,6 +428,7 @@ max-choices: 1
 - @dissolutionist
 
 @kpd_majority
+title: A Communist Chairman
 view-if: (kpd_s+unaffiliate_s) >= 50
 subtitle: [+ kpd_s +]% - The Communists have won
 on-arrival: reichstag_enemy = 1; kpd_soviets = 1; communist_influence += 3 if communist_influence; rfb_militancy += 0.1; rfb_militancy += (socialism/10); rb_strength -= left_strength; rfb_strength += left_strength; workers_kpd += (socialism/10)
@@ -436,6 +437,7 @@ frequency: 50
 The KPD has won chairmanship and control over the workers' councils coordinating bodies, and have immediately attempted to direct them towards the revolutionary path of seeking absolute control over the state, turning their attention squarely to the Reichstag as principal enemy.
 
 @revolutionary
+title: A Revolutionary Chairman
 view-if: (revolutionary_s+unaffiliate_s) >= 50
 subtitle: [+ revolutionary_s +]% - The Revolutionaries have won
 on-arrival: reichstag_enemy = 1; revolutionary_soviets = 1; rfb_militancy += 0.05; rfb_militancy += (socialism/10); rb_strength -= left_strength; rfb_strength += left_strength; workers_kpd += (socialism/20)
@@ -444,6 +446,7 @@ frequency: 25
 The Revolutionaries have together won chairmanship, with some disagreement within their tent, they have nonetheless put these aside to unify the councils against the Reichstag for the goal of full worker control.
 
 @left
+title: A Leftist Chairman
 view-if: (left_coalition_s+unaffiliate_s) >= 50 and kpd_relation >= 40
 subtitle: [+ left_coalition_s +]% - The Leftists have won
 on-arrival: leftist_soviets = 1; rfb_militancy += (socialism/20); left_strength += 5; kpd_relation += 5; socialism += 1; reichstag_enemy = 1
@@ -452,6 +455,7 @@ frequency: 10
 The Leftists have together won chairmanship, championing eventual empowerment of the councils over the Reichstag, even though the Communists would like to proactively launch a revolution, and even as those to the left of the Communists continue adventuristically preparing so.
 
 @spd_majority
+title: A Social-Democratic Chairman
 view-if: (spd_s+unaffiliate_s) >= 50
 subtitle: [+ spd_s +]% - The SPD has won!
 on-arrival: spd_soviets = 1
@@ -460,6 +464,7 @@ frequency: 100
 The SPD has won leadership of the councils! The maintenance of this majority will rest upon ensuring the unity of the party's factions.
 
 @united_front
+title: A Socialist Chairman
 view-if: (united_front_s+unaffiliate_s) >= 50 and kpd_relation >= 60
 subtitle: [+ united_front_s +]% - The United Front has won
 on-arrival: united_soviets = 1; rfb_militancy += (socialism/25); left_strength += 5; kpd_relation += 10; socialism += 2; reichstag_enemy = 1
@@ -468,6 +473,7 @@ frequency: 50
 The United Front has won the chairmanship, dividing executive positions between the SPD and the KPD and securing the support of the councils for the broader socialist agenda shared by the two parties.
 
 @dissolutionist
+title: A Parliamentarian Chairman
 view-if: (dissolutionist_s+unaffiliate_s) >= 50
 subtitle: [+ dissolutionist_s +]% - The Parliamentarians have won
 on-arrival: parliamentarian_soviets = 1; socialism -= 2; pro_republic += 3; left_strength -= 5; kpd_relation -= 5
