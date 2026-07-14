@@ -164,9 +164,12 @@ for (var faction of Q.factions) {
 }
 
 for (var c of Q.classes) {
-    Q[c+'_bourgeois'] = Q[c+'_dvp'] + Q[c+'_dnvp'] + (Q[c+'_zca'] * (1-Q.bourgeois_power)) + (Q[c+'_other'] * (1-(Q.socialism/100)));
+    Q[c+'_bourgeois'] = Q[c+'_dvp'] + Q[c+'_dnvp'] + (Q[c+'_other'] * (1-(Q.socialism/100)));
     if (!Q.ddp_socialist) {
         Q[c+'_bourgeois'] += Q[c+'_ddp'];
+    }
+    if (Q.zca_formed) {
+        Q[c+'_bourgeois'] += (Q[c+'_zca'] * (1-Q.bourgeois_power));
     }
 }
 
@@ -418,7 +421,7 @@ go-to: coalition_menu
 
 {!<tr><td><div class="box" style='background-color:#ff6ba9; outline: 2px; outline-style: solid;'> </div> !} **SPD (Reform):** {!</td><td>!} **[+ spd_reformist_s +]%** {!</td><td>!} **[+ str_change_spd_reformist +]** {!</td></tr>!}
 
-{!<tr><td><div class="box" style='background-color:#ff14a5; outline: 2px; outline-style: solid;'> </div> !} **SPD (Neorevisionist):** {!</td><td>!} **[+ spd_neorevisionist_s +]%** {!</td><td>!} **[+ str_change_spd_neorevisionist +]** {!</td></tr>!}
+[? if neorevisionism : {!<tr><td><div class="box" style='background-color:#ff14a5; outline: 2px; outline-style: solid;'> </div> !} **SPD (Neorevisionist):** {!</td><td>!} **[+ spd_neorevisionist_s +]%** {!</td><td>!} **[+ str_change_spd_neorevisionist +]** {!</td></tr>!} ?]
 
 [? if sapd_formed == 1 : {!<tr><td><div class="box" style='background-color:#C40000'> </div> !}SAPD: {!</td><td>!} [+ sapd_s +]% {!</td><td>!} [+ str_change_sapd +] {!</td></tr>!} ?]
 
