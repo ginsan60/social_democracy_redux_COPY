@@ -3,7 +3,7 @@ new-page: true
 tags: event
 priority: -1
 view-if: time >= soviet_election_time and soviets_exist and not supreme_soviet
-on-arrival: {! 
+on-arrival: buttons_mashed = 0; sapd_endorsement = 0; kpd_endorsement = 0; unaffiliate_endorsement = 0; bourgeois_endorsement = 0; backs_sapd = 0; backs_kpd = 0; backs_unaffiliate = 0; backs_bourgeois = 0; sapd_included = 0; kpd_included = 0; unaffiliate_included = 0; bourgeois_included = 0; {! 
 Q.soviet_parties = ['faud', 'kapd', 'kpd', 'sapd', 'spd_left', 'spd_center', 'spd_labor', 'spd_reformist', 'spd_neorevisionist', 'bourgeois', 'unaffiliate', 'nsdap', 'z'];
 if (Q.ddp_socialist) {
     Q.soviet_parties.push('ddp');
@@ -247,9 +247,10 @@ if (Q.electoral_threshold && Q.electoral_threshold > 0 || Q.party_bans) {
 }
 
 Q.spd_s = Q.spd_left_s + Q.spd_center_s + Q.spd_labor_s + Q.spd_reformist_s + Q.spd_neorevisionist_s;
+Q.effective_spd_s = Math.floor(Q.spd_s * 1-(Q.dissent));
 
 Q.revolutionary_s = Q.kpd_s + Q.faud_s + Q.kapd_s;
-Q.left_coalition_s = Q.kpd_s + Q.faud_s + Q.kapd_s + Q.sapd_s + Q.spd_left_s;
+Q.left_coalition_s = Q.kpd_s + Q.faud_s + Q.kapd_s + Q.sapd_s;
 Q.united_front_s = Q.kpd_s + Q.spd_s + Q.sapd_s;
 if (Q.spd_reformist_s || Q.spd_neorevisionist_s) {
     Q.united_front_s -= Q.spd_reformist_s;
@@ -300,7 +301,7 @@ if (Q.sapd_formed && Q.sapd_s) {
 
 if (Q.spd_left_s) {
     data.push({
-            "id": "left",
+            "id": "spd_left",
             "legend": "SPD",
             "name": "SPD",
             "seats": Math.round(Q.spd_left_s*(Q.socialism/10)),
@@ -309,7 +310,7 @@ if (Q.spd_left_s) {
 
 if (Q.spd_center_s) {
     data.push({
-            "id": "center",
+            "id": "spd_center",
             "legend": "SPD",
             "name": "SPD",
             "seats": Math.round(Q.spd_center_s*(Q.socialism/10)),
@@ -318,7 +319,7 @@ if (Q.spd_center_s) {
 
 if (Q.spd_labor_s) {
     data.push({
-            "id": "labor",
+            "id": "spd_labor",
             "legend": "SPD",
             "name": "SPD",
             "seats": Math.round(Q.spd_labor_s*(Q.socialism/10)),
@@ -327,7 +328,7 @@ if (Q.spd_labor_s) {
 
 if (Q.spd_reformist_s) {
     data.push({
-            "id": "reformist",
+            "id": "spd_reformist",
             "legend": "SPD",
             "name": "SPD",
             "seats": Math.round(Q.spd_reformist_s*(Q.socialism/10)),
@@ -336,7 +337,7 @@ if (Q.spd_reformist_s) {
 
 if (Q.spd_neorevisionist_s) {
     data.push({
-            "id": "neorevisionist",
+            "id": "spd_neorevisionist",
             "legend": "SPD",
             "name": "SPD",
             "seats": Math.round(Q.spd_neorevisionist_s*(Q.socialism/10)),
@@ -404,7 +405,7 @@ if (window && d3) {
     d3.select("#reichstag").datum(data).call(parliament);
 }
 !}
-go-to: coalition_menu
+#go-to: coalition_menu
 
 **Election results:**
 
@@ -442,42 +443,266 @@ go-to: coalition_menu
 {!<tr><td><div class="box" style='background-color:#954B00'> </div> !} NSDAP: {!</td><td>!} [+ nsdap_s +]% {!</td><td>!} [+ str_change_nsdap +] {!</td></tr>!}
 {!</table>!}
 
-There are some potential coalition arrangements.
+The council elections have been held, and deputies elected from all Germany's industries to determine the future course of the working clas and the pursuit of political power by this class. The first matter is the election of an executive.
+
+- @coalition_menu: Convene the Social Democratic delegation.
 
 @coalition_menu
-max-choices: 1
+subtitle: SPD - [+ spd_s +]%
 
-- @kpd_majority
-- @revolutionary
+Through the convocation of the SPD delegation, we have attempted to unify our factions ahead of the council discussions. In the end, our delegation numbers about [+ effective_spd_s +]% of the congress.
+
+- @spd_majority: We will elect a Social-Democratic chairman, then.
+- @minority: No majority.
+
+@minority
+view-if: effective_spd_s < 50
+go-to: competition
+on-arrival: spd_turn = 1; communist_candidate = kpd_s; unaffiliate_candidate = unaffiliate_s; bourgeois_candidate = bourgeois_s; nsdap_candidate = nsdap_s; spd_candidate = effective_spd_s; sapd_candidate = sapd_s if sapd_consolidated and sapd_s >= effective_spd_s; {! 
+
+Q.candidates = ['communist', 'unaffiliated', 'bourgeois', 'nsdap', 'spd', 'sapd'];
+
+!}
+
+With no majority for the SPD delegation, the election of a Social Democratic chairman becomes more complicated, requiring cooperation with other forces, other forces that also vie to take the councils for themselves.
+
+@competition
+on-arrival: {! 
+
+Q.highest_candidate_support = 0;
+for (var c of Q.candidates) {
+    if (Q[c+'_candidate'] >= Q.highest_candidate_support) {
+        Q[c+'_plurality_soviets'] = 0;
+    } else {
+        Q[c+'_plurality_soviets'] = 0;
+    }
+}
+
+!}
+
+[? if communist_candidate : Support for a Communist: [+ communist_candidate +] ?]
+
+[? if sapd_candidate : Support for a Socialist Workers': [+ sapd_candidate +] ?]
+
+[? if spd_candidate : Support for a Social Democrat: [+ spd_candidate +] ?]
+
+[? if unaffiliate_candidate : Support for an Independent: [+ unaffiliate_candidate +] ?]
+
+[? if bourgeois_candidate : Support for a Bourgeois: [+ bourgeois_candidate +] ?]
+
+[? if nsdap_candidate : Support for a Nazi: [+ nsdap_candidate +] ?]
+
+[? if communist_plurality_soviets : Currently, the communists are in the lead. ?]
+
+[? if sapd_plurality_soviets : Currently, the SAPD is in the lead. ?]
+
+[? if spd_plurality_soviets : Currently, we are in the lead. ?]
+
+[? if unaffiliate_plurality_soviets : Currently, the independents are in the lead. ?]
+
+[? if bourgeois_plurality_soviets : Currently, the bourgeois are in the lead. ?]
+
+[? if nsdap_plurality_soviets : Currently, the Nazis are in the lead. ?]
+
+- @kpd_wins: The communists have been elected.
+- @sapd_wins: The SAPD has been elected.
+- @spd_wins: We have won!
+- @independent_wins: The independents have been elected.
+- @bourgeois_wins: The bourgeois have been elected.
+- @nsdap_wins: The Nazis have been elected.
+- @spd_campaign_hq: What can we do?
+- @other_forces: The other forces make their moves...
+
+@kpd_wins
+view-if: communist_candidate >= 50
+
+tbd
+
+@sapd_wins
+view-if: sapd_candidate >= 50
+
+tbd
+
+@spd_wins
+view-if: spd_candidate >= 50
+
+tbd
+
+@independent_wins
+view-if: unaffiliate_candidate >= 50
+
+tbd
+
+@bourgeois_wins
+view-if: bourgeois_candidate >= 50
+
+tbd
+
+@nsdap_wins
+view-if: nsdap_candidate >= 50
+
+tbd
+
+@spd_campaign_hq
+view-if: spd_turn and spd_candidate
+
+We are attempting to be elected to the office of chairmanship. To this end, we will have to forge alliances with other factions vying for the same.
+
+- @court_kpd: Court the KPD.
+- @court_sapd: Court the SAPD.
+- @court_unaffiliated: Court the unaffiliated.
+- @court_bourgeois: Court the bourgeois.
+- @cou
+
+
+@spd_majority
+view-if: effective_spd_s >= 50
+on-arrival: spd_soviets = 1; executive_formed = 1
+
+With a majority of the delegates, we have the capacity to elect a Social Democratic chairman. There still remains the matter of which faction the chairman should come from, however.
+
 - @left
-- @spd_majority
-- @united_front
-- @dissolutionist
+- @center
+- @reformist
+- @labor
+- @neorevisionist
+
+@left
+title: The Left.
+subtitle: [+ spd_left_s +]%
+view-if: (((left_strength+center_strength >= reformist_strength+neorevisionist_strength+labor_strength) and (left_strength >= center_strength) and (center_dissent < center_strength)) or ((left_strength+labor_strength >= reformist_strength+neorevisionist_strength+center_strength) and (left_strength >= labor_strength) and (labor_dissent < labor_strength))) and ((spd_s - spd_reformist_s - spd_neorevisionist_s) >= 50)
+on-arrival: left_soviets = 1; left_strength += 5; pro_republic -= 2; socialism += 2; z_relation -= 3; dvp_relation -= 5; ddp_relation -= 5; kpd_relation += 3
+go-to: optional_coalitions
+
+Toni Sender is elected to chair the councils, representing a firm though not too firm leftist line in the leadership of the new institution. 
+
+@center
+title: The Center
+subtitle: [+ spd_center_s +]%
+view-if: (not (((((reformist_strength+neorevisionist_strength+center_strength >= left_strength+labor_strength) and (reformist_strength >= center_strength) and (center_dissent < center_strength)) or ((reformist_strength+neorevisionist_strength+labor_strength >= left_strength+center_strength) and (reformist_strength >= labor_strength) and (labor_dissent < labor_strength))) and spd_neorevisionist_s < 50) and ((spd_s - spd_left_s) >= 50)) and not ((((left_strength+center_strength >= reformist_strength+neorevisionist_strength+labor_strength) and (left_strength >= center_strength) and (center_dissent < center_strength)) or ((left_strength+labor_strength >= reformist_strength+neorevisionist_strength+center_strength) and (left_strength >= labor_strength) and (labor_dissent < labor_strength))) and ((spd_s - spd_reformist_s - spd_neorevisionist_s) >= 50)) and not (spd_neorevisionist_s >= 50)) and spd_center_s >= spd_labor_s
+on-arrival: center_soviets = 1; center_strength += 5
+go-to: optional_coalitions
+
+Rudolf Breitscheid is elected to chair the councils, representing a middle road between the revolutionaries and the reformists.
+
+@reformist
+title: The Reformists
+subtitle: [+ spd_reformist_s +]%
+view-if: ((((reformist_strength+neorevisionist_strength+center_strength >= left_strength+labor_strength) and (reformist_strength >= center_strength) and (center_dissent < center_strength)) or ((reformist_strength+neorevisionist_strength+labor_strength >= left_strength+center_strength) and (reformist_strength >= labor_strength) and (labor_dissent < labor_strength))) and spd_neorevisionist_s < 50) and ((spd_s - spd_left_s) >= 50)
+on-arrival: reformist_soviets = 1; reformist_strength += 5; socialism -= 2; pro_republic += 2; z_relation += 2; ddp_relation += 2; kpd_relation -= 4; left_dissent += 3
+go-to: optional_coalitions
+
+Marie Juchacz is elected to chair the councils, representing a strong reformist tendency that remains within the workers, and a seeming unreadiness by them to assume state power.
+
+@labor
+title: The Trade unions
+subtitle: [+ spd_labor_s +]%
+view-if: (not (((((reformist_strength+neorevisionist_strength+center_strength >= left_strength+labor_strength) and (reformist_strength >= center_strength) and (center_dissent < center_strength)) or ((reformist_strength+neorevisionist_strength+labor_strength >= left_strength+center_strength) and (reformist_strength >= labor_strength) and (labor_dissent < labor_strength))) and spd_neorevisionist_s < 50) and ((spd_s - spd_left_s) >= 50)) and not ((((left_strength+center_strength >= reformist_strength+neorevisionist_strength+labor_strength) and (left_strength >= center_strength) and (center_dissent < center_strength)) or ((left_strength+labor_strength >= reformist_strength+neorevisionist_strength+center_strength) and (left_strength >= labor_strength) and (labor_dissent < labor_strength))) and ((spd_s - spd_reformist_s - spd_neorevisionist_s) >= 50)) and not (spd_neorevisionist_s >= 50)) and spd_labor_s >= spd_center_s
+on-arrival: labor_soviets = 1; labor_strength += 5
+go-to: optional_coalitions
+
+Rudolf Wissell is elected to chair the councils, representing the interests of the trade unions and organized labor in this emerging form of labor organization.
+
+@neorevisionist
+title: The Neorevisionists
+subtitle: [+ spd_neorevisionist_s +]%
+view-if: spd_neorevisionist_s >= 50
+on-arrival: neorevisionist_soviets = 1
+go-to: optional_coalitions
+
+Surprisingly, the Neorevisionists have taken a lead, electing Carlo Mierendorff to chair the councils. 
+
+@optional_coalitions
+go-to: oc_menu
+
+With an SPD chair elected, however, remains the issue of the wider council executive. With us possessing a majority, we could choose to distribute positions simply within the SPD; but this would risk giving the councils the appearance of a mere party organ and undermining their budding legitimacy, especially when they currently possess no inherent power beyond that granted by the voluntary participation of workers within them.
+
+@oc_menu
+
+- @spd_only: Distribute positions exclusively within the party.
+- @invite_sapd: Invite the SAPD.
+- @invite_kpd: Invite the KPD.
+- @invite_unaffiliate: Invite the unaffiliated.
+- @invite_bourgeois: Invite the bourgeois-aligned.
+- @done: We are done. 
+
+@spd_only
+view-if: not buttons_mashed
+on-arrival: socialism -= (10-(spd_s/10)); left_dissent -= 5; center_dissent -= 5; labor_dissent -= 5; reformist_dissent -= 5; neorevisionist_dissent -= 5
+subtitle: This may at least reduce dissent within the party.
+go-to: done
+
+The legitimacy and capacity of the councils is hurt by our unwillingness to distribute positions amongst other forces within the councils. In the end, the executive is made into an effective party organ, and those forces opposed to our party simply urge their councils to noncooperation with this executive.
+
+@invite_sapd
+view-if: not sapd_included and sapd_formed and sapd_s
+subtitle: Former Social Democrats, they are willing.
+choose-if: not bourgeois_included
+unavailable-subtitle: With the bourgeois? Yeah, right.
+on-arrival: buttons_mashed += 1; sapd_included = 1; socialism += 1; left_strength += 3; left_dissent -= 6; kpd_relation += 2; z_relation -= 2; ddp_relation -= 4; dvp_relation -= 5
+go-to: oc_menu
+
+We have invited the SAPD to our executive, and they have agreed. This has given the council a more left-wing orientation, as the SAPD stands firmly opposed to the disempowerment of the councils.
+
+@invite_kpd
+view-if: not kpd_included and not reformist_soviets and not neorevisionist_soviets
+subtitle: The Communists are willing.
+choose-if: (left_soviets or kpd_relation >= 50) and not bourgeois_included
+unavailable-subtitle: The Communists are unwilling to enter the executive as it stands, opposing our chairmanship wholly.
+on-arrival: kpd_included = 1; reichstag_enemy = 1; socialism += 2; kpd_relation += 5; left_strength += 5; left_dissent -= 5; z_relation -= 5; ddp_relation -= 6; dvp_relation -= 8
+go-to: oc_menu
+
+We have invited the KPD to our executive, and they have agreed to join. This has given the council a vastly more left-wing orientation, opening itself up to a chorral of criticism from the bourgeois parties who have begun to view the councils with concern as parallel power structures genuinely invested in the overthrow of the existing ones.
+
+@invite_unaffiliate
+view-if: not unaffiliate_included and unaffiliate_s
+subtitle: Independent workers' representatives with largely economic and sectorial concerns.
+on-arrival: buttons_mashed += 1; unaffiliate_included = 1; workers_spd += 3*(1-dissent); workers_other -= 3*(1-dissent)
+go-to: oc_menu
+
+By including the unaffiliated representatives in the executive, we are politicizing them positively. 
+
+@invite_bourgeois
+view-if: not bourgeois_included and not left_soviets
+subtitle: The bourgeois-aligned representatives who demand the dissolution of the councils.
+choose-if: (reformist_soviets or neorevisionist_soviets or (reformist_strength > left_strength and dvp_relation >= 40)) and not kpd_included and not sapd_included
+unavailable-subtitle: The bourgeois representatives squarely refuse.
+on-arrival: bourgeois_included; socialism -= 3; left_dissent += 10; left_strength -= 5; socialism -= 4; pro_republic += 4; kpd_relation -= 7; capital_strike_progress -= 1 if capital_strike_progress >= 6
+go-to: oc_menu
+
+The bourgeois representatives are invited to the executive and promptly join. The KPD assaults and derides us as betraying the revolutionary opportunity once more, while the bourgeoisie take relief in the fact that the councils are being tamed.
+
+@done
+view-if: buttons_mashed
+
+With the executive assembled, the congress of councils is dismissed for the time being, to begin its affairs accordingly.
+
+
 
 @kpd_majority
+tags: other_forces
 title: A Communist Chairman
-view-if: (kpd_s+unaffiliate_s) >= 50
+view-if: kpd_s >= 50
 subtitle: [+ kpd_s +]% - The Communists have won
-on-arrival: reichstag_enemy = 1; kpd_soviets = 1; communist_influence += 3 if communist_influence; rfb_militancy += 0.1; rfb_militancy += (socialism/10); rb_strength -= left_strength; rfb_strength += left_strength; workers_kpd += (socialism/10)
-frequency: 50
+on-arrival: reichstag_enemy = 1; kpd_soviets = 1; communist_influence += 3 if communist_influence; rfb_militancy += 0.1; rfb_militancy += (socialism/10); rb_strength -= left_strength; rfb_strength += left_strength; workers_kpd += (socialism/10); executive_formed = 1
 
 The KPD has won chairmanship and control over the workers' councils coordinating bodies, and have immediately attempted to direct them towards the revolutionary path of seeking absolute control over the state, turning their attention squarely to the Reichstag as principal enemy.
 
 @revolutionary
 title: A Revolutionary Chairman
-view-if: (revolutionary_s+unaffiliate_s) >= 50
+view-if: revolutionary_s >= 50
 subtitle: [+ revolutionary_s +]% - The Revolutionaries have won
-on-arrival: reichstag_enemy = 1; revolutionary_soviets = 1; rfb_militancy += 0.05; rfb_militancy += (socialism/10); rb_strength -= left_strength; rfb_strength += left_strength; workers_kpd += (socialism/20)
-frequency: 25
+on-arrival: reichstag_enemy = 1; revolutionary_soviets = 1; rfb_militancy += 0.05; rfb_militancy += (socialism/10); rb_strength -= left_strength; rfb_strength += left_strength; workers_kpd += (socialism/20); executive_formed = 1
+tags: other_forces
 
-The Revolutionaries have together won chairmanship, with some disagreement within their tent, they have nonetheless put these aside to unify the councils against the Reichstag for the goal of full worker control.
+The Revolutionaries have together won chairmanship, with some disagreement within their tent, they have nonetheless put these aside to unify the councils against the Reichstag for the goal of full worker control, of transferring all political power to the soviets.
 
 @left
 title: A Leftist Chairman
-view-if: (left_coalition_s+unaffiliate_s) >= 50 and kpd_relation >= 40
+view-if: left_coalition_s >= 50
 subtitle: [+ left_coalition_s +]% - The Leftists have won
-on-arrival: leftist_soviets = 1; rfb_militancy += (socialism/20); left_strength += 5; kpd_relation += 5; socialism += 1; reichstag_enemy = 1
-frequency: 10
+on-arrival: leftist_soviets = 1; rfb_militancy += (socialism/20); left_strength += 5; kpd_relation += 5; socialism += 1; reichstag_enemy = 1; executive_formed = 1
+tags: other_forces
 
 The Leftists have together won chairmanship, championing eventual empowerment of the councils over the Reichstag, even though the Communists would like to proactively launch a revolution, and even as those to the left of the Communists continue adventuristically preparing so.
 
@@ -485,7 +710,7 @@ The Leftists have together won chairmanship, championing eventual empowerment of
 title: A Social-Democratic Chairman
 view-if: (spd_s+unaffiliate_s) >= 50
 subtitle: [+ spd_s +]% - The SPD has won!
-on-arrival: spd_soviets = 1
+on-arrival: spd_soviets = 1; executive_formed = 1
 frequency: 100
 
 The SPD has won leadership of the councils! The maintenance of this majority will rest upon ensuring the unity of the party's factions.
@@ -494,7 +719,7 @@ The SPD has won leadership of the councils! The maintenance of this majority wil
 title: A Socialist Chairman
 view-if: (united_front_s+unaffiliate_s) >= 50 and kpd_relation >= 60
 subtitle: [+ united_front_s +]% - The United Front has won
-on-arrival: united_soviets = 1; rfb_militancy += (socialism/25); left_strength += 5; kpd_relation += 10; socialism += 2; reichstag_enemy = 1
+on-arrival: united_soviets = 1; rfb_militancy += (socialism/25); left_strength += 5; kpd_relation += 10; socialism += 2; reichstag_enemy = 1; executive_formed = 1
 frequency: 50
 
 The United Front has won the chairmanship, dividing executive positions between the SPD and the KPD and securing the support of the councils for the broader socialist agenda shared by the two parties.
@@ -503,7 +728,7 @@ The United Front has won the chairmanship, dividing executive positions between 
 title: A Parliamentarian Chairman
 view-if: (dissolutionist_s+unaffiliate_s) >= 50
 subtitle: [+ dissolutionist_s +]% - The Parliamentarians have won
-on-arrival: parliamentarian_soviets = 1; socialism -= 2; pro_republic += 3; left_strength -= 5; kpd_relation -= 5
+on-arrival: parliamentarian_soviets = 1; socialism -= 2; pro_republic += 3; left_strength -= 5; kpd_relation -= 5; executive_formed = 1
 frequency: 100
 
 The councils have elected an executive actively in favor of the disempowerment of the councils in favor of the Reichstag, proving the unreadiness of the German working class for socialism in what some are calling a political suicide club.
