@@ -196,6 +196,10 @@ if (Q.nazi_peak || Q.return_to_normalcy || Q.victory_republic || Q.nsdap_banned)
     Q.capital_nazi = 0;
 }
 
+if (Q.socialism) {
+    Q.lumpenprole = ((Q.socialism/100) * (1 - (Q.unemployed_nsdap_normalized/100)));
+}
+
 Q.proletariat = Q.workers + (Q.rural*Q.rural_prole) + (Q.new_middle*Q.middle_prole) + (Q.unemployed*Q.lumpenprole);
 Q.catholic_proletariat = (Q.catholics/2);
 Q.urban_proletariat = ((Q.workers/Q.proletariat)*85);
