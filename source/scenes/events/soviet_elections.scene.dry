@@ -488,7 +488,11 @@ on-arrival: soviet_election_rounds += 1; {!
 Q.highest_candidate_support = 0;
 for (var c of Q.candidates) {
     if (Q[c+'_candidate'] >= Q.highest_candidate_support) {
-        Q[c+'_plurality_soviets'] = 0;
+        for (var can of Q.candidates) {
+            Q[can+'_plurality_soviets'] = 0;
+        }
+        Q[c+'_plurality_soviets'] = 1;
+        Q.highest_candidate_support = Q[c+'_candidate'];
     } else {
         Q[c+'_plurality_soviets'] = 0;
     }
@@ -568,7 +572,7 @@ on-arrival: workers_spd -= 10*bourgeois_power*(sa_force/50); workers_kpd -= 10*b
 The Nazis have, somehow, won control over the councils. This is obviously very bad, and causes the councils to essentially dissolve as every non-Nazi force immediately boycotts them and they transform the rump remainder into a party organ to broadcast their beliefs amongst workers.
 
 @spd_campaign_hq
-view-if: spd_turn and spd_candidate and rounds < 10
+view-if: spd_turn and spd_candidate and soviet_election_rounds < 10
 on-departure: spd_turn = 0
 
 [? if spd_turn : We are attempting to be elected to the office of chairmanship. To this end, we will have to forge alliances with other factions vying for the same. ?]
@@ -654,7 +658,7 @@ go-to: competition
 
 We have won the support of the Catholics!
 
-@beg_kpd
+@beg_z
 choose-if: z_relation >= 60
 unavailable-subtitle: The Center Party doesn't like us enough.
 on-arrival: spd_candidate += z_s
@@ -722,7 +726,7 @@ go-to: competition
 We have endorsed the independent candidate.
 
 @back_bourgeois
-view-if: bourgeois_candidate and reformist_candidate >= left_strength
+view-if: bourgeois_candidate and reformist_strength >= left_strength
 subtitle: [? if dvp_relation < 35 : They likely won't be at all grateful for this endorsement. ?]
 on-arrival: {!
 
@@ -911,7 +915,7 @@ view-if: not kpd_included and not reformist_soviets and not neorevisionist_sovie
 subtitle: The Communists are willing.
 choose-if: (left_soviets or kpd_relation >= 50) and not bourgeois_included
 unavailable-subtitle: The Communists are unwilling to enter the executive as it stands, opposing our chairmanship wholly.
-on-arrival: kpd_included = 1; reichstag_enemy = 1; socialism += 2; kpd_relation += 5; left_strength += 5; left_dissent -= 5; z_relation -= 5; ddp_relation -= 6; dvp_relation -= 8
+on-arrival: buttons_mashed += 1; kpd_included = 1; reichstag_enemy = 1; socialism += 2; kpd_relation += 5; left_strength += 5; left_dissent -= 5; z_relation -= 5; ddp_relation -= 6; dvp_relation -= 8
 go-to: oc_menu
 
 We have invited the KPD to our executive, and they have agreed to join. This has given the council a vastly more left-wing orientation, opening itself up to a chorral of criticism from the bourgeois parties who have begun to view the councils with concern as parallel power structures genuinely invested in the overthrow of the existing ones.
@@ -929,7 +933,7 @@ view-if: not bourgeois_included and not left_soviets
 subtitle: The bourgeois-aligned representatives who demand the dissolution of the councils.
 choose-if: (reformist_soviets or neorevisionist_soviets or (reformist_strength > left_strength and dvp_relation >= 40)) and not kpd_included and not sapd_included
 unavailable-subtitle: The bourgeois representatives squarely refuse.
-on-arrival: bourgeois_included; socialism -= 3; left_dissent += 10; left_strength -= 5; socialism -= 4; pro_republic += 4; kpd_relation -= 7; capital_strike_progress -= 1 if capital_strike_progress >= 6
+on-arrival: buttons_mashed += 1; bourgeois_included = 1; socialism -= 3; left_dissent += 10; left_strength -= 5; socialism -= 4; pro_republic += 4; kpd_relation -= 7; capital_strike_progress -= 1 if capital_strike_progress >= 6
 go-to: oc_menu
 
 The bourgeois representatives are invited to the executive and promptly join. The KPD assaults and derides us as betraying the revolutionary opportunity once more, while the bourgeoisie take relief in the fact that the councils are being tamed.
