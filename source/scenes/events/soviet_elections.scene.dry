@@ -572,7 +572,7 @@ on-arrival: workers_spd -= 10*bourgeois_power*(sa_force/50); workers_kpd -= 10*b
 The Nazis have, somehow, won control over the councils. This is obviously very bad, and causes the councils to essentially dissolve as every non-Nazi force immediately boycotts them and they transform the rump remainder into a party organ to broadcast their beliefs amongst workers.
 
 @spd_campaign_hq
-view-if: spd_turn and spd_candidate and soviet_election_rounds < 10
+view-if: spd_turn and spd_candidate and soviet_election_rounds < 10 and communist_candidate < 50 and spd_candidate < 50 and sapd_candidate < 50 and bourgeois_candidate < 50 and unaffiliate_candidate < 50 and nsdap_candidate < 50
 on-departure: spd_turn = 0
 
 [? if spd_turn : We are attempting to be elected to the office of chairmanship. To this end, we will have to forge alliances with other factions vying for the same. ?]
@@ -743,7 +743,7 @@ go-to: competition
 We have endorsed the bourgeois candidate.
 
 @other_forces
-view-if: (not spd_turn or not spd_candidate) and soviet_election_rounds < 10
+view-if: (not spd_turn or not spd_candidate) and soviet_election_rounds < 10 and communist_candidate < 50 and spd_candidate < 50 and sapd_candidate < 50 and bourgeois_candidate < 50 and unaffiliate_candidate < 50 and nsdap_candidate < 50
 max-choices: 1
 on-departure: spd_turn = 1 if spd_candidate
 
