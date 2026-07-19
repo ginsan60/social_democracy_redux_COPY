@@ -89,6 +89,12 @@ The resolution is successfully voted down by the socialist majority in the Reich
 - @councils_illegal: The courts find the councils illegal.
 - @councils_legal: The courts find the councils legal.
 
+@councils_legal
+view-if: council_legality >= council_illegality
+on-arrival: capital_strike_progress += 3; coup_progress += 3; socialism += judicial_reform; sh_militancy += (0.1*(1-reichswehr_loyalty)) if reichswehr_militancy >= (0.1*(1-reichswehr_loyalty)); reichswehr_militancy -= (0.1*(1-reichswehr_loyalty)) if reichswehr_militancy >= (0.1*(1-reichswehr_loyalty)); true_legitimacy = 1
+
+The certification of the councils as legal by both the courts and the Reichstag certifies them as irredeemably legitimate, and perhaps even paves the way for their institutionalization without need for revolutionary means. The bourgeoisie, however, begin to consider counterrevolutionary means...
+
 @councils_illegal
 view-if: council_legality < council_illegality
 on-arrival: socialism -= ((pro_republic)/20)*bourgeois_power; capital_strike_progress -= 1
@@ -167,7 +173,7 @@ The RFB's defense of the councils is shattered, alongside the councils themselve
 
 @nah
 view-if: left_strength > reformist_strength
-on-arrival: reformist_dissent += 80; reichswehr_loyalty -= 0.1; reichswehr_loyalty = 0 if reichswehr_loyalty < 0; workers_spd -= ((pro_republic/10)*bourgeois_power); new_middle_spd -= ((pro_republic/(5+(new_middle_conscious*5)))*bourgeois_power); old_middle_spd -= (pro_republic/5)*bourgeois_power; rural_spd -= ((pro_republic/(5+(land_reform*2)))*bourgeois_power); unemployed_spd -= (pro_republic/15)*bourgeois_power; catholics_spd -= (pro_republic/10)*bourgeois_power; center_dissent += 5; labor_dissent += 5; neorevisionist_dissent += 30; sh_militancy += (1*(1-reichswehr_loyalty)) if reichswehr_militancy >= (1*(1-reichswehr_loyalty)); reichswehr_militancy -= (1*(1-reichswehr_loyalty)) if reichswehr_militancy >= (1*(1-reichswehr_loyalty)); coup_progress += 7; capital_strike_progress += 5; z_relation -= 30; ddp_relation -= 30; dvp_relation -= 100; pro_republic -= 8
+on-arrival: reformist_dissent += 80; reichswehr_loyalty -= 0.1; reichswehr_loyalty = 0 if reichswehr_loyalty < 0; workers_spd -= ((pro_republic/10)*bourgeois_power); new_middle_spd -= ((pro_republic/(5+(new_middle_conscious*5)))*bourgeois_power); old_middle_spd -= (pro_republic/5)*bourgeois_power; rural_spd -= ((pro_republic/(5+(land_reform*2)))*bourgeois_power); unemployed_spd -= (pro_republic/15)*bourgeois_power; catholics_spd -= (pro_republic/10)*bourgeois_power; center_dissent += 5; labor_dissent += 5; neorevisionist_dissent += 30; sh_militancy += (0.25*(1-reichswehr_loyalty)) if reichswehr_militancy >= (0.25*(1-reichswehr_loyalty)); reichswehr_militancy -= (0.25*(1-reichswehr_loyalty)) if reichswehr_militancy >= (0.25*(1-reichswehr_loyalty)); coup_progress += 7; capital_strike_progress += 5; z_relation -= 30; ddp_relation -= 30; dvp_relation -= 100; pro_republic -= 8
 
 Our refusal to enforce the court order puts us in open defiance of the constitutional order. The bourgeois parties rally against us, attacking us as anti-democracy, while considering methods, legal and extralegal, to break this stalemate.
 
