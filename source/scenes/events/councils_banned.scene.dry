@@ -231,6 +231,7 @@ Our inaction offends those on our left, leaving the bourgeoisie free to break up
 - @success: The councils are successfully broken up.
 
 @success
+view-if: not ((rfb_force+(socialism/10)) >= 10 or ((rfb_force+(socialism/10)) >= 5 and not spd_in_government))
 on-arrival: soviets_exist = 0; bourgeois_power += 0.02 if bourgeois_power <= 0.98; socialism -= 3; pro_republic += 3
 
 The dissolution of the councils proceeds without incident. The legitimacy of the constitution is restored with the end of dual power.
