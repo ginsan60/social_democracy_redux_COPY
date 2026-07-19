@@ -183,7 +183,7 @@ subtitle: Labor will call a general strike. The Reichsbanner will resist the dis
 The Reichswehr and Stahlhelm are already surrounding the congress, and the SA is supporting them. This could be civil war. We do realize that, correct? 
 
 - @fight_2: We will fight, even if it leads to a civil war.
-- @surrender
+- @surrender: We should back down.
 
 @fight_2
 on-arrival: defense_strength = rb_strength*rb_militancy*(1-dissent/2); defense_strength += prussian_police_strength*prussian_police_militancy*prussian_police_loyalty*(socialism/250) if spd_prussia; enemy_strength = sa_strength*sa_militancy + sh_strength*sh_militancy; enemy_strength += reichswehr_strength*reichswehr_militancy/2; defense_strength += (workers_spd_normalized+workers_kpd_normalized+workers_sapd_normalized)*(2 - dissent)*(2 - unemployed/100);
