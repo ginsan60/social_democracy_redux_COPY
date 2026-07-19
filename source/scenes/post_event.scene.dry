@@ -2451,7 +2451,7 @@ if (Q.month_actions >= 1) {
         if (Q.in_left_front || Q.in_popular_front) {
             Q.army_relation_equilibrium -= Q.kpd_r;
         }
-        if (Q.reichsweh_minister_party != "I") {
+        if (Q.reichswehr_minister_party != "I") {
             Q.army_relation_equilibrium -= 10;
         }
         if (Q.spd_in_government) {

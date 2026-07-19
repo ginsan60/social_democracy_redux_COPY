@@ -13,7 +13,7 @@ Seeing the formation of nationwide workers' councils which have now fallen under
 - @vote_against: The SPD votes against the resolution to condemn the councils.
 
 @vote_for
-view-if: not united_soviets and left_strength < reformist_strength
+view-if: not spd_soviets and left_strength < reformist_strength
 on-arrival: left_dissent += 20; kpd_relation -= 30; z_relation += 10; ddp_relation += 10; dvp_relation += 5; workers_spd -= (socialism/10)
 
 The resolution is passed, compelling the councils to disband, a compulsion which is backed up shortly thereafter by the courts, who conclude them to be illegal.
@@ -22,8 +22,108 @@ The resolution is passed, compelling the councils to disband, a compulsion which
 - @councils_defy: The councils defy the order!
 
 @vote_against
+view-if: reformist_strength >= 50
+on-arrival: z_relation -= 5; ddp_relation -= 7; dvp_relation -= 7; workers_spd -= ((pro_republic/20)*bourgeois_power); new_middle_spd -= ((pro_republic/(10+(new_middle_conscious*5)))*bourgeois_power); old_middle_spd -= (pro_republic/10)*bourgeois_power; rural_spd -= ((pro_republic/(10+(land_reform*2)))*bourgeois_power); unemployed_spd -= (pro_republic/30)*bourgeois_power; catholics_spd -= (pro_republic/20)*bourgeois_power
+go-to: resolution_beaten if left_coalition+sapd_r >= 50; resolution_passed if left_coalition+sapd_r < 50
 
-tbd
+We vote against the resolution, aggrevating the bourgeois parties who view the councils as an existential threat.
+
+@resolution_beaten
+on-arrival: socialism += 3; pro_republic -= 5; capital_strike_progress += 2; coup_progress += 2; {! 
+
+Q.council_legality = 0;
+Q.council_illegality = 0;
+
+Q.council_legality += Q.socialism*(1-Q.bourgeois_power);
+Q.council_legality += Q.z_relation;
+Q.council_legality += Q.ddp_relation*Q.ddp_normalized;
+Q.council_legality += Q.spd_votes*Q.judicial_reform;
+Q.council_legality += Q.rb_strength*(0.5-Q.rb_militancy)*(1-(Q.left_strength/100));
+
+Q.council_illegality += (Q.capital_strike_progress*(Q.coup_progress+(Q.march_on_berlin_seen*3)));
+Q.council_illegality += Q.nationalism*Q.bourgeois_power;
+Q.council_illegality += Q.pro_republic*(1-(Q.spd_votes/100))*Q.bourgeois_power;
+Q.council_illegality += Q.kpd_relation;
+Q.council_illegality += Q.sa_strength*Q.sa_militancy*(Q.sa_force/100);
+Q.council_illegality += Q.sh_strength*Q.sh_militancy*(Q.sh_force/100);
+Q.council_illegality += Q.reichswehr_strength*Q.reichswehr_militancy*(1-Q.reichswehr_loyalty)*(Q.army_force/100);
+if (Q.factory_takeovers) {
+    Q.council_illegality += Q.rfb_force*Q.factory_takeovers;
+}
+
+if (Q.judicial_reform <= 0) {
+    Q.council_legality = 0;
+}
+if (Q.judicial_reform == 1) {
+    Q.council_legality *= 0.5;
+}
+if (Q.judicial_reform == 2) {
+    Q.council_legality *= 0.75;
+}
+if (Q.judicial_reform == 3) {
+    Q.council_legality *= 0.85;
+}
+if (Q.judicial_reform == 4) {
+    Q.council_legality *= 0.95;
+}
+if (Q.judicial_reform == 5) {
+    Q.council_illegality *= 0.95;
+}
+if (Q.judicial_reform == 6) {
+    Q.council_illegality *= 0.85;
+}
+if (Q.judicial_reform == 7) {
+    Q.council_illegality *= 0.75;
+}
+if (Q.judicial_reform == 8) {
+    Q.council_illegality *= 0.5;
+}
+if (Q.judicial_reform >= 9) {
+    Q.council_illegality = 0;
+}
+
+!}
+
+The resolution is successfully voted down by the socialist majority in the Reichstag, allowing the councils to continue operating freely. However, not to be deterred, the bourgeois parties turn to the other arms of the state to back them up, their lawsuits to the courts.
+
+- @councils_illegal: The courts find the councils illegal.
+- @councils_legal: The courts find the councils legal.
+
+@councils_illegal
+view-if: council_legality < council_illegality
+on-arrival: socialism -= ((pro_republic)/20)*bourgeois_power; capital_strike_progress -= 1
+go-to: spd_removal_govt if not presidential_powers and (president != "Schumacher" and president != "Braun" and president != "Juchacz" and president != "Thälmann" and president != "Münzenberg"); dilemma if presidential_powers or (president == "Schumacher" or president == "Braun" or president == "Juchacz" or president == "Thälmann" or president == "Münzenberg")
+
+Despite the majority in the Reichstag, the courts rule the councils as illegal parallel institutions nonetheless. 
+
+@spd_removal_govt
+on-arrival: spd_in_government = 0; chancellor = "Brüning"; chancellor_party = "Z"; spd_toleration = 0; time_to_election = 3
+call: set_next_election_time
+
+Not trusting us to enforce the court order to dissolve the councils, President [+ president +] dismisses our government unilaterally and appoints a caretaker one, which has immediately mustered federal forces for an intervention to dissolve the councils.
+
+- @fight: Mobilize the Reichsbanner and call a general strike to defend the councils!
+- @surrender: We have lost.
+
+@dilemma
+
+As we are in government, it is ultimately up to us to enforce the court order. We could ignore it if we wishes, though doing so would surely provoke a constitutional, and perhaps even extraconstitutional, crisis.
+
+- @enforce_order: We have no choice but to enforce the court order.
+- @nah: Nah.
+
+@enforce_order
+choose-if: left_strength < 50
+unavailable-subtitle: We're in too deep to back out now, bucko.
+on-arrival: left_dissent += 50; kpd_relation -= 30; rb_strength *= (1-(left_strength/100)); rb_militancy *= (1-(left_strength/50))
+
+We have chosen, to the ire of our left and the KPD, to enforce the court order calling for the dissolution of the councils.
+
+- @resistance: The Communists resist the dissolution!
+- @success: The councils are successfully broken up.
+
+@resistance
+view-if: (rfb_strength*rfb_militancy)
 
 @councils_dissolve
 
