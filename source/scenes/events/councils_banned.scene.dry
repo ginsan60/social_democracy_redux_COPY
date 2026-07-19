@@ -237,14 +237,14 @@ The dissolution of the councils proceeds without incident. The legitimacy of the
 
 @resolution_passed
 on-arrival: socialism -= 5; pro_republic += 3; vonc_too = 1 if spd_in_government
-go-to: call_elections if vonc_too
-set-jump: dilemma_2
+go-to: call_elections if vonc_too; dilemma_2 if not vonc_too
 
 The resolution is passed, compelling the councils to disband, a compulsion which is backed up shortly thereafter by the courts, who conclude them to be illegal. [? if vonc_too : The resolution is backed by a motion of no confidence against all SPD ministers, on the basis that they cannot be trusted to enforce the resolution. ?]
 
 @call_elections
 on-arrival: time_to_election = 3
 call: set_next_election_time
+go-to: dilemma_2
 
 @dilemma_2
 
