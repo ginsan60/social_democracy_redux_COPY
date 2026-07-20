@@ -196,6 +196,10 @@ if (Q.nazi_peak || Q.return_to_normalcy || Q.victory_republic || Q.nsdap_banned)
     Q.capital_nazi = 0;
 }
 
+if (Q.socialism) {
+    Q.lumpenprole = ((Q.socialism/100) * (1 - (Q.unemployed_nsdap_normalized/100)));
+}
+
 Q.proletariat = Q.workers + (Q.rural*Q.rural_prole) + (Q.new_middle*Q.middle_prole) + (Q.unemployed*Q.lumpenprole);
 Q.catholic_proletariat = (Q.catholics/2);
 Q.urban_proletariat = ((Q.workers/Q.proletariat)*85);
@@ -2322,6 +2326,14 @@ if (Q.month_actions >= 1) {
             Q.unemployed_kpd -= 3/12;
         }
     }
+    if (Q.kpd_votes >= (25-(Q.socialism/10)-(Q.unemployed/10))) {
+        Q.rfb_strength += (Q.unemployed_kpd_normalized*(Q.unemployed/100))/24;
+        Q.rfb_militancy += (Q.workers_kpd_normalized/100)/24;
+        if (!Q.rfb_banned) {
+            Q.rfb_strength += (Q.unemployed_kpd_normalized*(Q.unemployed/100))/24;
+            Q.rfb_militancy += (Q.workers_kpd_normalized/100)/24;
+        }
+    }
     if (Q.victory_republic && Q.kpd_relation >= 60 && Q.kpd_influence) {
         Q.rfb_strength += (Q.kpd_influence/4);
     }
@@ -2447,7 +2459,7 @@ if (Q.month_actions >= 1) {
         if (Q.in_left_front || Q.in_popular_front) {
             Q.army_relation_equilibrium -= Q.kpd_r;
         }
-        if (Q.reichsweh_minister_party != "I") {
+        if (Q.reichswehr_minister_party != "I") {
             Q.army_relation_equilibrium -= 10;
         }
         if (Q.spd_in_government) {
